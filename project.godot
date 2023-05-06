@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=256
 window/size/viewport_height=144
-window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [gui]
@@ -75,6 +74,16 @@ attack={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":2,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="player_hurtbox"
+2d_physics/layer_4="player_hitbox"
+2d_physics/layer_5="enemy"
+2d_physics/layer_6="enemy_hurtbox"
+2d_physics/layer_7="enemy_hitbox"
 
 [rendering]
 

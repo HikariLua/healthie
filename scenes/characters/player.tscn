@@ -1,9 +1,8 @@
-[gd_scene load_steps=40 format=3 uid="uid://6uo15x52gvv0"]
+[gd_scene load_steps=39 format=3 uid="uid://6uo15x52gvv0"]
 
 [ext_resource type="Script" path="res://source/components/motion_component.gd" id="1_01350"]
 [ext_resource type="Texture2D" uid="uid://bfuwhmtlfj3j6" path="res://images/lya.png" id="1_lgnpb"]
 [ext_resource type="Texture2D" uid="uid://d1ue2patct3x" path="res://images/umbrella.png" id="2_35i3u"]
-[ext_resource type="Script" path="res://source/components/health_component.gd" id="2_jr00n"]
 [ext_resource type="Script" path="res://source/attack_hitbox.gd" id="3_1tens"]
 [ext_resource type="Script" path="res://source/components/combat_component.gd" id="3_txr5l"]
 [ext_resource type="Script" path="res://source/states/state_machine.gd" id="4_o0l3m"]
@@ -683,12 +682,11 @@ frame = 1
 position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_0477f")
 
-[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("combat")]
+[node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(0, -5.5)
 collision_layer = 8
 collision_mask = 32
 script = ExtResource("3_1tens")
-combat = NodePath("../Components/CombatComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(5, -7.5)
@@ -711,13 +709,10 @@ debug_color = Color(0, 0.0745098, 0.662745, 0.419608)
 script = ExtResource("1_01350")
 max_fall_speed = 500.0
 
-[node name="HealthComponent" type="Node" parent="Components"]
-script = ExtResource("2_jr00n")
-
 [node name="CombatComponent" type="Node" parent="Components" node_paths=PackedStringArray("motion", "health")]
 script = ExtResource("3_txr5l")
 motion = NodePath("../MotionComponent")
-health = NodePath("../HealthComponent")
+health = NodePath("")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_o0l3m")
@@ -768,11 +763,10 @@ animation_player = NodePath("../../AnimationPlayer")
 [node name="JumpTimer" type="Timer" parent="StateMachine/PlayerStateJump"]
 one_shot = true
 
-[node name="PlayerStateStun" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "health", "effect_animation_player", "stun_timer", "hurtbox", "invincibility_timer", "animation_player")]
+[node name="PlayerStateStun" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "effect_animation_player", "stun_timer", "hurtbox", "invincibility_timer", "animation_player")]
 script = ExtResource("9_su27x")
 character_body = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
-health = NodePath("../../Components/HealthComponent")
 effect_animation_player = NodePath("../../EffectAnimationPlayer")
 stun_timer = NodePath("StunTimer")
 hurtbox = NodePath("../../Hurtbox")
@@ -806,8 +800,7 @@ animation_player = NodePath("../../AnimationPlayer")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/PlayerStateAttack" method="_on_animation_player_animation_finished"]
-[connection signal="area_entered" from="Hurtbox" to="Components/HealthComponent" method="_on_hurtbox_area_entered"]
-[connection signal="damage_taken" from="Components/HealthComponent" to="StateMachine/PlayerStateStun" method="_on_health_component_damage_taken"]
+[connection signal="area_entered" from="Hurtbox" to="StateMachine/PlayerStateStun" method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="StateMachine/PlayerStateFloat/FloatTimer" to="StateMachine/PlayerStateFloat" method="_on_float_timer_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerStateJump/JumpTimer" to="StateMachine/PlayerStateJump" method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerStateStun/StunTimer" to="StateMachine/PlayerStateStun" method="_on_stun_timer_timeout"]

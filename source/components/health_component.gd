@@ -11,7 +11,7 @@ signal damage_taken(previous_hp: int, attacker_hitbox: Area2D)
 func take_damage(attacker_hitbox: Area2D) -> void:
 	var previous_health: int = health_points
 	health_points -= attacker_hitbox.damage
-	
+
 	emit_signal("damage_taken", previous_health, attacker_hitbox)
 
 

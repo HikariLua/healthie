@@ -4,7 +4,6 @@ extends State
 @export var character_body: CharacterBody2D
 
 @export var motion: MotionComponent
-@export var health: HealthComponent
 
 @export var effect_animation_player: AnimationPlayer
 
@@ -24,15 +23,14 @@ extends State
 func _ready() -> void:
 	assert(character_body != null)
 	assert(motion != null)
-	assert(health != null)
 	assert(effect_animation_player != null)
 	assert(hurtbox != null)
 	assert(stun_timer != null)
 	assert(invincibility_timer != null)
 
 
-func _on_health_component_damage_taken(_previous_hp, attacker_hitbox) -> void:
-	var direction: Vector2 = get_knockback_direction(attacker_hitbox)
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	var direction: Vector2 = get_knockback_direction(area)
 
 	state_machine.transition_state_to(
 		"PlayerStateStun",
@@ -49,9 +47,9 @@ func on_enter(message := {}) -> void:
 
 	apply_knockback(direction)
 	
-	toggle_invencibility(true)
-	invincibility_timer.start(invincibility_duration)
-	effect_animation_player.play("invencibility")
+#	toggle_invencibility(true)
+#	invincibility_tim3er.start(invincibility_duration)
+#	effect_animation_player.play("invencibility")
 
 
 func physics_update(delta: float) -> void:
@@ -60,8 +58,6 @@ func physics_update(delta: float) -> void:
 		delta / 2
 	)
 	
-	
-
 	character_body.move_and_slide()
 
 
@@ -84,22 +80,18 @@ func apply_knockback(direction: Vector2) -> void:
 	character_body.velocity.x = 0
 	
 
-
-func toggle_invencibility(value: bool) -> void:
-	var collisions: Array = hurtbox.get_children()
-
-	for collision in collisions:
-		collision.set_deferred("disabled", value)
-
-
-func _on_invencibility_timer_timeout() -> void:
-	toggle_invencibility(false)
-	effect_animation_player.play("RESET")
-	
+#func toggle_invencibility(value: bool) -> void:
+#	var collisions: Array = hurtbox.get_children()
+#
+#	for collision in collisions:
+#		collision.set_deferred("disabled", value)
+#
+#
+#func _on_invencibility_timer_timeout() -> void:
+#	toggle_invencibility(false)
+#	effect_animation_player.play("RESET")
+#
 
 func _on_stun_timer_timeout() -> void:
-	if health.health_points <= 0:
-		state_machine.transition_state_to("PlayerStateDie")
-		return
-	
 	state_machine.transition_state_to("PlayerStateIdle")
+

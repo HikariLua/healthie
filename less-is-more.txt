@@ -1,3 +1,6 @@
+LEMBRA DE APAGAR O REPOSITORIO DO GIT PARA NAO VAZAR AS ARTES DO DRIZZLE
+
+
 Main Idea: The game consists in a player that moves in a platform like style,
 the main character wants to pass trhough some physical test's for applying for a job
 but for that it needs to stay healthy all the time until get in the job. There will

@@ -9,6 +9,7 @@ extends State
 @export var hitbox_collision: CollisionShape2D
 
 
+
 func _ready() -> void:
 	assert(character_body != null)
 	assert(motion != null)
@@ -17,7 +18,16 @@ func _ready() -> void:
 
 
 func on_enter(_message := {}) -> void:
-	umbrella_sprite.visible = true
+	var projectile: PlayerProjectile = preload(
+		"res://scenes/projectiles/player_projectile.tscn"
+	).instantiate()
+
+	projectile.global_position = character_body.global_position
+	projectile.global_position.y -= 7.5
+	projectile.direction.x = motion.looking_direction.x
+
+	get_tree().get_root().add_child(projectile)
+
 	motion.two_direction_animation(animation_player, "attack")
 
 	character_body.velocity.x = 0

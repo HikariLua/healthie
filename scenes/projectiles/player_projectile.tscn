@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://7vtkxafog8wi"]
+
+[ext_resource type="Script" path="res://source/projectiles/player_projectile.gd" id="1_fefbb"]
+[ext_resource type="Texture2D" uid="uid://d1ue2patct3x" path="res://images/umbrella.png" id="2_41qyh"]
+[ext_resource type="Script" path="res://source/attack_hitbox.gd" id="3_84u6v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxfst"]
+size = Vector2(10, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yn54k"]
+size = Vector2(12, 6)
+
+[node name="PlayerProjectile" type="CharacterBody2D" node_paths=PackedStringArray("hitbox")]
+collision_layer = 0
+script = ExtResource("1_fefbb")
+hitbox = NodePath("Hitbox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-11, -9)
+texture = ExtResource("2_41qyh")
+hframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wxfst")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 32
+script = ExtResource("3_84u6v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_yn54k")
+debug_color = Color(0.701961, 0, 0.0196078, 0.419608)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
