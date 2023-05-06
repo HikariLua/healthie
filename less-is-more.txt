@@ -1,0 +1,40 @@
+Main Idea: The game consists in a player that moves in a platform like style,
+the main character wants to pass trhough some physical test's for applying for a job
+but for that it needs to stay healthy all the time until get in the job. There will
+be 3 tests, so 3 stages to pass, in the stages you need to avoid collecting unhealthy
+food. The LESS unhealthy food you get, MORE healthy you become.
+
+Mechanics:
+    - collect food and count it
+	- trigger end of stage and calculate health
+	- moving platforms
+	- moving food (x and y axis, circle shape)
+	- knockback
+	- static enemies throwing food
+	- food cannons
+
+Technical Needs:
+    - on screen detection
+	- enemy spawn
+	- enemy range attack
+	- checkpoints
+	- death holes
+	- player range attack
+
+	maybe-
+	- serveral food collected in a row kills
+	- collecting gives you a little boost
+
+Overall:
+    - 3 stages
+	- 3-4 enemies per stage
+	- 2-3 scenario obstacles
+	- (MAYBE) a final boss
+
+Art:
+   - All characters are animals
+   - 16x16 base
+   - 4-5 food sprites per stage
+   - main caracter is a fox
+   - music probably classical chiptune remix made by me
+
