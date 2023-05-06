@@ -6,7 +6,6 @@ extends State
 @export var motion: MotionComponent
 
 @export var umbrella_sprite: Sprite2D
-@export var hitbox_collision: CollisionShape2D
 
 
 
@@ -14,7 +13,6 @@ func _ready() -> void:
 	assert(character_body != null)
 	assert(motion != null)
 	assert(umbrella_sprite != null)
-	assert(hitbox_collision != null)
 
 
 func on_enter(_message := {}) -> void:
@@ -48,4 +46,3 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func on_exit() -> void:
 	umbrella_sprite.visible = false
-	hitbox_collision.set_deferred("disabled", true)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dg5p3k67ql42i"]
+[gd_scene load_steps=23 format=3 uid="uid://dg5p3k67ql42i"]
 
 [ext_resource type="PackedScene" uid="uid://6uo15x52gvv0" path="res://scenes/characters/player.tscn" id="1_n5c5m"]
 [ext_resource type="Texture2D" uid="uid://dv1hwm55kavqp" path="res://images/scenario/level_1/caves.png" id="1_s4pto"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bny56sxjj3je8" path="res://images/scenario/level_1/forest_tile.png" id="10_2bbtp"]
 [ext_resource type="PackedScene" uid="uid://bgw07jqxk7uwd" path="res://scenes/characters/aroeira.tscn" id="13_e0ia7"]
 [ext_resource type="PackedScene" path="res://scenes/triggers/death_hole.tscn" id="14_vvurq"]
+[ext_resource type="PackedScene" uid="uid://dimfi5n0yonvs" path="res://scenes/collectibles/standard_food.tscn" id="15_xd6c2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f3e5c"]
 animations = [{
@@ -1553,7 +1554,7 @@ centered = false
 [node name="Player" parent="." instance=ExtResource("1_n5c5m")]
 position = Vector2(222, 228)
 
-[node name="Camera2D" parent="Player" index="9"]
+[node name="Camera2D" parent="Player" index="10"]
 position = Vector2(-1, 17)
 limit_top = 0
 limit_bottom = 320
@@ -1606,7 +1607,38 @@ position = Vector2(483, 372)
 shape = SubResource("RectangleShape2D_palp7")
 debug_color = Color(0.701961, 0.329412, 0.427451, 0.419608)
 
+[node name="StandardFood" parent="." instance=ExtResource("15_xd6c2")]
+position = Vector2(235, 250)
+
+[node name="StandardFood2" parent="." instance=ExtResource("15_xd6c2")]
+position = Vector2(278, 249)
+
+[node name="StandardFood3" parent="." instance=ExtResource("15_xd6c2")]
+position = Vector2(293, 249)
+
+[node name="StandardFood4" parent="." instance=ExtResource("15_xd6c2")]
+position = Vector2(284, 249)
+
+[node name="StandardFood5" parent="." instance=ExtResource("15_xd6c2")]
+position = Vector2(269, 249)
+
+[node name="StandardFood6" parent="." instance=ExtResource("15_xd6c2")]
+position = Vector2(265, 250)
+
+[node name="StandardFood7" parent="." instance=ExtResource("15_xd6c2")]
+position = Vector2(257, 248)
+
+[node name="StandardFood8" parent="." instance=ExtResource("15_xd6c2")]
+position = Vector2(250, 249)
+
+[node name="StandardFood9" parent="." instance=ExtResource("15_xd6c2")]
+position = Vector2(243, 249)
+
+[node name="StandardFood10" parent="." instance=ExtResource("15_xd6c2")]
+position = Vector2(238, 249)
+
 [editable path="Player"]
+[editable path="Player/MainHUD"]
 [editable path="Aroeira3"]
 [editable path="Aroeira2"]
 [editable path="DeathHole"]
