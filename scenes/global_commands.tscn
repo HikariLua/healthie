@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://db3r2b8mt887h"]
+
+[ext_resource type="Script" path="res://source/global_commands.gd" id="1_vr1yi"]
+
+[node name="GlobalCommands" type="Node"]
+process_mode = 3
+script = ExtResource("1_vr1yi")

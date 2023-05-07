@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dv1hwm55kavqp" path="res://images/scenario/level_1/caves.png" id="2_d3lr8"]
 [ext_resource type="Texture2D" uid="uid://u4ubojsit8rx" path="res://images/scenario/level_1/cave_tile.png" id="3_7rb1x"]
 [ext_resource type="Texture2D" uid="uid://bga186w1xs767" path="res://images/scenario/level_1/shadow_decoration_tile.png" id="4_8ncbc"]
-[ext_resource type="PackedScene" uid="uid://cxpoqvu6jrvbs" path="res://scenes/trigger_camera_limit.tscn" id="5_72yvq"]
+[ext_resource type="PackedScene" uid="uid://cxpoqvu6jrvbs" path="res://scenes/triggers/trigger_camera_limit.tscn" id="5_72yvq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_efp4g"]
 texture = ExtResource("3_7rb1x")

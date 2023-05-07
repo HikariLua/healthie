@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bga186w1xs767" path="res://images/scenario/level_1/shadow_decoration_tile.png" id="8_022el"]
 [ext_resource type="Texture2D" uid="uid://bny56sxjj3je8" path="res://images/scenario/level_1/forest_tile.png" id="10_2bbtp"]
 [ext_resource type="PackedScene" uid="uid://bgw07jqxk7uwd" path="res://scenes/characters/aroeira.tscn" id="13_e0ia7"]
-[ext_resource type="PackedScene" path="res://scenes/triggers/death_hole.tscn" id="14_vvurq"]
+[ext_resource type="PackedScene" uid="uid://v3halvyh28q5" path="res://scenes/triggers/death_hole.tscn" id="14_vvurq"]
 [ext_resource type="PackedScene" uid="uid://dimfi5n0yonvs" path="res://scenes/collectibles/standard_food.tscn" id="15_xd6c2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f3e5c"]

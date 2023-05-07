@@ -5,12 +5,17 @@ extends State
 @export var motion: MotionComponent
 @export var hurtbox_collision: CollisionShape2D
 
+var death_screen: CanvasLayer = preload(
+	"res://scenes/screens/death_screen.tscn"
+).instantiate()
+
 
 func _ready() -> void:
 	assert(character_body != null)
 
 
 func on_enter(_message := {}) -> void:
+	get_tree().get_root().add_child(death_screen)
 	hurtbox_collision.set_deferred("disabled", true)
 	animation_player.play("die")
 
