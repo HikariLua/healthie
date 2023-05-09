@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://nl67k57xsf82"]
+
+[ext_resource type="Script" path="res://source/scene_components/sign.gd" id="1_5kjya"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fq8r6"]
+size = Vector2(14, 28)
+
+[node name="Sign" type="Area2D" node_paths=PackedStringArray("text_label", "color_rect", "message_node")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_5kjya")
+text_label = NodePath("Message/Label")
+color_rect = NodePath("Message/ColorRect")
+message_node = NodePath("Message")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fq8r6")
+
+[node name="Message" type="Node2D" parent="."]
+visible = false
+scale = Vector2(0.9, 0.9)
+
+[node name="ColorRect" type="ColorRect" parent="Message"]
+offset_left = -50.0
+offset_top = -56.0
+offset_right = 150.0
+offset_bottom = 24.0
+scale = Vector2(0.5, 0.5)
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Message"]
+offset_left = -50.0
+offset_top = -56.0
+offset_right = 150.0
+offset_bottom = 24.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 8
+text = "Your objective is to pass all stages getting the less food you can. Good Luck"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

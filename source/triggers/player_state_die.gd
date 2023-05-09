@@ -1,4 +1,3 @@
-class_name PlayerStateDie
 extends State
 
 @export var character_body: CharacterBody2D
@@ -23,10 +22,7 @@ func on_enter(_message := {}) -> void:
 		TransitionScreen.reload_scene(self.get_tree())
 		
 	else:
-		TransitionScreen.transition_to(
-			"res://scenes/screens/game_over_screen.tscn",
-			get_tree()
-		)
+		get_tree().change_scene_to_file("res://scenes/screens/game_over_screen.tscn")
 	
 	hurtbox_collision.set_deferred("disabled", true)
 	collectible_collision.set_deferred("disabled", true)

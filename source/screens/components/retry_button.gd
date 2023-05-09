@@ -10,8 +10,9 @@ func _ready() -> void:
 
 func _on_pressed() -> void:
 	blocker.visible = true
-	TransitionScreen.animation_player.play("fade_out")
+	TransitionScreen.transition_to("res://scenes/screens/main_menu.tscn", get_tree())
 	animation_player.play("fade")
+
 
 
 func reload() -> void:

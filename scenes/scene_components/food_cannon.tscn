@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt346spxrvjq"]
+
+[ext_resource type="Texture2D" uid="uid://d0e1s0ht03fhm" path="res://images/frame.png" id="1_j0w1b"]
+[ext_resource type="Script" path="res://source/scene_components/food_cannon.gd" id="1_w1ee6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upwm5"]
+size = Vector2(16, 16)
+
+[node name="FoodCannon" type="StaticBody2D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_w1ee6")
+timer = NodePath("Timer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_j0w1b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_upwm5")
+one_way_collision = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

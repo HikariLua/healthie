@@ -10,7 +10,7 @@ extends Node
 
 func _ready() -> void:
 	assert(initial_state != null)
-
+	
 	active_state.on_enter()
 
 

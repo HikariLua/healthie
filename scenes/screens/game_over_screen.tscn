@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://cvskl433rnerq"]
 
-[ext_resource type="FontFile" uid="uid://b4nnj0vck6ek2" path="res://fonts/pixel_operator/PixelOperator8-Bold.ttf" id="1_n8ei8"]
-[ext_resource type="FontFile" uid="uid://bq55taxbtsta5" path="res://fonts/pixel_operator/PixelOperator8.ttf" id="2_2f88b"]
-[ext_resource type="Script" path="res://source/screens/components/pause_button.gd" id="2_bb51i"]
-[ext_resource type="Script" path="res://source/screens/components/retry_button.gd" id="3_i5hyi"]
+[ext_resource type="FontFile" uid="uid://b4nnj0vck6ek2" path="res://fonts/pixel_operator/PixelOperator8-Bold.ttf" id="1_sngif"]
+[ext_resource type="FontFile" uid="uid://bq55taxbtsta5" path="res://fonts/pixel_operator/PixelOperator8.ttf" id="2_pwsng"]
+[ext_resource type="Script" path="res://source/screens/components/retry_button.gd" id="3_jkboh"]
 
-[sub_resource type="Animation" id="Animation_b5meq"]
+[sub_resource type="Animation" id="Animation_slbq7"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -20,7 +19,7 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_dskeb"]
+[sub_resource type="Animation" id="Animation_trvkt"]
 resource_name = "fade"
 length = 0.2
 tracks/0/type = "value"
@@ -36,14 +35,13 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8gwf1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvr85"]
 _data = {
-"RESET": SubResource("Animation_b5meq"),
-"fade": SubResource("Animation_dskeb")
+"RESET": SubResource("Animation_slbq7"),
+"fade": SubResource("Animation_trvkt")
 }
 
-[node name="PauseScreen" type="CanvasLayer"]
-process_mode = 3
+[node name="GameOverScreen" type="CanvasLayer"]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -54,6 +52,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,26 +75,19 @@ offset_bottom = 19.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Paused" type="Label" parent="Control/VBoxContainer"]
+[node name="GameOver" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_n8ei8")
-text = "PAUSED
-"
+theme_override_fonts/font = ExtResource("1_sngif")
+text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="Control/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "Resume"
-script = ExtResource("2_bb51i")
-
 [node name="RetryButton" type="Button" parent="Control/VBoxContainer" node_paths=PackedStringArray("animation_player", "blocker")]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_2f88b")
+theme_override_fonts/font = ExtResource("2_pwsng")
 theme_override_font_sizes/font_size = 8
 text = "Retry"
-script = ExtResource("3_i5hyi")
+script = ExtResource("3_jkboh")
 animation_player = NodePath("../../../AnimationPlayer")
 blocker = NodePath("../../../ButtonBloker")
 
@@ -110,8 +102,7 @@ color = Color(0, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_8gwf1")
+"": SubResource("AnimationLibrary_gvr85")
 }
 
-[connection signal="pressed" from="Control/VBoxContainer/ResumeButton" to="Control/VBoxContainer/ResumeButton" method="_on_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/RetryButton" to="Control/VBoxContainer/RetryButton" method="_on_pressed" flags=18]
+[connection signal="pressed" from="Control/VBoxContainer/RetryButton" to="Control/VBoxContainer/RetryButton" method="_on_pressed"]

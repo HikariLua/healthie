@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://df3ksxfcx8i6y"]
+[gd_scene load_steps=3 format=3 uid="uid://df3ksxfcx8i6y"]
 
 [ext_resource type="Script" path="res://source/screens/main_hud.gd" id="1_yj6dt"]
+[ext_resource type="Theme" uid="uid://wbb5lh8bsy3s" path="res://resources/main_hud.tres" id="2_c6ues"]
 
-[node name="MainHUD" type="CanvasLayer"]
+[node name="MainHUD" type="CanvasLayer" node_paths=PackedStringArray("food_label", "food_bar", "time_bar", "lifes")]
+script = ExtResource("1_yj6dt")
+food_label = NodePath("Control/VBoxContainer/Food")
+food_bar = NodePath("Control/VBoxContainer/VBoxContainer/FoodBar")
+time_bar = NodePath("Control/VBoxContainer/VBoxContainer/TimeBar")
+lifes = NodePath("Control/VBoxContainer/Lifes")
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("food_label")]
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,17 +19,46 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_yj6dt")
-food_label = NodePath("VBoxContainer/Label")
+theme = ExtResource("2_c6ues")
 
 [node name="VBoxContainer" type="GridContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 5.0
+offset_right = -7.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
+columns = 2
 
-[node name="Label" type="Label" parent="Control/VBoxContainer"]
+[node name="Food" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 8
 text = "Food = "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lifes" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="FoodBar" type="ProgressBar" parent="Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+value = 5.0
+show_percentage = false
+
+[node name="TimeBar" type="ProgressBar" parent="Control/VBoxContainer/VBoxContainer"]
+modulate = Color(1, 0.960784, 0, 1)
+layout_mode = 2
+max_value = 10.0
+step = 0.001
+show_percentage = false

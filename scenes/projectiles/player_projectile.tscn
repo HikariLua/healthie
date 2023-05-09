@@ -10,7 +10,7 @@ size = Vector2(10, 2)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yn54k"]
 size = Vector2(12, 6)
 
-[node name="PlayerProjectile" type="CharacterBody2D" node_paths=PackedStringArray("hitbox")]
+[node name="PlayerProjectile" type="CharacterBody2D" node_paths=PackedStringArray("hitbox") groups=["projectile"]]
 collision_layer = 0
 script = ExtResource("1_fefbb")
 hitbox = NodePath("Hitbox")

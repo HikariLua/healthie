@@ -1,13 +1,14 @@
 class_name DeathScreen
 extends CanvasLayer
 
-@export var animation_player: AnimationPlayer
+
+func _ready() -> void:
+	TransitionScreen.connect("transition_complete", self_destroy)
 
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "fade_out":
-		get_tree().reload_current_scene()
-		animation_player.play("fade_in")
+func show_lifes() -> void:
+	pass
 
-	if anim_name == "fade_in":
-		queue_free()
+
+func self_destroy() -> void:
+	queue_free()

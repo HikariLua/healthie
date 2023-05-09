@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://xfsn0roj30rn"]
+
+[ext_resource type="Script" path="res://source/triggers/end_stage_trigger.gd" id="1_leo6r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1er58"]
+size = Vector2(124, 58)
+
+[node name="EndStageTrigger" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_leo6r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1er58")
+debug_color = Color(0.0980392, 1, 0, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

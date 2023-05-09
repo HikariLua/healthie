@@ -1,24 +1,78 @@
-[gd_scene load_steps=4 format=3 uid="uid://dimfi5n0yonvs"]
+[gd_scene load_steps=8 format=3 uid="uid://dimfi5n0yonvs"]
 
-[ext_resource type="Texture2D" uid="uid://bewocliy57b45" path="res://images/flower.png" id="1_ml1t1"]
 [ext_resource type="Script" path="res://source/collectibles/standard_food.gd" id="1_pmf38"]
+[ext_resource type="Texture2D" uid="uid://bfuwhmtlfj3j6" path="res://images/lya.png" id="2_sfn01"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_us7gl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvo2d"]
 size = Vector2(10, 10)
 
-[node name="StandardFood" type="Node2D" groups=["food"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6cjg"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_xkqgj"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_3r4c5"]
+resource_name = "float"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -12, 0, 0.3, 0.3, 0, -0.5, -0.3, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_or2nw"]
+_data = {
+"RESET": SubResource("Animation_xkqgj"),
+"float": SubResource("Animation_3r4c5")
+}
+
+[node name="StandardFood" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["food", "projectile"]]
+collision_layer = 0
 script = ExtResource("1_pmf38")
+sprite = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cvo2d")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_ml1t1")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_sfn01")
+hframes = 10
+vframes = 5
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 128
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_us7gl")
+shape = SubResource("CircleShape2D_e6cjg")
 debug_color = Color(1, 0.952941, 0.45098, 0.419608)
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "float"
+libraries = {
+"": SubResource("AnimationLibrary_or2nw")
+}
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

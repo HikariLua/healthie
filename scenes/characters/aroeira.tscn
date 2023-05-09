@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bgw07jqxk7uwd"]
+[gd_scene load_steps=20 format=3 uid="uid://bgw07jqxk7uwd"]
 
 [ext_resource type="Texture2D" uid="uid://d772i5qcg42r" path="res://images/aroeira.png" id="1_sdsva"]
 [ext_resource type="Script" path="res://source/components/motion_component.gd" id="2_cnh11"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://source/components/combat_component.gd" id="5_bfa1x"]
 [ext_resource type="Script" path="res://source/states/enemy_state_roam_01.gd" id="8_btyt0"]
 [ext_resource type="Script" path="res://source/states/enemy_state_die_01.gd" id="9_8m1sv"]
+[ext_resource type="PackedScene" uid="uid://dimfi5n0yonvs" path="res://scenes/collectibles/standard_food.tscn" id="10_dqeiv"]
 
 [sub_resource type="Animation" id="Animation_63bfe"]
 length = 0.001
@@ -200,6 +201,9 @@ script = ExtResource("9_8m1sv")
 character_body = NodePath("../..")
 health = NodePath("../../Components/HealthComponent")
 animation_player = NodePath("../../AnimationPlayer")
+
+[node name="StandardFood" parent="." instance=ExtResource("10_dqeiv")]
+position = Vector2(0, -19)
 
 [connection signal="area_entered" from="Hurtbox" to="Components/HealthComponent" method="_on_hurtbox_area_entered"]
 [connection signal="damage_taken" from="Components/HealthComponent" to="StateMachine/EnemyStateDie01" method="_on_health_component_damage_taken"]
