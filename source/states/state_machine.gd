@@ -26,7 +26,7 @@ func transition_state_to(target_state: String, message := {}) -> bool:
 	# Avoid transition to non existent state
 	if not has_node(target_state):
 		return false
-	
+
 	active_state.on_exit()
 
 	active_state = get_node(target_state) as State

@@ -1,14 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://xfsn0roj30rn"]
+[gd_scene load_steps=4 format=3 uid="uid://xfsn0roj30rn"]
 
 [ext_resource type="Script" path="res://source/triggers/end_stage_trigger.gd" id="1_leo6r"]
+[ext_resource type="AudioStream" uid="uid://f1og135qfn3y" path="res://audio/sfx/clear.wav" id="2_w3346"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1er58"]
 size = Vector2(124, 58)
 
-[node name="EndStageTrigger" type="Area2D"]
+[node name="EndStageTrigger" type="Area2D" node_paths=PackedStringArray("clear_sfx", "extra_clear_sfx")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_leo6r")
+clear_sfx = NodePath("Sfx/Clear")
+extra_clear_sfx = NodePath("Sfx/ExtraClear")
+
+[node name="Sfx" type="Node2D" parent="."]
+
+[node name="Clear" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource("2_w3346")
+volume_db = -5.0
+max_distance = 400.0
+
+[node name="ExtraClear" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource("2_w3346")
+volume_db = -5.0
+max_distance = 400.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1er58")

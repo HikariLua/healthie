@@ -1,9 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://bgw07jqxk7uwd"]
+[gd_scene load_steps=24 format=3 uid="uid://bgw07jqxk7uwd"]
 
+[ext_resource type="AudioStream" uid="uid://clk85h3yfnytp" path="res://audio/sfx/hurt.wav" id="1_lov5l"]
 [ext_resource type="Texture2D" uid="uid://d772i5qcg42r" path="res://images/aroeira.png" id="1_sdsva"]
 [ext_resource type="Script" path="res://source/components/motion_component.gd" id="2_cnh11"]
 [ext_resource type="Script" path="res://source/body_hitbox.gd" id="2_j4fty"]
+[ext_resource type="AudioStream" uid="uid://bwmkplw1cfbcb" path="res://audio/sfx/enemy_death.wav" id="2_qwn7s"]
 [ext_resource type="Script" path="res://source/components/health_component.gd" id="3_1pbox"]
+[ext_resource type="Texture2D" uid="uid://bgdbdx2e4yk0q" path="res://images/explosion.png" id="3_jlm6w"]
 [ext_resource type="Script" path="res://source/states/state_machine.gd" id="4_sgbe7"]
 [ext_resource type="Script" path="res://source/states/enemy_state_idle_01.gd" id="5_0xljm"]
 [ext_resource type="Script" path="res://source/components/combat_component.gd" id="5_bfa1x"]
@@ -24,6 +27,42 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explosion:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemySprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_gvnm2"]
@@ -94,9 +133,51 @@ tracks/0/keys = {
 "values": [10, 11, 12, 13, 14, 15]
 }
 
+[sub_resource type="Animation" id="Animation_8w0dr"]
+resource_name = "die"
+length = 0.16
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemySprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4xu3m"]
 _data = {
 "RESET": SubResource("Animation_63bfe"),
+"die": SubResource("Animation_8w0dr"),
 "idle-left": SubResource("Animation_gvnm2"),
 "idle-right": SubResource("Animation_u1r0n"),
 "run-left": SubResource("Animation_i7ux6"),
@@ -116,6 +197,18 @@ size = Vector2(9, 12)
 collision_layer = 16
 collision_mask = 17
 
+[node name="Sfx" type="Node2D" parent="."]
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource("1_lov5l")
+volume_db = -5.0
+max_distance = 400.0
+
+[node name="Die" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource("2_qwn7s")
+volume_db = -5.0
+max_distance = 400.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle-right"
 libraries = {
@@ -128,6 +221,13 @@ texture = ExtResource("1_sdsva")
 offset = Vector2(0, -8.5)
 hframes = 10
 vframes = 3
+
+[node name="Explosion" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(0, -5)
+texture = ExtResource("3_jlm6w")
+hframes = 5
 
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5.5)
@@ -196,15 +296,19 @@ animation_player = NodePath("../../AnimationPlayer")
 [node name="RoamTimer" type="Timer" parent="StateMachine/EnemyStateRoam01"]
 one_shot = true
 
-[node name="EnemyStateDie01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "health", "animation_player")]
+[node name="EnemyStateDie01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "health", "hurt_sfx", "die_sfx", "hurtbox_collision", "animation_player")]
 script = ExtResource("9_8m1sv")
 character_body = NodePath("../..")
 health = NodePath("../../Components/HealthComponent")
+hurt_sfx = NodePath("../../Sfx/Hurt")
+die_sfx = NodePath("../../Sfx/Die")
+hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
 animation_player = NodePath("../../AnimationPlayer")
 
 [node name="StandardFood" parent="." instance=ExtResource("10_dqeiv")]
 position = Vector2(0, -19)
 
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/EnemyStateDie01" method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="Components/HealthComponent" method="_on_hurtbox_area_entered"]
 [connection signal="damage_taken" from="Components/HealthComponent" to="StateMachine/EnemyStateDie01" method="_on_health_component_damage_taken"]
 [connection signal="timeout" from="StateMachine/EnemyStateIdle01/IdleTimer" to="StateMachine/EnemyStateIdle01" method="_on_idle_timer_timeout"]

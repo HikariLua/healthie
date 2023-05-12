@@ -18,7 +18,13 @@ func update_input_direction() -> Vector2:
 	var new_input_direction := Vector2(
 		Input.get_axis("left", "right"),
 		Input.get_axis("up", "down")
-	)	
+	)
+	
+	if not new_input_direction.x == 0:
+		new_input_direction.x = 1 if new_input_direction.x > 0 else -1
+	
+	if not new_input_direction.y == 0:
+		new_input_direction.y = 1 if new_input_direction.y > 0 else -1
 	
 	return new_input_direction
 

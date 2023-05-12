@@ -78,19 +78,11 @@ func apply_knockback(direction: Vector2) -> void:
 
 	await get_tree().create_timer(knockback_duration).timeout
 	character_body.velocity.x = 0
-	
 
-#func toggle_invencibility(value: bool) -> void:
-#	var collisions: Array = hurtbox.get_children()
-#
-#	for collision in collisions:
-#		collision.set_deferred("disabled", value)
-#
-#
-#func _on_invencibility_timer_timeout() -> void:
-#	toggle_invencibility(false)
-#	effect_animation_player.play("RESET")
-#
+
+func on_exit() -> void:
+	stun_timer.stop()
+
 
 func _on_stun_timer_timeout() -> void:
 	state_machine.transition_state_to("PlayerStateIdle")

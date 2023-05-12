@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfuwhmtlfj3j6"
-path="res://.godot/imported/lya.png-b6863a1e0cecd65867a65fc5a5616fe9.ctex"
+uid="uid://5sok6jwuyn1l"
+path="res://.godot/imported/cosmic_layer_3.png-ce8656ed1917f902df6d9d3224c4bd28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/lya.png"
-dest_files=["res://.godot/imported/lya.png-b6863a1e0cecd65867a65fc5a5616fe9.ctex"]
+source_file="res://images/scenario/level_1/cosmic_layer_3.png"
+dest_files=["res://.godot/imported/cosmic_layer_3.png-ce8656ed1917f902df6d9d3224c4bd28.ctex"]
 
 [params]
 

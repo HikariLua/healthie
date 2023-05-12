@@ -15,8 +15,18 @@ func _ready() -> void:
 	hitbox.damage = self.damage
 
 
+func _enter_tree() -> void:
+	var color: Color = Color8(
+		randi_range(80, 255),
+		randi_range(80, 255),
+		randi_range(80, 255)
+	)
+	
+	modulate = color
+
+
 func _physics_process(_delta: float) -> void:
-	if is_on_wall():
+	if is_on_wall() or is_on_floor() or is_on_ceiling():
 		self_destroy()
 	
 	move_and_slide()

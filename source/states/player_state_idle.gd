@@ -36,7 +36,7 @@ func physics_update(delta: float) -> void:
 
 
 func check_transitions() -> void:
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and character_body.is_on_floor():
 		state_machine.transition_state_to("PlayerStateJump")
 
 	elif character_body.velocity.y > 0:

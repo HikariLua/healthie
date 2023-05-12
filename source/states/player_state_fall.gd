@@ -44,6 +44,9 @@ func check_transitions() -> void:
 	if Input.is_action_just_pressed("attack"):
 		state_machine.transition_state_to("PlayerStateAttackAir")
 
+	elif character_body.is_on_floor() and not motion.input_direction.x == 0:
+		state_machine.transition_state_to("PlayerStateRun")
+
 	elif character_body.is_on_floor():
 		state_machine.transition_state_to("PlayerStateIdle")
 

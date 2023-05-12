@@ -3,6 +3,7 @@ extends Node
 
 @export var sequence_timer: Timer
 @export var sequence_duration: float = 5
+@export var pickup_sfx: AudioStreamPlayer2D
 
 @export var state_machine: StateMachine
 
@@ -13,6 +14,7 @@ var collect_sequence: int = 0
 func _on_interactbox_area_entered(_area: Area2D) -> void:
 	collected_food += 1
 	collect_sequence += 1
+	pickup_sfx.play()
 	
 	if collect_sequence >= 10:
 		state_machine.transition_state_to("PlayerStateDie")

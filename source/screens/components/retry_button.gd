@@ -3,6 +3,9 @@ extends Button
 @export var animation_player: AnimationPlayer
 @export var blocker: ColorRect
 
+@export var select_sfx: AudioStreamPlayer2D
+@export var click_sfx: AudioStreamPlayer2D
+
 
 func _ready() -> void:
 	TransitionScreen.connect("fade_outed", reload)
@@ -24,3 +27,11 @@ func reload() -> void:
 	).instantiate()
 	
 	owner.queue_free()
+
+
+func _on_mouse_entered() -> void:
+	select_sfx.play()
+
+
+func _on_button_down() -> void:
+	click_sfx.play()

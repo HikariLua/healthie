@@ -2,8 +2,8 @@ class_name PlayerStateJump
 extends State
 
 ## Jump state executed when the player is on floor
-
 @export var character_body: CharacterBody2D
+@export var jump_sfx: AudioStreamPlayer2D
 
 @export var motion: MotionComponent
 
@@ -18,6 +18,8 @@ func _ready() -> void:
 func on_enter(_message := {}) -> void:
 	motion.two_direction_animation(animation_player, "jump")
 	character_body.velocity.y = motion.jump_velocity
+	
+	jump_sfx.play()
 
 
 func physics_update(delta: float) -> void:
@@ -54,6 +56,9 @@ func regulate_jump() -> void:
 func check_transitions() -> void:
 	if Input.is_action_just_pressed("attack"):
 		state_machine.transition_state_to("PlayerStateAttackAir")
+		
+	elif character_body.is_on_floor() and not motion.input_direction.x == 0:
+		state_machine.transition_state_to("PlayerStateRun")
 
 	elif character_body.is_on_floor():
 		state_machine.transition_state_to("PlayerStateIdle")

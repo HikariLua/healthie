@@ -3,6 +3,7 @@ extends State
 
 @export var character_body: CharacterBody2D
 @export var motion: MotionComponent
+@export var die_sfx: AudioStreamPlayer2D
 
 @export var hurtbox_collision: CollisionShape2D
 @export var collectible_collision: CollisionShape2D
@@ -17,6 +18,8 @@ func _ready() -> void:
 
 
 func on_enter(_message := {}) -> void:
+	die_sfx.play()
+	
 	if PlayerInfo.lifes > 0:
 		PlayerInfo.lifes -= 1
 		get_tree().get_root().add_child(death_screen)
@@ -30,7 +33,7 @@ func on_enter(_message := {}) -> void:
 	
 	hurtbox_collision.set_deferred("disabled", true)
 	collectible_collision.set_deferred("disabled", true)
-	animation_player.play("die")
+	motion.two_direction_animation(animation_player, "die")
 
 	character_body.velocity.x = 0
 

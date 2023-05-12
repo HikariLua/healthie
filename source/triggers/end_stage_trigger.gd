@@ -1,6 +1,8 @@
 extends Area2D
 
 @export var requierd_health: int = 85
+@export var clear_sfx: AudioStreamPlayer2D
+@export var extra_clear_sfx: AudioStreamPlayer2D
 
 var health: int = 100
 var player: CharacterBody2D
@@ -31,6 +33,7 @@ func _on_body_entered(body: Node2D) -> void:
 		result = "Extra Success"
 		plus = "+1 Life"
 		PlayerInfo.lifes += 1
+		extra_clear_sfx.play()
 		
 		show_sceen()
 		PlayerInfo.current_level += 1
@@ -40,6 +43,7 @@ func _on_body_entered(body: Node2D) -> void:
 	else:
 		result = "Success"
 		show_sceen()
+		clear_sfx.play()
 		PlayerInfo.current_level += 1
 		await get_tree().create_timer(3).timeout
 		next_level()

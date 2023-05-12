@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://b635qq8s2it8r"]
 
 [ext_resource type="Texture2D" uid="uid://d04pabjrt7od4" path="res://images/scenario/level_1/tileset_sample001.png" id="1_5h0eh"]
 

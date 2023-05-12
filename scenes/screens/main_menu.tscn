@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cx13u703swmfu"]
+[gd_scene load_steps=4 format=3 uid="uid://cx13u703swmfu"]
 
 [ext_resource type="Script" path="res://source/screens/components/play_button.gd" id="1_eepkb"]
+[ext_resource type="AudioStream" uid="uid://cfuukjesyayae" path="res://audio/sfx/select.wav" id="2_5abde"]
+[ext_resource type="AudioStream" uid="uid://453bk4bf7snq" path="res://audio/sfx/click.wav" id="3_1c0kp"]
 
 [node name="MainMenu" type="CanvasLayer"]
 
@@ -30,10 +32,27 @@ grow_vertical = 2
 layout_mode = 2
 text = "Game"
 
-[node name="PlayButton" type="Button" parent="Control/GridContainer"]
+[node name="PlayButton" type="Button" parent="Control/GridContainer" node_paths=PackedStringArray("select_sfx", "click_sfx")]
+modulate = Color(0.309804, 1, 0.690196, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "play"
 script = ExtResource("1_eepkb")
+select_sfx = NodePath("Sfx/Select")
+click_sfx = NodePath("Sfx/Click")
 
+[node name="Sfx" type="Node2D" parent="Control/GridContainer/PlayButton"]
+
+[node name="Select" type="AudioStreamPlayer2D" parent="Control/GridContainer/PlayButton/Sfx"]
+stream = ExtResource("2_5abde")
+volume_db = -5.0
+max_distance = 400.0
+
+[node name="Click" type="AudioStreamPlayer2D" parent="Control/GridContainer/PlayButton/Sfx"]
+stream = ExtResource("3_1c0kp")
+volume_db = -5.0
+max_distance = 400.0
+
+[connection signal="button_down" from="Control/GridContainer/PlayButton" to="Control/GridContainer/PlayButton" method="_on_button_down"]
+[connection signal="mouse_entered" from="Control/GridContainer/PlayButton" to="Control/GridContainer/PlayButton" method="_on_mouse_entered"]
 [connection signal="pressed" from="Control/GridContainer/PlayButton" to="Control/GridContainer/PlayButton" method="_on_pressed"]

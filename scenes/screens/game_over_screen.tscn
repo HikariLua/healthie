@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvskl433rnerq"]
+[gd_scene load_steps=9 format=3 uid="uid://cvskl433rnerq"]
 
 [ext_resource type="FontFile" uid="uid://b4nnj0vck6ek2" path="res://fonts/pixel_operator/PixelOperator8-Bold.ttf" id="1_sngif"]
 [ext_resource type="FontFile" uid="uid://bq55taxbtsta5" path="res://fonts/pixel_operator/PixelOperator8.ttf" id="2_pwsng"]
 [ext_resource type="Script" path="res://source/screens/components/retry_button.gd" id="3_jkboh"]
+[ext_resource type="AudioStream" uid="uid://cfuukjesyayae" path="res://audio/sfx/select.wav" id="4_otfau"]
+[ext_resource type="AudioStream" uid="uid://453bk4bf7snq" path="res://audio/sfx/click.wav" id="5_kvotc"]
 
 [sub_resource type="Animation" id="Animation_slbq7"]
 length = 0.001
@@ -82,7 +84,7 @@ text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RetryButton" type="Button" parent="Control/VBoxContainer" node_paths=PackedStringArray("animation_player", "blocker")]
+[node name="RetryButton" type="Button" parent="Control/VBoxContainer" node_paths=PackedStringArray("animation_player", "blocker", "select_sfx", "click_sfx")]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_pwsng")
 theme_override_font_sizes/font_size = 8
@@ -90,6 +92,20 @@ text = "Retry"
 script = ExtResource("3_jkboh")
 animation_player = NodePath("../../../AnimationPlayer")
 blocker = NodePath("../../../ButtonBloker")
+select_sfx = NodePath("Sfx/Select")
+click_sfx = NodePath("Sfx/Click")
+
+[node name="Sfx" type="Node2D" parent="Control/VBoxContainer/RetryButton"]
+
+[node name="Select" type="AudioStreamPlayer2D" parent="Control/VBoxContainer/RetryButton/Sfx"]
+stream = ExtResource("4_otfau")
+volume_db = -5.0
+max_distance = 400.0
+
+[node name="Click" type="AudioStreamPlayer2D" parent="Control/VBoxContainer/RetryButton/Sfx"]
+stream = ExtResource("5_kvotc")
+volume_db = -5.0
+max_distance = 400.0
 
 [node name="ButtonBloker" type="ColorRect" parent="."]
 visible = false
@@ -105,4 +121,6 @@ libraries = {
 "": SubResource("AnimationLibrary_gvr85")
 }
 
+[connection signal="button_down" from="Control/VBoxContainer/RetryButton" to="Control/VBoxContainer/RetryButton" method="_on_button_down"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/RetryButton" to="Control/VBoxContainer/RetryButton" method="_on_mouse_entered"]
 [connection signal="pressed" from="Control/VBoxContainer/RetryButton" to="Control/VBoxContainer/RetryButton" method="_on_pressed"]
