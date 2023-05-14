@@ -367,7 +367,7 @@ shader = ExtResource("6_esg8b")
 shader_parameter/hit_opacity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0477f"]
-size = Vector2(8, 8)
+size = Vector2(10, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke6g0"]
 size = Vector2(2, 8)

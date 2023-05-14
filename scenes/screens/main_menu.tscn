@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cx13u703swmfu"]
+[gd_scene load_steps=16 format=3 uid="uid://cx13u703swmfu"]
 
 [ext_resource type="Script" path="res://source/screens/components/play_button.gd" id="1_eepkb"]
 [ext_resource type="Script" path="res://source/screens/main_menu.gd" id="1_xfc8d"]
@@ -13,6 +13,110 @@
 [ext_resource type="Texture2D" uid="uid://ceyschb22pnc1" path="res://images/scenario/level_1/forest_layer_4.png" id="11_bo8wo"]
 [ext_resource type="Script" path="res://source/screens/components/menu_camera.gd" id="12_uujvb"]
 
+[sub_resource type="Animation" id="Animation_7l5tg"]
+resource_name = "rotate"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(77, 41.5), Vector2(77, 29)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(77, -0.25, 0, 0.25, 0, 77, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(41.5, -0.25, 0, 0.2, 2, 29, -0.7, 2.5, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(50, -0.25, 0, 0.25, 0, 48, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+
+[sub_resource type="Animation" id="Animation_e7n63"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(77, 41.5)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(77, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(41.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(50, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wp7wh"]
+_data = {
+"RESET": SubResource("Animation_e7n63"),
+"rotate": SubResource("Animation_7l5tg")
+}
+
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_xfc8d")
 
@@ -24,6 +128,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Node2D" type="Node2D" parent="Control"]
+position = Vector2(117, 50)
+scale = Vector2(1.411, 1.411)
+
+[node name="Label" type="Label" parent="Control/Node2D"]
+modulate = Color(0.517647, 1, 0.737255, 1)
+offset_left = -47.0
+offset_top = -8.5
+offset_right = 55.0
+offset_bottom = 10.5001
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_pq5p2")
+text = "Healthie"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Node2D/Label"]
+autoplay = "rotate"
+libraries = {
+"": SubResource("AnimationLibrary_wp7wh")
+}
+
 [node name="GridContainer" type="GridContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
@@ -32,15 +158,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -30.0
-offset_top = -20.0
+offset_top = -7.0
 offset_right = 30.0
-offset_bottom = 20.0
+offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="Control/GridContainer"]
-layout_mode = 2
-text = "Game"
 
 [node name="PlayButton" type="Button" parent="Control/GridContainer" node_paths=PackedStringArray("select_sfx", "click_sfx")]
 modulate = Color(0.4, 0.486275, 1, 1)
@@ -105,9 +227,9 @@ volume_db = -5.0
 [node name="Label2" type="Label" parent="Control"]
 modulate = Color(0.968627, 0.713726, 1, 1)
 layout_mode = 2
-offset_left = 96.0
+offset_left = 90.0
 offset_top = 124.0
-offset_right = 256.0
+offset_right = 250.0
 offset_bottom = 162.0
 scale = Vector2(0.399, 0.399)
 theme_override_fonts/font = ExtResource("6_pq5p2")

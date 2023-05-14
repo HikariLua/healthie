@@ -72,6 +72,7 @@ message_node = NodePath("Message")
 animation_player = NodePath("AnimationPlayer")
 open_sfx = NodePath("Sfx/Open")
 close_sfx = NodePath("Sfx/Close")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)

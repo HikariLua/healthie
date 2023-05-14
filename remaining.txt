@@ -1,10 +1,5 @@
-level 2 desgin
 level 3 desgin
-end level desgin
 level 3 music
-win music
-put icon
-sound on splash
 music sound transition
 
 

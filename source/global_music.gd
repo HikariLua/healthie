@@ -3,13 +3,17 @@ extends Node
 @export var menu: AudioStreamPlayer
 @export var level_1: AudioStreamPlayer
 @export var level_2: AudioStreamPlayer
+@export var level_3: AudioStreamPlayer
 @export var game_over: AudioStreamPlayer
+@export var win: AudioStreamPlayer
 
 @onready var music_list: Array[AudioStreamPlayer] = [
 	menu,
 	level_1,
 	level_2,
-	game_over
+	level_3,
+	game_over,
+	win
 ]
 
 func play(music: AudioStreamPlayer) -> void:

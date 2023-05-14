@@ -39,7 +39,6 @@ func physics_update(delta: float) -> void:
 		motion.max_speed,
 		motion.input_direction.x
 	)
-	print(character_body.velocity.y)
 	
 	if character_body.is_on_floor():
 		character_body.velocity.x = 0
