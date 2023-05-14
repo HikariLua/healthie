@@ -17,7 +17,3 @@ func take_damage(attacker_hitbox: Area2D) -> void:
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	take_damage(area)
-
-
-# func _on_hurtbox_body_entered(body: Node2D) -> void:
-# 	health_points = take_damage(body.damage)

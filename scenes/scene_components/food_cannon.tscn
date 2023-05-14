@@ -50,12 +50,14 @@ script = ExtResource("1_w1ee6")
 timer = NodePath("Timer")
 animation_player = NodePath("AnimationPlayer")
 shoot_sfx = NodePath("Sfx/Shoot")
+metadata/_edit_group_ = true
 
 [node name="Sfx" type="Node2D" parent="."]
 
 [node name="Shoot" type="AudioStreamPlayer2D" parent="Sfx"]
 stream = ExtResource("2_sfgyh")
 volume_db = -5.0
+pitch_scale = 2.0
 max_distance = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

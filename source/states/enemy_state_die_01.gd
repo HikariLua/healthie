@@ -8,6 +8,7 @@ extends State
 @export var die_sfx: AudioStreamPlayer2D
 
 @export var hurtbox_collision: CollisionShape2D
+@export var hitbox_collision: CollisionShape2D
 
 
 func _ready() -> void:
@@ -24,6 +25,7 @@ func _on_health_component_damage_taken(_previous_hp, _attacker_hitbox) -> void:
 
 func on_enter(_message := {}) -> void:
 	hurtbox_collision.set_deferred("disabled", true)
+	hitbox_collision.set_deferred("disabled", true)
 	die_sfx.play()
 	animation_player.play("die")
 

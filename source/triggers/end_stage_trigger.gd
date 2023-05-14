@@ -26,7 +26,7 @@ func _on_body_entered(body: Node2D) -> void:
 		result = "Fail"
 		show_sceen()
 		
-		await get_tree().create_timer(3).timeout		
+		await get_tree().create_timer(7).timeout
 		player.get_node("StateMachine").transition_state_to("PlayerStateDie")
 
 	elif final_health > requierd_health + 5:
@@ -37,7 +37,7 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		show_sceen()
 		PlayerInfo.current_level += 1
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(7).timeout
 		next_level()
 		
 	else:
@@ -45,7 +45,7 @@ func _on_body_entered(body: Node2D) -> void:
 		show_sceen()
 		clear_sfx.play()
 		PlayerInfo.current_level += 1
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(7).timeout
 		next_level()
 
 
@@ -65,6 +65,6 @@ func show_sceen() -> void:
 	end_screen.plus.text = plus
 	get_tree().get_root().add_child(end_screen)
 	
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(7).timeout
 	
 	end_screen.queue_free()

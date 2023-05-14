@@ -94,7 +94,7 @@ scale = Vector2(1.321, 1.321)
 [node name="FoodBar" type="ProgressBar" parent="Control/VBoxContainer2"]
 modulate = Color(1, 0.929412, 0.207843, 1)
 layout_mode = 2
-max_value = 10.0
+max_value = 8.0
 value = 5.0
 show_percentage = false
 

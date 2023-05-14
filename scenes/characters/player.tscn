@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://6uo15x52gvv0"]
+[gd_scene load_steps=46 format=3 uid="uid://6uo15x52gvv0"]
 
 [ext_resource type="Script" path="res://source/components/motion_component.gd" id="1_01350"]
 [ext_resource type="PackedScene" uid="uid://df3ksxfcx8i6y" path="res://scenes/screens/main_hud.tscn" id="1_mf63t"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://source/components/health_component.gd" id="5_q848o"]
 [ext_resource type="Script" path="res://source/states/player_state_idle.gd" id="5_rlyxm"]
 [ext_resource type="AudioStream" uid="uid://c1lrvcmdoxiac" path="res://audio/sfx/pickup.wav" id="5_ru0ta"]
+[ext_resource type="Shader" path="res://resources/blink.gdshader" id="6_esg8b"]
 [ext_resource type="Script" path="res://source/states/player_state_jump.gd" id="6_fd52w"]
 [ext_resource type="Script" path="res://source/states/player_state_run.gd" id="7_282nt"]
 [ext_resource type="Script" path="res://source/components/collectible_component.gd" id="7_aq08m"]
@@ -38,7 +39,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_unk87"]
 resource_name = "attack-left"
-length = 0.06
+length = 0.2
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -47,7 +48,7 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [22, 23]
@@ -55,7 +56,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_6mn8t"]
 resource_name = "attack-right"
-length = 0.06
+length = 0.2
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -64,7 +65,7 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [20, 21]
@@ -307,6 +308,35 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:material:shader_parameter/hit_opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_wvuce"]
+resource_name = "hit"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:material:shader_parameter/hit_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_d65ao"]
 resource_name = "ivencibility"
@@ -328,8 +358,13 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dq7x5"]
 _data = {
 "RESET": SubResource("Animation_wucld"),
+"hit": SubResource("Animation_wvuce"),
 "invencibility": SubResource("Animation_d65ao")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wt2fm"]
+shader = ExtResource("6_esg8b")
+shader_parameter/hit_opacity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0477f"]
 size = Vector2(8, 8)
@@ -343,6 +378,7 @@ size = Vector2(2, 8)
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 collision_layer = 2
+metadata/_edit_group_ = true
 
 [node name="MainHUD" parent="." node_paths=PackedStringArray("collectible") instance=ExtResource("1_mf63t")]
 collectible = NodePath("../Components/CollectibleComponent")
@@ -382,6 +418,7 @@ libraries = {
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_wt2fm")
 texture = ExtResource("2_jfyrs")
 offset = Vector2(0, -8.5)
 hframes = 10
@@ -425,10 +462,11 @@ script = ExtResource("3_txr5l")
 motion = NodePath("../MotionComponent")
 health = NodePath("")
 
-[node name="CollectibleComponent" type="Node" parent="Components" node_paths=PackedStringArray("sequence_timer", "pickup_sfx", "state_machine")]
+[node name="CollectibleComponent" type="Node" parent="Components" node_paths=PackedStringArray("sequence_timer", "pickup_sfx", "effect", "state_machine")]
 script = ExtResource("7_aq08m")
 sequence_timer = NodePath("SequenceTimer")
 pickup_sfx = NodePath("../../Sfx/Pickup")
+effect = NodePath("../../EffectAnimationPlayer")
 state_machine = NodePath("../../StateMachine")
 
 [node name="SequenceTimer" type="Timer" parent="Components/CollectibleComponent"]
@@ -502,13 +540,14 @@ one_shot = true
 [node name="InvencibilityTimer" type="Timer" parent="StateMachine/PlayerStateStun"]
 one_shot = true
 
-[node name="PlayerStateDie" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "die_sfx", "hurtbox_collision", "collectible_collision", "animation_player")]
+[node name="PlayerStateDie" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "die_sfx", "hurtbox_collision", "collectible_collision", "collectible", "animation_player")]
 script = ExtResource("15_xkw6v")
 character_body = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
 die_sfx = NodePath("../../Sfx/Die")
 hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
 collectible_collision = NodePath("../../Interactbox/CollisionShape2D")
+collectible = NodePath("../../Components/CollectibleComponent")
 animation_player = NodePath("../../AnimationPlayer")
 
 [node name="PlayerStateAttackAir" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "attack_sfx", "motion", "animation_player")]
@@ -519,7 +558,6 @@ motion = NodePath("../../Components/MotionComponent")
 animation_player = NodePath("../../AnimationPlayer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 

@@ -14,6 +14,7 @@ collision_mask = 2
 script = ExtResource("1_leo6r")
 clear_sfx = NodePath("Sfx/Clear")
 extra_clear_sfx = NodePath("Sfx/ExtraClear")
+metadata/_edit_group_ = true
 
 [node name="Sfx" type="Node2D" parent="."]
 

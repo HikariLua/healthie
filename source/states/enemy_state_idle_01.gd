@@ -7,6 +7,8 @@ extends State
 @export var idle_duration: float = 2
 @export var idle_timer: Timer
 
+@export var flips: bool = true
+
 
 func _ready() -> void:
 	assert(character_body != null)
@@ -38,6 +40,7 @@ func _on_idle_timer_timeout() -> void:
 func on_exit() -> void:
 	idle_timer.stop()
 
-	motion.looking_direction = motion.set_looking_direction(
-		motion.looking_direction * -1
-	)
+	if flips:
+		motion.looking_direction = motion.set_looking_direction(
+			motion.looking_direction * -1
+		)

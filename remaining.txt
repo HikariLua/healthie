@@ -1,14 +1,10 @@
-level 1 desgin
 level 2 desgin
 level 3 desgin
 end level desgin
-blink on damage
-thrower enemy
-walking enemy
-running enemy
-win music
-game over music
 level 3 music
-credits scene
-main screen enhance
+win music
+put icon
+sound on splash
+music sound transition
+
 

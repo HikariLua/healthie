@@ -7,6 +7,7 @@ extends State
 
 @export var hurtbox_collision: CollisionShape2D
 @export var collectible_collision: CollisionShape2D
+@export var collectible: CollectibleComponent
 
 var death_screen: CanvasLayer = preload(
 	"res://scenes/screens/death_screen.tscn"
@@ -20,6 +21,7 @@ func _ready() -> void:
 func on_enter(_message := {}) -> void:
 	die_sfx.play()
 	
+	
 	if PlayerInfo.lifes > 0:
 		PlayerInfo.lifes -= 1
 		get_tree().get_root().add_child(death_screen)
@@ -31,6 +33,7 @@ func on_enter(_message := {}) -> void:
 			get_tree()
 		)
 	
+	collectible.collect_sequence = -100
 	hurtbox_collision.set_deferred("disabled", true)
 	collectible_collision.set_deferred("disabled", true)
 	motion.two_direction_animation(animation_player, "die")

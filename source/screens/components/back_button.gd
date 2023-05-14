@@ -1,7 +1,7 @@
 extends Button
 
-@export var select_sfx: AudioStreamPlayer2D
-@export var click_sfx: AudioStreamPlayer2D
+@export var select_sfx: AudioStreamPlayer
+@export var click_sfx: AudioStreamPlayer
 @export var to_scene: String
 
 

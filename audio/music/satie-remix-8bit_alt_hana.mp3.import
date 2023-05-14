@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/satie-remix-8bit_alt_hana.mp3-50e6507d8a95a48
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

@@ -87,7 +87,7 @@ offset_top = -51.1111
 offset_right = 150.0
 offset_bottom = 28.8889
 scale = Vector2(0.5, 0.5)
-color = Color(0, 0, 0, 0.945098)
+color = Color(0, 0, 0, 0.694118)
 
 [node name="Label" type="Label" parent="Message"]
 offset_left = -50.0
