@@ -12,8 +12,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	food_label.text = "Food = " + str(collectible.collected_food)
-	lifes.text = "Lifes = " + str(PlayerInfo.lifes)
+	food_label.text = "= " + str(collectible.collected_food)
+	lifes.text = "= " + str(PlayerInfo.lifes)
 	
 	food_bar.value = collectible.collect_sequence
 	time_bar.value = collectible.sequence_timer.time_left

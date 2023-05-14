@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx13u703swmfu"]
+[gd_scene load_steps=8 format=3 uid="uid://cx13u703swmfu"]
 
 [ext_resource type="Script" path="res://source/screens/components/play_button.gd" id="1_eepkb"]
+[ext_resource type="Script" path="res://source/screens/main_menu.gd" id="1_xfc8d"]
 [ext_resource type="AudioStream" uid="uid://cfuukjesyayae" path="res://audio/sfx/select.wav" id="2_5abde"]
 [ext_resource type="AudioStream" uid="uid://453bk4bf7snq" path="res://audio/sfx/click.wav" id="3_1c0kp"]
+[ext_resource type="Script" path="res://source/screens/components/credit_button.gd" id="4_h1m54"]
+[ext_resource type="Script" path="res://source/screens/components/quit_button.gd" id="5_3ux1f"]
+[ext_resource type="FontFile" uid="uid://db05cah26g47n" path="res://fonts/pixel_operator/PixelOperator-Bold.ttf" id="6_pq5p2"]
 
 [node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_xfc8d")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -33,10 +38,11 @@ layout_mode = 2
 text = "Game"
 
 [node name="PlayButton" type="Button" parent="Control/GridContainer" node_paths=PackedStringArray("select_sfx", "click_sfx")]
-modulate = Color(0.309804, 1, 0.690196, 1)
+modulate = Color(0.4, 0.486275, 1, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
-text = "play"
+text = "Play"
+icon_alignment = 1
 script = ExtResource("1_eepkb")
 select_sfx = NodePath("Sfx/Select")
 click_sfx = NodePath("Sfx/Click")
@@ -53,6 +59,70 @@ stream = ExtResource("3_1c0kp")
 volume_db = -5.0
 max_distance = 400.0
 
+[node name="CreditButton" type="Button" parent="Control/GridContainer" node_paths=PackedStringArray("select_sfx", "click_sfx")]
+modulate = Color(0.4, 0.486275, 1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Credits"
+icon_alignment = 1
+script = ExtResource("4_h1m54")
+select_sfx = NodePath("Sfx/Select")
+click_sfx = NodePath("Sfx/Click")
+
+[node name="Sfx" type="Node2D" parent="Control/GridContainer/CreditButton"]
+
+[node name="Select" type="AudioStreamPlayer2D" parent="Control/GridContainer/CreditButton/Sfx"]
+stream = ExtResource("2_5abde")
+volume_db = -5.0
+max_distance = 400.0
+
+[node name="Click" type="AudioStreamPlayer2D" parent="Control/GridContainer/CreditButton/Sfx"]
+stream = ExtResource("3_1c0kp")
+volume_db = -5.0
+max_distance = 400.0
+
+[node name="QuitButton" type="Button" parent="Control/GridContainer" node_paths=PackedStringArray("select_sfx", "click_sfx")]
+modulate = Color(1, 0.321569, 0.290196, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Quit!"
+icon_alignment = 1
+script = ExtResource("5_3ux1f")
+select_sfx = NodePath("Sfx/Select")
+click_sfx = NodePath("Sfx/Click")
+
+[node name="Sfx" type="Node2D" parent="Control/GridContainer/QuitButton"]
+
+[node name="Select" type="AudioStreamPlayer2D" parent="Control/GridContainer/QuitButton/Sfx"]
+stream = ExtResource("2_5abde")
+volume_db = -5.0
+max_distance = 400.0
+
+[node name="Click" type="AudioStreamPlayer2D" parent="Control/GridContainer/QuitButton/Sfx"]
+stream = ExtResource("3_1c0kp")
+volume_db = -5.0
+max_distance = 400.0
+
+[node name="Label2" type="Label" parent="Control"]
+modulate = Color(0.968627, 0.713726, 1, 1)
+layout_mode = 2
+offset_left = 96.0
+offset_top = 124.0
+offset_right = 256.0
+offset_bottom = 162.0
+scale = Vector2(0.399, 0.399)
+theme_override_fonts/font = ExtResource("6_pq5p2")
+text = "Made for GoGodot Jam 4
+by FoxCheeze (2023)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="button_down" from="Control/GridContainer/PlayButton" to="Control/GridContainer/PlayButton" method="_on_button_down"]
 [connection signal="mouse_entered" from="Control/GridContainer/PlayButton" to="Control/GridContainer/PlayButton" method="_on_mouse_entered"]
 [connection signal="pressed" from="Control/GridContainer/PlayButton" to="Control/GridContainer/PlayButton" method="_on_pressed"]
+[connection signal="button_down" from="Control/GridContainer/CreditButton" to="Control/GridContainer/CreditButton" method="_on_button_down"]
+[connection signal="mouse_entered" from="Control/GridContainer/CreditButton" to="Control/GridContainer/CreditButton" method="_on_mouse_entered"]
+[connection signal="pressed" from="Control/GridContainer/CreditButton" to="Control/GridContainer/CreditButton" method="_on_pressed"]
+[connection signal="button_down" from="Control/GridContainer/QuitButton" to="Control/GridContainer/QuitButton" method="_on_button_down"]
+[connection signal="mouse_entered" from="Control/GridContainer/QuitButton" to="Control/GridContainer/QuitButton" method="_on_mouse_entered"]
+[connection signal="pressed" from="Control/GridContainer/QuitButton" to="Control/GridContainer/QuitButton" method="_on_pressed"]

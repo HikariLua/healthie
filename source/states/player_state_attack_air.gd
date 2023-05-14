@@ -35,14 +35,14 @@ func physics_update(delta: float) -> void:
 		motion.input_direction
 	)
 
+	character_body.velocity.x = motion.move_x(
+		motion.max_speed,
+		motion.input_direction.x
+	)
+	print(character_body.velocity.y)
+	
 	if character_body.is_on_floor():
 		character_body.velocity.x = 0
-
-	elif not character_body.is_on_floor():
-		character_body.velocity.x = motion.move_x(
-			motion.max_speed,
-			motion.input_direction.x
-		)
 
 	var divisor: float = 1 if character_body.velocity.y <= 0 else 2
 	character_body.velocity.y = motion.apply_gravity(character_body, delta / divisor)

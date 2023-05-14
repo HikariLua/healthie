@@ -5,16 +5,23 @@ signal fade_outed
 
 @export var animation_player: AnimationPlayer
 
-var scene: String
 var player: CharacterBody2D
 
 
 func transition_to(path: String, tree) -> void:
-	scene = path
 	animation_player.play("fade_out")
 	
 	await animation_player.animation_finished
-	tree.change_scene_to_file(scene)
+	tree.change_scene_to_file(path)
+	
+	delete_projectiles()
+
+
+func transition_to_packed(path: PackedScene, tree) -> void:
+	animation_player.play("fade_out")
+	
+	await animation_player.animation_finished
+	tree.change_scene_to_packed(path)
 	
 	delete_projectiles()
 

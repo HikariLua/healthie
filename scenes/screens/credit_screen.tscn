@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://7xafqjp8h31s"]
+[gd_scene load_steps=5 format=3 uid="uid://7xafqjp8h31s"]
 
 [ext_resource type="Theme" uid="uid://wbb5lh8bsy3s" path="res://resources/main_hud.tres" id="1_jfy1q"]
+[ext_resource type="Script" path="res://source/screens/components/back_button.gd" id="2_0ycvc"]
+[ext_resource type="AudioStream" uid="uid://cfuukjesyayae" path="res://audio/sfx/select.wav" id="2_akbw5"]
+[ext_resource type="AudioStream" uid="uid://453bk4bf7snq" path="res://audio/sfx/click.wav" id="3_fxj24"]
 
 [node name="CreditScreen" type="CanvasLayer"]
 
@@ -50,3 +53,32 @@ theme_override_font_sizes/font_size = 8
 text = "Arthur \"Nieeg\""
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="Control" node_paths=PackedStringArray("select_sfx", "click_sfx")]
+modulate = Color(0.396078, 0.639216, 1, 1)
+layout_mode = 2
+offset_left = 203.0
+offset_top = 129.0
+offset_right = 249.0
+offset_bottom = 139.0
+text = "Back"
+script = ExtResource("2_0ycvc")
+select_sfx = NodePath("Sfx/Select")
+click_sfx = NodePath("Sfx/Click")
+to_scene = "res://scenes/screens/main_menu.tscn"
+
+[node name="Sfx" type="Node2D" parent="Control/BackButton"]
+
+[node name="Select" type="AudioStreamPlayer2D" parent="Control/BackButton/Sfx"]
+stream = ExtResource("2_akbw5")
+volume_db = -5.0
+max_distance = 400.0
+
+[node name="Click" type="AudioStreamPlayer2D" parent="Control/BackButton/Sfx"]
+stream = ExtResource("3_fxj24")
+volume_db = -5.0
+max_distance = 400.0
+
+[connection signal="button_down" from="Control/BackButton" to="Control/BackButton" method="_on_button_down"]
+[connection signal="mouse_entered" from="Control/BackButton" to="Control/BackButton" method="_on_mouse_entered"]
+[connection signal="pressed" from="Control/BackButton" to="Control/BackButton" method="_on_pressed"]

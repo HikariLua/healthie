@@ -5,14 +5,14 @@ extends Button
 
 
 var main_scene: PackedScene = preload(
-	"res://scenes/levels/level_1.tscn"
+	"res://scenes/levels/level_0.tscn"
 )
 
 
 func _on_pressed() -> void:
-	PlayerInfo.lifes = 1
-	PlayerInfo.current_level = 1
-	get_tree().change_scene_to_packed(main_scene)
+	PlayerInfo.lifes = 2
+	PlayerInfo.current_level = 0
+	TransitionScreen.transition_to_packed(main_scene, get_tree())
 
 
 func _on_mouse_entered() -> void:

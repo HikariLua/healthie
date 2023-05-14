@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://cnhoovseu1oe7"]
 
 [ext_resource type="FontFile" uid="uid://b4nnj0vck6ek2" path="res://fonts/pixel_operator/PixelOperator8-Bold.ttf" id="1_n8ei8"]
 [ext_resource type="FontFile" uid="uid://bq55taxbtsta5" path="res://fonts/pixel_operator/PixelOperator8.ttf" id="2_2f88b"]
 [ext_resource type="Script" path="res://source/screens/components/pause_button.gd" id="2_bb51i"]
 [ext_resource type="Script" path="res://source/screens/components/retry_button.gd" id="3_i5hyi"]
+[ext_resource type="AudioStream" uid="uid://cfuukjesyayae" path="res://audio/sfx/select.wav" id="3_xm27h"]
+[ext_resource type="AudioStream" uid="uid://453bk4bf7snq" path="res://audio/sfx/click.wav" id="4_jbapn"]
 
 [sub_resource type="Animation" id="Animation_b5meq"]
 length = 0.001
@@ -84,20 +86,46 @@ text = "PAUSED
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="Control/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="Control/VBoxContainer" node_paths=PackedStringArray("select_sfx", "click_sfx")]
+modulate = Color(0.396078, 0.639216, 1, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "Resume"
 script = ExtResource("2_bb51i")
+select_sfx = NodePath("Sfx/Select")
+click_sfx = NodePath("Sfx/Click")
 
-[node name="RetryButton" type="Button" parent="Control/VBoxContainer" node_paths=PackedStringArray("animation_player", "blocker")]
+[node name="Sfx" type="Node2D" parent="Control/VBoxContainer/ResumeButton"]
+
+[node name="Select" type="AudioStreamPlayer" parent="Control/VBoxContainer/ResumeButton/Sfx"]
+stream = ExtResource("3_xm27h")
+volume_db = -5.0
+
+[node name="Click" type="AudioStreamPlayer" parent="Control/VBoxContainer/ResumeButton/Sfx"]
+stream = ExtResource("4_jbapn")
+volume_db = -5.0
+
+[node name="MainMenuButton" type="Button" parent="Control/VBoxContainer" node_paths=PackedStringArray("animation_player", "blocker", "select_sfx", "click_sfx")]
+modulate = Color(0.952941, 1, 0.388235, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_2f88b")
 theme_override_font_sizes/font_size = 8
-text = "Retry"
+text = "Main Menu"
 script = ExtResource("3_i5hyi")
 animation_player = NodePath("../../../AnimationPlayer")
 blocker = NodePath("../../../ButtonBloker")
+select_sfx = NodePath("Sfx/Select")
+click_sfx = NodePath("Sfx/Click")
+
+[node name="Sfx" type="Node2D" parent="Control/VBoxContainer/MainMenuButton"]
+
+[node name="Select" type="AudioStreamPlayer" parent="Control/VBoxContainer/MainMenuButton/Sfx"]
+stream = ExtResource("3_xm27h")
+volume_db = -5.0
+
+[node name="Click" type="AudioStreamPlayer" parent="Control/VBoxContainer/MainMenuButton/Sfx"]
+stream = ExtResource("4_jbapn")
+volume_db = -5.0
 
 [node name="ButtonBloker" type="ColorRect" parent="."]
 visible = false
@@ -113,5 +141,9 @@ libraries = {
 "": SubResource("AnimationLibrary_8gwf1")
 }
 
+[connection signal="button_down" from="Control/VBoxContainer/ResumeButton" to="Control/VBoxContainer/ResumeButton" method="_on_button_down"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/ResumeButton" to="Control/VBoxContainer/ResumeButton" method="_on_mouse_entered"]
 [connection signal="pressed" from="Control/VBoxContainer/ResumeButton" to="Control/VBoxContainer/ResumeButton" method="_on_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/RetryButton" to="Control/VBoxContainer/RetryButton" method="_on_pressed" flags=18]
+[connection signal="button_down" from="Control/VBoxContainer/MainMenuButton" to="Control/VBoxContainer/MainMenuButton" method="_on_button_down"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/MainMenuButton" to="Control/VBoxContainer/MainMenuButton" method="_on_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/MainMenuButton" to="Control/VBoxContainer/MainMenuButton" method="_on_pressed" flags=18]

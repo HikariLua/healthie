@@ -25,10 +25,11 @@ func physics_update(delta: float) -> void:
 	)
 
 	motion.two_direction_animation(animation_player, "fall")
-
+	
+	var divisor: float = 1 if character_body.velocity.y <= 0 else 2
 	character_body.velocity.y = motion.apply_gravity(
 		character_body,
-		delta / 2
+		delta / divisor
 	)
 
 	character_body.velocity.x = motion.move_x(

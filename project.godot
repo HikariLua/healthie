@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 TransitionScreen="*res://scenes/screens/transition_screen.tscn"
 GlobalCommands="*res://scenes/global_commands.tscn"
 PlayerInfo="*res://scenes/player_global_info.tscn"
+Music="*res://scenes/global_music.tscn"
 
 [display]
 
