@@ -518,6 +518,7 @@ sources/0 = SubResource("TileSetAtlasSource_t8auy")
 [node name="Level 1 - A" type="Node2D"]
 script = ExtResource("1_4tt7f")
 metadata/_edit_horizontal_guides_ = []
+metadata/_edit_lock_ = true
 
 [node name="Scenario" type="ParallaxBackground" parent="."]
 
@@ -561,7 +562,6 @@ metadata/_edit_lock_ = true
 
 [node name="Rain" type="Node2D" parent="."]
 visible = false
-metadata/_edit_lock_ = true
 
 [node name="Rain1" type="AnimatedSprite2D" parent="Rain"]
 position = Vector2(512, 0)
@@ -1670,6 +1670,9 @@ position = Vector2(3534, 250)
 
 [node name="Player" parent="." instance=ExtResource("2_alftw")]
 position = Vector2(36, 261)
+
+[node name="MainHUD" parent="Player" index="0"]
+visible = false
 
 [node name="Camera2D" parent="Player" index="10"]
 limit_left = 20

@@ -6,14 +6,14 @@
 [ext_resource type="AudioStream" uid="uid://c1jxx1ol82miu" path="res://audio/music/satie-remix-8bit_alt_hana.mp3" id="4_524an"]
 [ext_resource type="AudioStream" uid="uid://bgvi267mdf1jg" path="res://audio/music/nocturne_20_hana.mp3" id="5_x8kc6"]
 [ext_resource type="AudioStream" uid="uid://bxr0d0lwadvga" path="res://audio/music/chopin_uplift_op9_no2_hana.mp3" id="6_6ic1k"]
-[ext_resource type="AudioStream" uid="uid://c3eouryh1xdao" path="res://audio/music/lizt_chiptune_test.mp3" id="7_w4eiw"]
+[ext_resource type="AudioStream" uid="uid://0k8jfgn8ubf5" path="res://audio/music/hr_lizt_hana.mp3" id="7_rljw2"]
 
 [node name="GlobalMusic" type="Node" node_paths=PackedStringArray("menu", "level_1", "level_2", "level_3", "game_over", "win")]
 script = ExtResource("1_1q0pd")
 menu = NodePath("Nocturne92")
 level_1 = NodePath("Mozart16")
 level_2 = NodePath("Gymnopie1")
-level_3 = NodePath("temp")
+level_3 = NodePath("LiztHR2p2")
 game_over = NodePath("Nocturne20")
 win = NodePath("UpNocturne92")
 
@@ -37,6 +37,6 @@ volume_db = -8.0
 stream = ExtResource("6_6ic1k")
 volume_db = -8.0
 
-[node name="temp" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_w4eiw")
-volume_db = -15.0
+[node name="LiztHR2p2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_rljw2")
+volume_db = -18.0

@@ -14,6 +14,10 @@ func _ready() -> void:
 	velocity = direction * speed
 	if is_random:
 		sprite.frame = randi_range(0, max_frames - 1)
+	
+	if speed != 0:
+		await get_tree().create_timer(15).timeout
+		self_destroy()
 
 
 func _physics_process(_delta: float) -> void:

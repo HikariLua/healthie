@@ -13,10 +13,10 @@ script = ExtResource("1_07m1h")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -6
-offset_left = -3446.0
-offset_top = -2108.0
-offset_right = 3066.0
-offset_bottom = 1806.0
+offset_left = -3434.0
+offset_top = -2036.0
+offset_right = 3078.0
+offset_bottom = 1878.0
 color = Color(0.439216, 0.74902, 1, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -83,13 +83,15 @@ volume_db = -5.0
 position = Vector2(39, 112)
 
 [node name="Label" parent="Sign/Message" index="1"]
-text = "Congratulations! You are great!"
+text = "Congratulations!
+You are great!"
 
 [node name="Sign2" parent="." instance=ExtResource("7_54pag")]
 position = Vector2(217, 112)
 
 [node name="Label" parent="Sign2/Message" index="1"]
-text = "You did it! I knew you could do it."
+text = "You did it!
+ I knew you could do it."
 
 [connection signal="button_down" from="CreditButton" to="CreditButton" method="_on_button_down"]
 [connection signal="mouse_entered" from="CreditButton" to="CreditButton" method="_on_mouse_entered"]

@@ -10,7 +10,7 @@ var main_scene: PackedScene = preload(
 
 
 func _on_pressed() -> void:
-	PlayerInfo.lifes = 2
+	PlayerInfo.lifes = 3
 	PlayerInfo.current_level = 0
 	TransitionScreen.transition_to_packed(main_scene, get_tree())
 

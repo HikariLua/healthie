@@ -18,7 +18,7 @@ func _on_interactbox_area_entered(_area: Area2D) -> void:
 	pickup_sfx.play()
 	effect.play("hit")
 	
-	if collect_sequence >= 8:
+	if collect_sequence >= 7:
 		state_machine.transition_state_to("PlayerStateDie")
 		return
 	
