@@ -1,7 +1,8 @@
-[gd_scene load_steps=45 format=3 uid="uid://6uo15x52gvv0"]
+[gd_scene load_steps=46 format=3 uid="uid://6uo15x52gvv0"]
 
 [ext_resource type="PackedScene" uid="uid://df3ksxfcx8i6y" path="res://scenes/screens/main_hud.tscn" id="1_mf63t"]
 [ext_resource type="AudioStream" uid="uid://cu0jfti2ef27i" path="res://audio/sfx/jump.wav" id="2_c3aux"]
+[ext_resource type="PackedScene" uid="uid://cggqb75a8w8r" path="res://addons/debug_menu/debug_menu.tscn" id="2_qtmcn"]
 [ext_resource type="AudioStream" uid="uid://bgnqq1cuhn0p1" path="res://audio/sfx/player_shoot.wav" id="3_mhfsw"]
 [ext_resource type="AudioStream" uid="uid://cnjjpqra0s4sf" path="res://audio/sfx/death.wav" id="4_iqkos"]
 [ext_resource type="Script" path="res://source/states/state_machine.gd" id="4_o0l3m"]
@@ -382,6 +383,13 @@ metadata/_edit_group_ = true
 [node name="MainHUD" parent="." node_paths=PackedStringArray("collectible") instance=ExtResource("1_mf63t")]
 collectible = NodePath("../Components/CollectibleComponent")
 
+[node name="DebugMenu" parent="MainHUD" instance=ExtResource("2_qtmcn")]
+offset_left = -124.0
+offset_top = 21.0
+offset_right = 276.0
+offset_bottom = 421.0
+scale = Vector2(0.3, 0.3)
+
 [node name="Sfx" type="Node2D" parent="."]
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="Sfx"]
@@ -451,7 +459,6 @@ debug_color = Color(0, 0.0745098, 0.662745, 0.419608)
 
 [node name="MotionComponent" type="Node" parent="Components"]
 script = ExtResource("8_s2mg2")
-max_fall_speed = 500.0
 
 [node name="HealthComponent" type="Node" parent="Components"]
 script = ExtResource("9_1ku18")

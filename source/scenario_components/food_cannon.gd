@@ -11,7 +11,7 @@ extends StaticBody2D
 
 @export var direction := Vector2.LEFT
 
-var standard_food: PackedScene = preload(
+var junk_food: PackedScene = preload(
 	"res://scenes/collectibles/junk_food.tscn"
 )
 
@@ -30,7 +30,7 @@ func _ready() -> void:
 
 
 func _on_timer_timeout() -> void:
-	var food: StandardFood = standard_food.instantiate()
+	var food: JunkFood = junk_food.instantiate()
 
 	food.global_position = self.global_position
 	food.speed = self.shoot_speed

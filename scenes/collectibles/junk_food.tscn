@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dimfi5n0yonvs"]
+[gd_scene load_steps=9 format=3 uid="uid://dimfi5n0yonvs"]
 
-[ext_resource type="Script" path="res://source/items/junk_food.gd" id="1_pmf38"]
-[ext_resource type="Texture2D" uid="uid://b52l00xvrm6fm" path="res://images/items/foods.png" id="2_jyevo"]
+[ext_resource type="Script" path="res://source/items/junk_food.gd" id="1_opdoe"]
+[ext_resource type="Texture2D" uid="uid://b52l00xvrm6fm" path="res://images/items/foods.png" id="2_apj17"]
 
 [sub_resource type="Gradient" id="Gradient_3w81u"]
 offsets = PackedFloat32Array(0.611465, 0.713376)
@@ -14,12 +14,6 @@ height = 24
 fill = 1
 fill_from = Vector2(0.495726, 0.492877)
 fill_to = Vector2(0.706553, 0.213675)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvo2d"]
-size = Vector2(10, 10)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_e6cjg"]
-radius = 5.0
 
 [sub_resource type="Animation" id="Animation_xkqgj"]
 length = 0.001
@@ -56,12 +50,16 @@ _data = {
 "float": SubResource("Animation_3r4c5")
 }
 
-[node name="JunkFood" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "body_collision") groups=["food", "projectile"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6cjg"]
+radius = 5.0
+
+[node name="JunkFood" type="Area2D" node_paths=PackedStringArray("sprite") groups=["food", "projectile"]]
+position = Vector2(4, -1)
 scale = Vector2(1.2, 1.2)
-collision_layer = 0
-script = ExtResource("1_pmf38")
+collision_layer = 128
+collision_mask = 257
+script = ExtResource("1_opdoe")
 sprite = NodePath("Sprite2D")
-body_collision = NodePath("CollisionShape2D")
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -73,23 +71,12 @@ offset_right = 12.3333
 offset_bottom = 12.3333
 texture = SubResource("GradientTexture2D_v5nwx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_cvo2d")
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_jyevo")
+texture = ExtResource("2_apj17")
 hframes = 13
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 128
-collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_e6cjg")
-debug_color = Color(1, 0.952941, 0.45098, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "float"
@@ -97,5 +84,9 @@ libraries = {
 "": SubResource("AnimationLibrary_or2nw")
 }
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e6cjg")
+debug_color = Color(1, 0.952941, 0.45098, 0.419608)
+
+[connection signal="area_entered" from="." to="." method="_on_area_2d_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

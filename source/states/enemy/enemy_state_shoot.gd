@@ -6,13 +6,13 @@ extends State
 
 @export var shoot_speed: float = 70
 
-var standard_food: PackedScene = preload(
+var junk_food: PackedScene = preload(
 	"res://scenes/collectibles/junk_food.tscn"
 )
 
 
 func on_enter(_message := {}) -> void:
-	var food: StandardFood = standard_food.instantiate()
+	var food: JunkFood = junk_food.instantiate()
 
 	food.global_position = character_body.global_position + Vector2(0, -8)
 	food.speed = self.shoot_speed
