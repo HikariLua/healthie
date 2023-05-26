@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://source/triggers/end_stage_trigger.gd" id="1_leo6r"]
 [ext_resource type="AudioStream" uid="uid://f1og135qfn3y" path="res://audio/sfx/clear.wav" id="2_w3346"]
-[ext_resource type="Texture2D" uid="uid://dfyyngphnt1mo" path="res://images/scenario/level_1/stone_tile.png" id="3_ergbj"]
-[ext_resource type="Texture2D" uid="uid://dlsovikwltbjn" path="res://images/sign.png" id="3_jfbcx"]
+[ext_resource type="Texture2D" uid="uid://dfyyngphnt1mo" path="res://images/scenario/peace_mountain/peace_mountain_tileset.png" id="3_ergbj"]
+[ext_resource type="Texture2D" uid="uid://dlsovikwltbjn" path="res://images/scenario/components/sign.png" id="3_jfbcx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1er58"]
 size = Vector2(48, 21)

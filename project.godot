@@ -22,8 +22,8 @@ boot_splash/minimum_display_time=1000
 [autoload]
 
 TransitionScreen="*res://scenes/screens/transition_screen.tscn"
-PlayerInfo="*res://scenes/player_global_info.tscn"
-Music="*res://scenes/global_music.tscn"
+PlayerInfo="*res://scenes/globals/player_global_info.tscn"
+Music="*res://scenes/globals/global_music.tscn"
 
 [display]
 
@@ -35,7 +35,7 @@ window/stretch/mode="canvas_items"
 
 [gui]
 
-theme/custom="res://resources/main_hud.tres"
+theme/custom="res://resources/themes/main_hud.tres"
 theme/custom_font="res://fonts/pixel_operator/PixelOperator8.ttf"
 theme/default_font_antialiasing=2
 

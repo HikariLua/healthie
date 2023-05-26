@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://elnbs2kb3bgo"]
 
-[ext_resource type="Texture2D" uid="uid://d04pabjrt7od4" path="res://images/scenario/level_1/tileset_sample001.png" id="1_ai0vu"]
+[ext_resource type="Texture2D" uid="uid://d04pabjrt7od4" path="res://images/scenario/forest_cyan/forest_cyan_tileset.png" id="1_ai0vu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dk66l"]
 size = Vector2(48, 8)

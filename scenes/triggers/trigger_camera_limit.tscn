@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cxpoqvu6jrvbs"]
 
-[ext_resource type="Script" path="res://scenes/debug/scripts_debug/trigger_limit_camera.gd" id="1_rhccs"]
+[ext_resource type="Script" path="res://source/triggers/trigger_limit_camera.gd" id="1_rhccs"]
 
 [node name="TriggerLimitCamera" type="Area2D"]
 collision_mask = 2

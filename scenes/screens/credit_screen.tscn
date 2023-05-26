@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://7xafqjp8h31s"]
 
-[ext_resource type="Theme" uid="uid://wbb5lh8bsy3s" path="res://resources/main_hud.tres" id="1_jfy1q"]
+[ext_resource type="Theme" uid="uid://wbb5lh8bsy3s" path="res://resources/themes/main_hud.tres" id="1_jfy1q"]
 [ext_resource type="Script" path="res://source/screens/components/back_button.gd" id="2_0ycvc"]
 [ext_resource type="AudioStream" uid="uid://cfuukjesyayae" path="res://audio/sfx/select.wav" id="2_akbw5"]
 [ext_resource type="AudioStream" uid="uid://453bk4bf7snq" path="res://audio/sfx/click.wav" id="3_fxj24"]
-[ext_resource type="Texture2D" uid="uid://5sok6jwuyn1l" path="res://images/scenario/level_1/cosmic_layer_3.png" id="5_li78q"]
-[ext_resource type="Texture2D" uid="uid://bfgxmcvkxbu5j" path="res://images/scenario/level_1/cosmic_layer_2.png" id="6_4vpbw"]
-[ext_resource type="Texture2D" uid="uid://bqehmtsk6d21l" path="res://images/scenario/level_1/cosmic_layer_1.png" id="7_5irs0"]
-[ext_resource type="Texture2D" uid="uid://bcmg3g2th0bhm" path="res://images/scenario/level_1/cosmict_layer_4.png" id="8_x1eeh"]
+[ext_resource type="Texture2D" uid="uid://5sok6jwuyn1l" path="res://images/scenario/forest_cyan/forest_cyan_layer_3.png" id="5_li78q"]
+[ext_resource type="Texture2D" uid="uid://bfgxmcvkxbu5j" path="res://images/scenario/forest_cyan/forest_cyan_layer_2.png" id="6_4vpbw"]
+[ext_resource type="Texture2D" uid="uid://bqehmtsk6d21l" path="res://images/scenario/forest_cyan/forest_cyan_layer_1.png" id="7_5irs0"]
+[ext_resource type="Texture2D" uid="uid://bcmg3g2th0bhm" path="res://images/scenario/forest_cyan/forest_cyan_layer_4.png" id="8_x1eeh"]
 [ext_resource type="Script" path="res://source/screens/components/menu_camera.gd" id="9_hgwxg"]
 
 [node name="CreditScreen" type="CanvasLayer"]

@@ -1,25 +1,25 @@
 [gd_scene load_steps=45 format=3 uid="uid://6uo15x52gvv0"]
 
-[ext_resource type="Script" path="res://source/components/motion_component.gd" id="1_01350"]
 [ext_resource type="PackedScene" uid="uid://df3ksxfcx8i6y" path="res://scenes/screens/main_hud.tscn" id="1_mf63t"]
 [ext_resource type="AudioStream" uid="uid://cu0jfti2ef27i" path="res://audio/sfx/jump.wav" id="2_c3aux"]
-[ext_resource type="Texture2D" uid="uid://dwiy5tkluhm06" path="res://images/player_fox.png" id="2_jfyrs"]
 [ext_resource type="AudioStream" uid="uid://bgnqq1cuhn0p1" path="res://audio/sfx/player_shoot.wav" id="3_mhfsw"]
-[ext_resource type="Script" path="res://source/components/combat_component.gd" id="3_txr5l"]
 [ext_resource type="AudioStream" uid="uid://cnjjpqra0s4sf" path="res://audio/sfx/death.wav" id="4_iqkos"]
 [ext_resource type="Script" path="res://source/states/state_machine.gd" id="4_o0l3m"]
-[ext_resource type="Script" path="res://source/components/health_component.gd" id="5_q848o"]
-[ext_resource type="Script" path="res://source/states/player_state_idle.gd" id="5_rlyxm"]
 [ext_resource type="AudioStream" uid="uid://c1lrvcmdoxiac" path="res://audio/sfx/pickup.wav" id="5_ru0ta"]
-[ext_resource type="Shader" path="res://resources/blink.gdshader" id="6_esg8b"]
-[ext_resource type="Script" path="res://source/states/player_state_jump.gd" id="6_fd52w"]
-[ext_resource type="Script" path="res://source/states/player_state_run.gd" id="7_282nt"]
-[ext_resource type="Script" path="res://source/components/collectible_component.gd" id="7_aq08m"]
-[ext_resource type="Script" path="res://source/states/player_state_fall.gd" id="8_30syb"]
-[ext_resource type="Script" path="res://source/states/player_state_attack.gd" id="8_njk4h"]
-[ext_resource type="Script" path="res://source/states/player_state_stun.gd" id="9_su27x"]
-[ext_resource type="Script" path="res://source/states/player_state_die.gd" id="15_xkw6v"]
-[ext_resource type="Script" path="res://source/states/player_state_attack_air.gd" id="16_0wwif"]
+[ext_resource type="Shader" path="res://resources/shaders/blink.gdshader" id="6_bp27n"]
+[ext_resource type="Texture2D" uid="uid://dwiy5tkluhm06" path="res://images/characters/player/little_fox.png" id="7_t686d"]
+[ext_resource type="Script" path="res://source/characters/components/motion_component.gd" id="8_s2mg2"]
+[ext_resource type="Script" path="res://source/characters/components/health_component.gd" id="9_1ku18"]
+[ext_resource type="Script" path="res://source/characters/components/combat_component.gd" id="10_n04hy"]
+[ext_resource type="Script" path="res://source/characters/components/collectible_component.gd" id="11_vn30s"]
+[ext_resource type="Script" path="res://source/states/player/player_state_idle.gd" id="13_o13sq"]
+[ext_resource type="Script" path="res://source/states/player/player_state_attack.gd" id="14_lkmt6"]
+[ext_resource type="Script" path="res://source/states/player/player_state_run.gd" id="15_ln5kd"]
+[ext_resource type="Script" path="res://source/states/player/player_state_fall.gd" id="16_g3jao"]
+[ext_resource type="Script" path="res://source/states/player/player_state_jump.gd" id="17_3wf12"]
+[ext_resource type="Script" path="res://source/states/player/player_state_stun.gd" id="18_bbui5"]
+[ext_resource type="Script" path="res://source/states/player/player_state_die.gd" id="19_e5t7l"]
+[ext_resource type="Script" path="res://source/states/player/player_state_attack_air.gd" id="20_in0xa"]
 
 [sub_resource type="Animation" id="Animation_8bm6c"]
 length = 0.001
@@ -362,7 +362,7 @@ _data = {
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wt2fm"]
-shader = ExtResource("6_esg8b")
+shader = ExtResource("6_bp27n")
 shader_parameter/hit_opacity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0477f"]
@@ -418,7 +418,7 @@ libraries = {
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_wt2fm")
-texture = ExtResource("2_jfyrs")
+texture = ExtResource("7_t686d")
 offset = Vector2(0, -8.5)
 hframes = 10
 vframes = 3
@@ -450,19 +450,19 @@ debug_color = Color(0, 0.0745098, 0.662745, 0.419608)
 [node name="Components" type="Node" parent="."]
 
 [node name="MotionComponent" type="Node" parent="Components"]
-script = ExtResource("1_01350")
+script = ExtResource("8_s2mg2")
 max_fall_speed = 500.0
 
 [node name="HealthComponent" type="Node" parent="Components"]
-script = ExtResource("5_q848o")
+script = ExtResource("9_1ku18")
 
 [node name="CombatComponent" type="Node" parent="Components" node_paths=PackedStringArray("motion", "health")]
-script = ExtResource("3_txr5l")
+script = ExtResource("10_n04hy")
 motion = NodePath("../MotionComponent")
 health = NodePath("")
 
 [node name="CollectibleComponent" type="Node" parent="Components" node_paths=PackedStringArray("sequence_timer", "pickup_sfx", "effect", "state_machine")]
-script = ExtResource("7_aq08m")
+script = ExtResource("11_vn30s")
 sequence_timer = NodePath("SequenceTimer")
 pickup_sfx = NodePath("../../Sfx/Pickup")
 effect = NodePath("../../EffectAnimationPlayer")
@@ -476,26 +476,26 @@ script = ExtResource("4_o0l3m")
 initial_state = NodePath("PlayerStateIdle")
 
 [node name="PlayerStateIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "animation_player")]
-script = ExtResource("5_rlyxm")
+script = ExtResource("13_o13sq")
 character_body = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
 animation_player = NodePath("../../AnimationPlayer")
 
 [node name="PlayerStateAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "attack_sfx", "motion", "animation_player")]
-script = ExtResource("8_njk4h")
+script = ExtResource("14_lkmt6")
 character_body = NodePath("../..")
 attack_sfx = NodePath("../../Sfx/Attack")
 motion = NodePath("../../Components/MotionComponent")
 animation_player = NodePath("../../AnimationPlayer")
 
 [node name="PlayerStateRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "animation_player")]
-script = ExtResource("7_282nt")
+script = ExtResource("15_ln5kd")
 character_body = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
 animation_player = NodePath("../../AnimationPlayer")
 
 [node name="PlayerStateFall" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "coyote_timer", "animation_player")]
-script = ExtResource("8_30syb")
+script = ExtResource("16_g3jao")
 character_body = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
 coyote_timer = NodePath("CoyoteTimer")
@@ -505,7 +505,7 @@ animation_player = NodePath("../../AnimationPlayer")
 one_shot = true
 
 [node name="PlayerStateJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "jump_sfx", "motion", "animation_player")]
-script = ExtResource("6_fd52w")
+script = ExtResource("17_3wf12")
 character_body = NodePath("../..")
 jump_sfx = NodePath("../../Sfx/Jump")
 motion = NodePath("../../Components/MotionComponent")
@@ -515,7 +515,7 @@ animation_player = NodePath("../../AnimationPlayer")
 one_shot = true
 
 [node name="PlayerStateStun" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "effect_animation_player", "stun_timer", "hurtbox", "invincibility_timer", "animation_player")]
-script = ExtResource("9_su27x")
+script = ExtResource("18_bbui5")
 character_body = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
 effect_animation_player = NodePath("../../EffectAnimationPlayer")
@@ -534,7 +534,7 @@ one_shot = true
 one_shot = true
 
 [node name="PlayerStateDie" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "die_sfx", "hurtbox_collision", "collectible_collision", "collectible", "animation_player")]
-script = ExtResource("15_xkw6v")
+script = ExtResource("19_e5t7l")
 character_body = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
 die_sfx = NodePath("../../Sfx/Die")
@@ -544,7 +544,7 @@ collectible = NodePath("../../Components/CollectibleComponent")
 animation_player = NodePath("../../AnimationPlayer")
 
 [node name="PlayerStateAttackAir" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "attack_sfx", "motion", "animation_player")]
-script = ExtResource("16_0wwif")
+script = ExtResource("20_in0xa")
 character_body = NodePath("../..")
 attack_sfx = NodePath("../../Sfx/Attack")
 motion = NodePath("../../Components/MotionComponent")

@@ -2,8 +2,8 @@
 
 [ext_resource type="FontFile" uid="uid://b4nnj0vck6ek2" path="res://fonts/pixel_operator/PixelOperator8-Bold.ttf" id="1_n8ei8"]
 [ext_resource type="FontFile" uid="uid://bq55taxbtsta5" path="res://fonts/pixel_operator/PixelOperator8.ttf" id="2_2f88b"]
-[ext_resource type="Script" path="res://source/screens/components/pause_button.gd" id="2_bb51i"]
-[ext_resource type="Script" path="res://source/screens/components/retry_button.gd" id="3_i5hyi"]
+[ext_resource type="Script" path="res://source/screens/components/resume_button.gd" id="2_bb51i"]
+[ext_resource type="Script" path="res://source/screens/components/main_menu_button.gd" id="3_i5hyi"]
 [ext_resource type="AudioStream" uid="uid://cfuukjesyayae" path="res://audio/sfx/select.wav" id="3_xm27h"]
 [ext_resource type="AudioStream" uid="uid://453bk4bf7snq" path="res://audio/sfx/click.wav" id="4_jbapn"]
 

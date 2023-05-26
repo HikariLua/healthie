@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://b2qufse4fk6e5"]
 
-[ext_resource type="Texture2D" uid="uid://d04pabjrt7od4" path="res://images/scenario/level_1/tileset_sample001.png" id="1_obfsb"]
-[ext_resource type="Texture2D" uid="uid://bny56sxjj3je8" path="res://images/scenario/level_1/forest_tile.png" id="2_8fsgm"]
-[ext_resource type="Texture2D" uid="uid://u4ubojsit8rx" path="res://images/scenario/level_1/cave_tile.png" id="3_iv23e"]
-[ext_resource type="Texture2D" uid="uid://bga186w1xs767" path="res://images/scenario/level_1/shadow_decoration_tile.png" id="4_w1t5d"]
+[ext_resource type="Texture2D" uid="uid://d04pabjrt7od4" path="res://images/scenario/forest_cyan/forest_cyan_tileset.png" id="1_obfsb"]
+[ext_resource type="Texture2D" uid="uid://bny56sxjj3je8" path="res://images/scenario/forest_pink/forest_pink_tileset.png" id="2_8fsgm"]
+[ext_resource type="Texture2D" uid="uid://u4ubojsit8rx" path="res://images/scenario/water_cave/cave_tile.png" id="3_iv23e"]
+[ext_resource type="Texture2D" uid="uid://bga186w1xs767" path="res://images/unused/shadow_decoration_tile.png" id="4_w1t5d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s21ds"]
 texture = ExtResource("1_obfsb")

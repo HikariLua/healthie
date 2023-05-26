@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dt346spxrvjq"]
 
-[ext_resource type="Script" path="res://source/scene_components/food_cannon.gd" id="1_w1ee6"]
-[ext_resource type="Texture2D" uid="uid://cjw6ir7mskmx4" path="res://images/cannon.png" id="2_1ayhc"]
+[ext_resource type="Script" path="res://source/scenario_components/food_cannon.gd" id="1_w1ee6"]
+[ext_resource type="Texture2D" uid="uid://cjw6ir7mskmx4" path="res://images/scenario/components/cannon.png" id="2_1ayhc"]
 [ext_resource type="AudioStream" uid="uid://d23b55gb8m6p" path="res://audio/sfx/cannon.wav" id="2_sfgyh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upwm5"]

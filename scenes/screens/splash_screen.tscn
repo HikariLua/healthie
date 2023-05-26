@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://dbfx60m72wyqt"]
 
 [ext_resource type="Script" path="res://source/screens/splash_screen.gd" id="1_luodu"]
-[ext_resource type="Texture2D" uid="uid://d0e1s0ht03fhm" path="res://images/frame.png" id="1_p2h24"]
-[ext_resource type="Texture2D" uid="uid://dr5seuxkls7p1" path="res://images/fox_head.png" id="2_ytrht"]
-[ext_resource type="Texture2D" uid="uid://bewocliy57b45" path="res://images/flower.png" id="3_nq2ca"]
+[ext_resource type="Texture2D" uid="uid://d0e1s0ht03fhm" path="res://images/other/frame.png" id="1_p2h24"]
+[ext_resource type="Texture2D" uid="uid://dr5seuxkls7p1" path="res://images/other/fox_head.png" id="2_ytrht"]
+[ext_resource type="Texture2D" uid="uid://bewocliy57b45" path="res://images/other/flower.png" id="3_nq2ca"]
 [ext_resource type="FontFile" uid="uid://db05cah26g47n" path="res://fonts/pixel_operator/PixelOperator-Bold.ttf" id="4_mx8y0"]
 [ext_resource type="AudioStream" uid="uid://olpn5b6v1qhi" path="res://audio/sfx/splash.wav" id="5_p38pp"]
 
