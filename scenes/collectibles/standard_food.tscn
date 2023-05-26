@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b52l00xvrm6fm" path="res://images/foods.png" id="2_tgqjt"]
 
 [sub_resource type="Gradient" id="Gradient_3w81u"]
+offsets = PackedFloat32Array(0.611465, 0.713376)
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_v5nwx"]
@@ -11,8 +12,8 @@ gradient = SubResource("Gradient_3w81u")
 width = 24
 height = 24
 fill = 1
-fill_from = Vector2(0.501424, 0.470085)
-fill_to = Vector2(0.752137, 0.236467)
+fill_from = Vector2(0.495726, 0.492877)
+fill_to = Vector2(0.706553, 0.213675)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvo2d"]
 size = Vector2(10, 10)
@@ -55,15 +56,17 @@ _data = {
 "float": SubResource("Animation_3r4c5")
 }
 
-[node name="StandardFood" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["food", "projectile"]]
+[node name="StandardFood" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "body_collision") groups=["food", "projectile"]]
 scale = Vector2(1.2, 1.2)
 collision_layer = 0
 script = ExtResource("1_pmf38")
 sprite = NodePath("Sprite2D")
+body_collision = NodePath("CollisionShape2D")
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
-texture_filter = 2
+modulate = Color(1, 1, 1, 0.929412)
+texture_filter = 1
 offset_left = -11.6667
 offset_top = -11.6667
 offset_right = 12.3333

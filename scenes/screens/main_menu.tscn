@@ -167,12 +167,17 @@ grow_vertical = 2
 [node name="PlayButton" type="Button" parent="Control/GridContainer" node_paths=PackedStringArray("select_sfx", "click_sfx")]
 modulate = Color(0.4, 0.486275, 1, 1)
 layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../CreditButton")
+focus_next = NodePath("../CreditButton")
+focus_previous = NodePath("../QuitButton")
 theme_override_font_sizes/font_size = 8
 text = "Play"
 icon_alignment = 1
 script = ExtResource("1_eepkb")
 select_sfx = NodePath("Sfx/Select")
 click_sfx = NodePath("Sfx/Click")
+start_focus = true
 
 [node name="Sfx" type="Node2D" parent="Control/GridContainer/PlayButton"]
 
@@ -187,6 +192,10 @@ volume_db = -5.0
 [node name="CreditButton" type="Button" parent="Control/GridContainer" node_paths=PackedStringArray("select_sfx", "click_sfx")]
 modulate = Color(0.4, 0.486275, 1, 1)
 layout_mode = 2
+focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../PlayButton")
 theme_override_font_sizes/font_size = 8
 text = "Credits"
 icon_alignment = 1
@@ -207,6 +216,10 @@ volume_db = -5.0
 [node name="QuitButton" type="Button" parent="Control/GridContainer" node_paths=PackedStringArray("select_sfx", "click_sfx")]
 modulate = Color(1, 0.321569, 0.290196, 1)
 layout_mode = 2
+focus_neighbor_top = NodePath("../CreditButton")
+focus_neighbor_bottom = NodePath("../PlayButton")
+focus_next = NodePath("../PlayButton")
+focus_previous = NodePath("../PlayButton")
 theme_override_font_sizes/font_size = 8
 text = "Quit!"
 icon_alignment = 1

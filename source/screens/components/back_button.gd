@@ -5,6 +5,10 @@ extends Button
 @export var to_scene: String
 
 
+func _ready() -> void:
+	grab_focus()
+
+
 func _on_pressed() -> void:
 	TransitionScreen.transition_to(to_scene, get_tree())
 

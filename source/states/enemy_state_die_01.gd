@@ -9,6 +9,7 @@ extends State
 
 @export var hurtbox_collision: CollisionShape2D
 @export var hitbox_collision: CollisionShape2D
+@export var effect_player: AnimationPlayer
 
 
 func _ready() -> void:
@@ -17,6 +18,7 @@ func _ready() -> void:
 
 
 func _on_health_component_damage_taken(_previous_hp, _attacker_hitbox) -> void:
+	effect_player.play("hurt")
 	hurt_sfx.play()
 	
 	if health.health_points <= 0:

@@ -110,6 +110,7 @@ animation_player = NodePath("../../../AnimationPlayer")
 blocker = NodePath("../../../ButtonBloker")
 select_sfx = NodePath("Sfx/Select")
 click_sfx = NodePath("Sfx/Click")
+first_button = true
 
 [node name="Sfx" type="Node2D" parent="Control/VBoxContainer/MainMenuButton"]
 

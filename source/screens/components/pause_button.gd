@@ -4,13 +4,13 @@ extends Button
 @export var click_sfx: AudioStreamPlayer
 
 
+func _ready() -> void:
+	grab_focus()
+
+
 func _on_pressed() -> void:
 	get_tree().paused = false
-	
-	GlobalCommands.pause_screen = preload(
-		"res://scenes/screens/pause_screen.tscn"
-	).instantiate()
-	
+
 	owner.queue_free()
 
 

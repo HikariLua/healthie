@@ -45,7 +45,7 @@ func check_transitions() -> void:
 		state_machine.transition_state_to("PlayerStateJump")
 
 	elif character_body.velocity.y > 0:
-		state_machine.transition_state_to("PlayerStateFall")
+		state_machine.transition_state_to("PlayerStateFall", {"coyote": true})
 
 	elif not motion.input_direction.x:
 		state_machine.transition_state_to("PlayerStateIdle")

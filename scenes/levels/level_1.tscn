@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c654roanumkrs"]
+[gd_scene load_steps=22 format=3 uid="uid://c654roanumkrs"]
 
 [ext_resource type="Script" path="res://source/levels/level_1.gd" id="1_4tt7f"]
 [ext_resource type="Texture2D" uid="uid://ceyschb22pnc1" path="res://images/scenario/level_1/forest_layer_4.png" id="1_ebjki"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dt346spxrvjq" path="res://scenes/scene_components/food_cannon.tscn" id="14_dlasg"]
 [ext_resource type="PackedScene" uid="uid://bgw07jqxk7uwd" path="res://scenes/characters/enemy_1.tscn" id="14_kkl7x"]
 [ext_resource type="PackedScene" uid="uid://dwaqa6splnpx3" path="res://scenes/characters/enemy_3.tscn" id="16_8bgbf"]
+[ext_resource type="PackedScene" uid="uid://db3r2b8mt887h" path="res://scenes/global_commands.tscn" id="18_nvq1g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_llsd6"]
 animations = [{
@@ -523,7 +524,7 @@ metadata/_edit_lock_ = true
 [node name="Scenario" type="ParallaxBackground" parent="."]
 
 [node name="Layer3" type="ParallaxLayer" parent="Scenario"]
-motion_scale = Vector2(0.6, 1)
+motion_scale = Vector2(0.5, 1)
 motion_mirroring = Vector2(512, 0)
 metadata/_edit_lock_ = true
 
@@ -533,7 +534,7 @@ centered = false
 metadata/_edit_lock_ = true
 
 [node name="Layer2" type="ParallaxLayer" parent="Scenario"]
-motion_scale = Vector2(0.8, 0.9)
+motion_scale = Vector2(0.7, 0.9)
 motion_mirroring = Vector2(512, 0)
 metadata/_edit_lock_ = true
 
@@ -543,6 +544,7 @@ centered = false
 metadata/_edit_lock_ = true
 
 [node name="Layer1" type="ParallaxLayer" parent="Scenario"]
+motion_scale = Vector2(0.99, 1)
 motion_mirroring = Vector2(512, 0)
 metadata/_edit_lock_ = true
 
@@ -1671,16 +1673,12 @@ position = Vector2(3534, 250)
 [node name="Player" parent="." instance=ExtResource("2_alftw")]
 position = Vector2(36, 261)
 
-[node name="MainHUD" parent="Player" index="0"]
-visible = false
-
 [node name="Camera2D" parent="Player" index="10"]
 limit_left = 20
 limit_top = 176
 limit_right = 4919
 limit_bottom = 320
 editor_draw_limits = true
-editor_draw_drag_margin = true
 
 [node name="Tile" type="TileMap" parent="."]
 z_index = -1
@@ -1834,6 +1832,9 @@ position = Vector2(2576, 287)
 [node name="EndStageTrigger" parent="." instance=ExtResource("13_uvihv")]
 position = Vector2(3608, 228)
 requierd_health = 75
+next_level_index = 2
+
+[node name="GlobalCommands" parent="." instance=ExtResource("18_nvq1g")]
 
 [editable path="Signs/Sign"]
 [editable path="Signs/Sign2"]

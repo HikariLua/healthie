@@ -2,11 +2,13 @@ extends Button
 
 @export var select_sfx: AudioStreamPlayer
 @export var click_sfx: AudioStreamPlayer
+@export var start_focus: bool = false
+
+var main_scene: PackedScene = preload("res://scenes/levels/level_0.tscn")
 
 
-var main_scene: PackedScene = preload(
-	"res://scenes/levels/level_0.tscn"
-)
+func _ready() -> void:
+	grab_focus()
 
 
 func _on_pressed() -> void:

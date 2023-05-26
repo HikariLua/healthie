@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bgw07jqxk7uwd"]
+[gd_scene load_steps=27 format=3 uid="uid://bgw07jqxk7uwd"]
 
 [ext_resource type="AudioStream" uid="uid://clk85h3yfnytp" path="res://audio/sfx/hurt.wav" id="1_c36tb"]
 [ext_resource type="AudioStream" uid="uid://bwmkplw1cfbcb" path="res://audio/sfx/enemy_death.wav" id="2_h3t8f"]
@@ -184,6 +184,44 @@ _data = {
 "run-right": SubResource("Animation_xvfou")
 }
 
+[sub_resource type="Animation" id="Animation_x1io1"]
+resource_name = "hurt"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jbein"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6g5p7"]
+_data = {
+"RESET": SubResource("Animation_jbein"),
+"hurt": SubResource("Animation_x1io1")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_knebj"]
 size = Vector2(6, 11)
 
@@ -202,6 +240,11 @@ metadata/_edit_group_ = true
 autoplay = "idle-right"
 libraries = {
 "": SubResource("AnimationLibrary_l1igr")
+}
+
+[node name="EffectAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6g5p7")
 }
 
 [node name="Sfx" type="Node2D" parent="."]
@@ -287,7 +330,7 @@ animation_player = NodePath("../../AnimationPlayer")
 [node name="IdleTimer" type="Timer" parent="StateMachine/EnemyStateIdle01"]
 one_shot = true
 
-[node name="EnemyStateDie01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "health", "hurt_sfx", "die_sfx", "hurtbox_collision", "hitbox_collision", "animation_player")]
+[node name="EnemyStateDie01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "health", "hurt_sfx", "die_sfx", "hurtbox_collision", "hitbox_collision", "effect_player", "animation_player")]
 script = ExtResource("11_hqlxt")
 character_body = NodePath("../..")
 health = NodePath("../../Components/HealthComponent")
@@ -295,6 +338,7 @@ hurt_sfx = NodePath("../../Sfx/Hurt")
 die_sfx = NodePath("../../Sfx/Die")
 hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
 hitbox_collision = NodePath("../../BodyHitbox/CollisionShape2D")
+effect_player = NodePath("../../EffectAnimationPlayer")
 animation_player = NodePath("../../AnimationPlayer")
 
 [node name="EnemyStateRoam01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "roam_timer", "animation_player")]

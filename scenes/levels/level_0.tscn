@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://kk2jle7s538x"]
+[gd_scene load_steps=17 format=3 uid="uid://kk2jle7s538x"]
 
 [ext_resource type="Script" path="res://source/levels/level_0.gd" id="1_5n7eb"]
 [ext_resource type="Texture2D" uid="uid://bny56sxjj3je8" path="res://images/scenario/level_1/forest_tile.png" id="1_c80pe"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://xfsn0roj30rn" path="res://scenes/triggers/end_stage_trigger.tscn" id="8_82pc3"]
 [ext_resource type="PackedScene" uid="uid://nl67k57xsf82" path="res://scenes/scene_components/sign.tscn" id="9_6hdfw"]
 [ext_resource type="PackedScene" uid="uid://dimfi5n0yonvs" path="res://scenes/collectibles/standard_food.tscn" id="10_ulaqr"]
+[ext_resource type="PackedScene" uid="uid://db3r2b8mt887h" path="res://scenes/global_commands.tscn" id="11_qgp4g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s21ds"]
 texture = ExtResource("3_0dvjm")
@@ -950,6 +951,7 @@ color = Color(0.439216, 0.74902, 1, 1)
 [node name="EndStageTrigger" parent="." instance=ExtResource("8_82pc3")]
 position = Vector2(579, 100)
 requierd_health = 90
+next_level_index = 1
 
 [node name="Signs" type="Node2D" parent="."]
 
@@ -970,7 +972,7 @@ text = "The LESS food you eat, MORE healthy you will be! If you don't eat much y
 position = Vector2(301, 96)
 
 [node name="Label" parent="Signs/Sign4/Message" index="1"]
-text = "It is OK if you eat a little once in a while (still makes you unhealthy), but be aware of eating to much in a short amount of time, it can KILL you! 
+text = "It is OK if you eat a little once in a while, but it still makes you unhealthy, so be aware of eating to much in a short amount of time, it can KILL you! 
 
 "
 
@@ -978,7 +980,7 @@ text = "It is OK if you eat a little once in a while (still makes you unhealthy)
 position = Vector2(226, 96)
 
 [node name="Label" parent="Signs/Sign3/Message" index="1"]
-text = "Unfortunately you really love unhealthy food, so you need to avoid eating it at all cost. Do not eat even a single of them!
+text = "Unfortunately you really love unhealthy food, so you need to avoid eating it at all cost! 
 "
 
 [node name="Sign2" parent="Signs" instance=ExtResource("9_6hdfw")]
@@ -991,12 +993,13 @@ text = "You want to climb the peace mountain, but you need to be healthy to acco
 position = Vector2(63, 96)
 
 [node name="Label" parent="Signs/Sign/Message" index="1"]
-text = "Welcome to Less is More!
+text = "Welcome to Healthie!
 Move: WASD or Arrow keys,
 Controller: D-pad or Left Analogue Stick"
 
 [node name="Player" parent="." instance=ExtResource("7_8uc2f")]
 position = Vector2(51, 81)
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" parent="Player" index="10"]
 limit_left = 0
@@ -1015,6 +1018,8 @@ position = Vector2(228, 25)
 
 [node name="StandardFood3" parent="." instance=ExtResource("10_ulaqr")]
 position = Vector2(208, 10)
+
+[node name="GlobalCommands" parent="." instance=ExtResource("11_qgp4g")]
 
 [editable path="Signs/Sign6"]
 [editable path="Signs/Sign5"]

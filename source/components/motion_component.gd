@@ -8,6 +8,7 @@ extends Node
 @export var max_fall_speed: float = 200
 
 @export var looking_direction := Vector2.RIGHT
+@export var was_on_floor: bool = false
 
 var input_direction := Vector2.ZERO
 

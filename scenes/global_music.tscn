@@ -39,4 +39,4 @@ volume_db = -8.0
 
 [node name="LiztHR2p2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_rljw2")
-volume_db = -18.0
+volume_db = -14.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://0f2n7sfcj3l0"]
+[gd_scene load_steps=20 format=3 uid="uid://0f2n7sfcj3l0"]
 
 [ext_resource type="Texture2D" uid="uid://dv1hwm55kavqp" path="res://images/scenario/level_1/caves.png" id="1_k72lt"]
 [ext_resource type="Script" path="res://source/levels/level_2.gd" id="1_ufgvk"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dimfi5n0yonvs" path="res://scenes/collectibles/standard_food.tscn" id="10_utk2q"]
 [ext_resource type="PackedScene" uid="uid://dt346spxrvjq" path="res://scenes/scene_components/food_cannon.tscn" id="11_cmpgo"]
 [ext_resource type="PackedScene" uid="uid://dwaqa6splnpx3" path="res://scenes/characters/enemy_3.tscn" id="13_7coo1"]
+[ext_resource type="PackedScene" uid="uid://db3r2b8mt887h" path="res://scenes/global_commands.tscn" id="14_rrmc6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_efp4g"]
 texture = ExtResource("2_pvlgf")
@@ -559,7 +560,7 @@ centered = false
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("4_dvka2")]
-position = Vector2(4105, 179)
+position = Vector2(28, 193)
 
 [node name="Camera2D" parent="Player" index="10"]
 limit_left = 0
@@ -567,7 +568,6 @@ limit_top = 140
 limit_right = 4222
 limit_bottom = 284
 editor_draw_limits = true
-editor_draw_drag_margin = true
 
 [node name="ColorRect" type="ColorRect" parent="Player/Camera2D" index="0"]
 modulate = Color(1, 1, 1, 0.317647)
@@ -747,6 +747,17 @@ position = Vector2(246, 180)
 [node name="StandardFood6" parent="Food" instance=ExtResource("10_utk2q")]
 position = Vector2(246, 193)
 
+[node name="Sign" parent="." instance=ExtResource("8_i870r")]
+position = Vector2(464, 224)
+
+[node name="Label" parent="Sign/Message" index="1"]
+text = "Be careful with holes, they are pretty dangerous! "
+
+[node name="EndStageTrigger" parent="." instance=ExtResource("9_t7p40")]
+position = Vector2(4195, 228)
+requierd_health = 70
+next_level_index = 3
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource("8_ofmbq")]
@@ -818,21 +829,11 @@ roam_duration = 1.0
 [node name="Enemy10" parent="Enemies" instance=ExtResource("9_1m2pb")]
 position = Vector2(1511, 271)
 
-[node name="AnimationPlayer" parent="Enemies/Enemy10" index="0"]
-root_node = NodePath("../../Enemy10")
-
 [node name="MotionComponent" parent="Enemies/Enemy10/Components" index="0"]
 looking_direction = Vector2(-1, 0)
 
-[node name="EnemyStateIdle01" parent="Enemies/Enemy10/StateMachine" index="0" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy10")
+[node name="EnemyStateIdle01" parent="Enemies/Enemy10/StateMachine" index="0"]
 idle_duration = 1.0
-
-[node name="EnemyStateRoam01" parent="Enemies/Enemy10/StateMachine" index="1" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy10")
-
-[node name="EnemyStateDie01" parent="Enemies/Enemy10/StateMachine" index="2" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy10")
 
 [node name="FoodCannon8" parent="Enemies" instance=ExtResource("11_cmpgo")]
 position = Vector2(984, 148)
@@ -976,16 +977,6 @@ direction = Vector2(0, -1)
 position = Vector2(3928, 152)
 direction = Vector2(0, 1)
 
-[node name="Sign" parent="." instance=ExtResource("8_i870r")]
-position = Vector2(464, 224)
-
-[node name="Label" parent="Sign/Message" index="1"]
-text = "Be careful with holes, they are pretty dangerous! "
-
-[node name="EndStageTrigger" parent="." instance=ExtResource("9_t7p40")]
-position = Vector2(4195, 228)
-requierd_health = 70
-
 [node name="Enemy2" parent="." instance=ExtResource("9_1m2pb")]
 position = Vector2(1400, 224)
 
@@ -1028,6 +1019,8 @@ position = Vector2(4054, 223)
 [node name="EnemyStateIdle01" parent="Enemy7/StateMachine" index="0"]
 idle_duration = 0.8
 
+[node name="GlobalCommands" parent="." instance=ExtResource("14_rrmc6")]
+
 [editable path="Player"]
 [editable path="Triggers/DeathHole"]
 [editable path="Triggers/DeathHole2"]
@@ -1036,12 +1029,12 @@ idle_duration = 0.8
 [editable path="Triggers/DeathHole4"]
 [editable path="Triggers/DeathHole5"]
 [editable path="Triggers/DeathHole6"]
+[editable path="Sign"]
 [editable path="Enemies/Enemy3"]
 [editable path="Enemies/Enemy5"]
 [editable path="Enemies/Enemy2"]
 [editable path="Enemies/Enemy13"]
 [editable path="Enemies/Enemy10"]
-[editable path="Sign"]
 [editable path="Enemy3"]
 [editable path="Enemy4"]
 [editable path="Enemy5"]
