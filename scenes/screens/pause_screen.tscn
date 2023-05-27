@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cnhoovseu1oe7"]
 
-[ext_resource type="Script" path="res://source/globals/pause_screen.gd" id="1_25fwk"]
+[ext_resource type="Script" path="res://source/screens/pause_screen.gd" id="1_88cpq"]
 [ext_resource type="FontFile" uid="uid://b4nnj0vck6ek2" path="res://fonts/pixel_operator/PixelOperator8-Bold.ttf" id="1_n8ei8"]
 [ext_resource type="FontFile" uid="uid://bq55taxbtsta5" path="res://fonts/pixel_operator/PixelOperator8.ttf" id="2_2f88b"]
 [ext_resource type="Script" path="res://source/screens/components/resume_button.gd" id="2_bb51i"]
@@ -47,7 +47,7 @@ _data = {
 
 [node name="PauseScreen" type="CanvasLayer" node_paths=PackedStringArray("focus_on_show_button")]
 process_mode = 3
-script = ExtResource("1_25fwk")
+script = ExtResource("1_88cpq")
 focus_on_show_button = NodePath("Control/VBoxContainer/ResumeButton")
 
 [node name="Control" type="Control" parent="."]

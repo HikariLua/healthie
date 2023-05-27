@@ -4,11 +4,15 @@ extends State
 ## Fall state executed when character body is falling
 
 @export var character_body: CharacterBody2D
-@export var jump_ray_cast: RayCast2D
+@export var ray_casts_group: Node2D
+
 
 @export var motion: MotionComponent
 
 @export var coyote_timer: Timer
+
+# FIX IN 4.1, make it and exported typed array and populate from the editor
+@onready var jump_ray_casts: Array[Node] = ray_casts_group.get_children()
 
 var coyote: bool = false
 
@@ -55,7 +59,7 @@ func check_transitions() -> void:
 	if Input.is_action_just_pressed("jump"):
 		if coyote_timer.time_left > 0 and coyote:
 			state_machine.transition_state_to("PlayerStateJump")
-		elif jump_ray_cast.is_colliding():
+		elif ray_casts_colliding():
 			state_machine.transition_state_to("PlayerStateJump")
 
 	elif Input.is_action_just_pressed("attack"):
@@ -66,6 +70,14 @@ func check_transitions() -> void:
 
 	elif character_body.is_on_floor():
 		state_machine.transition_state_to("PlayerStateIdle")
+
+
+func ray_casts_colliding() -> bool:
+	for ray_cast in jump_ray_casts:
+		if ray_cast.is_colliding():
+			return true
+	
+	return false
 
 
 func on_exit() -> void:

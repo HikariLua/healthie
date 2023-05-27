@@ -502,10 +502,10 @@ character_body = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
 animation_player = NodePath("../../AnimationPlayer")
 
-[node name="PlayerStateFall" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "jump_ray_cast", "motion", "coyote_timer", "animation_player")]
+[node name="PlayerStateFall" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "ray_casts_group", "motion", "coyote_timer", "animation_player")]
 script = ExtResource("16_g3jao")
 character_body = NodePath("../..")
-jump_ray_cast = NodePath("../../JumpRayCast")
+ray_casts_group = NodePath("../../RayCasts")
 motion = NodePath("../../Components/MotionComponent")
 coyote_timer = NodePath("CoyoteTimer")
 animation_player = NodePath("../../AnimationPlayer")
@@ -560,8 +560,18 @@ drag_left_margin = 0.05
 drag_right_margin = 0.0
 editor_draw_drag_margin = true
 
-[node name="JumpRayCast" type="RayCast2D" parent="."]
-target_position = Vector2(0, 5)
+[node name="RayCasts" type="Node2D" parent="."]
+
+[node name="JumpRayCastCenter" type="RayCast2D" parent="RayCasts"]
+target_position = Vector2(0, 10)
+
+[node name="JumpRayCastrRight" type="RayCast2D" parent="RayCasts"]
+position = Vector2(4, 0)
+target_position = Vector2(0, 10)
+
+[node name="JumpRayCastLeft" type="RayCast2D" parent="RayCasts"]
+position = Vector2(-4, 0)
+target_position = Vector2(0, 10)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/PlayerStateAttack" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/PlayerStateAttackAir" method="_on_animation_player_animation_finished"]

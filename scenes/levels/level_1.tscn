@@ -1834,7 +1834,7 @@ position = Vector2(3608, 228)
 requierd_health = 75
 next_level_index = 2
 
-[node name="GlobalCommands" parent="." instance=ExtResource("18_nvq1g")]
+[node name="PauseComponent" parent="." instance=ExtResource("18_nvq1g")]
 
 [editable path="Signs/Sign"]
 [editable path="Signs/Sign2"]
