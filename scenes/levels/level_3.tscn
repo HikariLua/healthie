@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bgw07jqxk7uwd" path="res://scenes/characters/enemy_red.tscn" id="13_miykj"]
 [ext_resource type="PackedScene" uid="uid://nl67k57xsf82" path="res://scenes/scene_components/sign.tscn" id="14_35ooa"]
 [ext_resource type="PackedScene" uid="uid://xfsn0roj30rn" path="res://scenes/triggers/end_stage_trigger.tscn" id="16_t6iwx"]
-[ext_resource type="PackedScene" uid="uid://db3r2b8mt887h" path="res://scenes/globals/global_commands.tscn" id="17_1uok5"]
+[ext_resource type="PackedScene" uid="uid://db3r2b8mt887h" path="res://scenes/scene_components/pause_compenent.tscn" id="17_1uok5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s21ds"]
 texture = ExtResource("7_vbe4j")
@@ -831,7 +831,10 @@ position = Vector2(1144, 226)
 position = Vector2(2051, 240)
 
 [node name="Enemy5" parent="Enemies" instance=ExtResource("11_nkgi4")]
-position = Vector2(2262, 243)
+position = Vector2(2210, 241)
+
+[node name="Enemy6" parent="Enemies" instance=ExtResource("11_nkgi4")]
+position = Vector2(2304, 241)
 
 [node name="Enemy8" parent="Enemies" instance=ExtResource("11_nkgi4")]
 position = Vector2(3541, 289)

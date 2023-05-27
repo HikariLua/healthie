@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cnhoovseu1oe7"]
+[gd_scene load_steps=11 format=3 uid="uid://cnhoovseu1oe7"]
 
+[ext_resource type="Script" path="res://source/globals/pause_screen.gd" id="1_25fwk"]
 [ext_resource type="FontFile" uid="uid://b4nnj0vck6ek2" path="res://fonts/pixel_operator/PixelOperator8-Bold.ttf" id="1_n8ei8"]
 [ext_resource type="FontFile" uid="uid://bq55taxbtsta5" path="res://fonts/pixel_operator/PixelOperator8.ttf" id="2_2f88b"]
 [ext_resource type="Script" path="res://source/screens/components/resume_button.gd" id="2_bb51i"]
@@ -44,8 +45,10 @@ _data = {
 "fade": SubResource("Animation_dskeb")
 }
 
-[node name="PauseScreen" type="CanvasLayer"]
+[node name="PauseScreen" type="CanvasLayer" node_paths=PackedStringArray("focus_on_show_button")]
 process_mode = 3
+script = ExtResource("1_25fwk")
+focus_on_show_button = NodePath("Control/VBoxContainer/ResumeButton")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -113,7 +116,7 @@ theme_override_font_sizes/font_size = 8
 text = "Main Menu"
 script = ExtResource("3_i5hyi")
 animation_player = NodePath("../../../AnimationPlayer")
-blocker = NodePath("../../../ButtonBloker")
+blocker = NodePath("")
 select_sfx = NodePath("Sfx/Select")
 click_sfx = NodePath("Sfx/Click")
 
@@ -127,16 +130,8 @@ volume_db = -5.0
 stream = ExtResource("4_jbapn")
 volume_db = -5.0
 
-[node name="ButtonBloker" type="ColorRect" parent="."]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_8gwf1")
 }

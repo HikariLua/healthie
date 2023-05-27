@@ -4,11 +4,8 @@ extends Button
 @export var click_sfx: AudioStreamPlayer
 
 
-func _ready() -> void:
-	grab_focus()
-
-
 func _on_pressed() -> void:
+	print("aa")
 	get_tree().paused = false
 
 	owner.queue_free()

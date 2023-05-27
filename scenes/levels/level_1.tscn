@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dt346spxrvjq" path="res://scenes/scene_components/food_cannon.tscn" id="14_dlasg"]
 [ext_resource type="PackedScene" uid="uid://bgw07jqxk7uwd" path="res://scenes/characters/enemy_red.tscn" id="14_kkl7x"]
 [ext_resource type="PackedScene" uid="uid://dwaqa6splnpx3" path="res://scenes/characters/enemy_green.tscn" id="16_8bgbf"]
-[ext_resource type="PackedScene" uid="uid://db3r2b8mt887h" path="res://scenes/globals/global_commands.tscn" id="18_nvq1g"]
+[ext_resource type="PackedScene" uid="uid://db3r2b8mt887h" path="res://scenes/scene_components/pause_compenent.tscn" id="18_nvq1g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_llsd6"]
 animations = [{

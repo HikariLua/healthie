@@ -5,6 +5,7 @@ extends State
 @export var character_body: CharacterBody2D
 @export var jump_sfx: AudioStreamPlayer2D
 
+
 @export var motion: MotionComponent
 
 @onready var min_jump_velocity: float = motion.jump_velocity / 2

@@ -1,3 +1,4 @@
+class_name FoodCannon
 extends StaticBody2D
 
 @export var timer: Timer

@@ -4,6 +4,7 @@ extends State
 ## Fall state executed when character body is falling
 
 @export var character_body: CharacterBody2D
+@export var jump_ray_cast: RayCast2D
 
 @export var motion: MotionComponent
 
@@ -20,6 +21,8 @@ func _ready() -> void:
 func on_enter(message := {}) -> void:
 	if message.has("coyote"):
 		coyote = message["coyote"]
+	else:
+		coyote = false
 
 	coyote_timer.start(0.2)
 
@@ -51,6 +54,8 @@ func physics_update(delta: float) -> void:
 func check_transitions() -> void:
 	if Input.is_action_just_pressed("jump"):
 		if coyote_timer.time_left > 0 and coyote:
+			state_machine.transition_state_to("PlayerStateJump")
+		elif jump_ray_cast.is_colliding():
 			state_machine.transition_state_to("PlayerStateJump")
 
 	elif Input.is_action_just_pressed("attack"):

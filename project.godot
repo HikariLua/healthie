@@ -32,7 +32,6 @@ window/size/viewport_height=144
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
-window/vsync/vsync_mode=0
 
 [gui]
 
@@ -150,6 +149,7 @@ pause={
 2d_physics/layer_7="enemy_hitbox"
 2d_physics/layer_8="food"
 2d_physics/layer_9="player_interact_box"
+2d_physics/layer_10="cannon"
 
 [rendering]
 

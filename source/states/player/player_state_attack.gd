@@ -5,6 +5,11 @@ extends State
 @export var attack_sfx: AudioStreamPlayer2D
 
 @export var motion: MotionComponent
+@export var combat: CombatComponent
+
+var projectile_scene: PackedScene = preload(
+	"res://scenes/projectiles/player_projectile.tscn"
+)
 
 
 func _ready() -> void:
@@ -13,12 +18,11 @@ func _ready() -> void:
 
 
 func on_enter(_message := {}) -> void:
-	var projectile: PlayerProjectile = (
-		preload("res://scenes/projectiles/player_projectile.tscn").instantiate()
-	)
+	var projectile: PlayerProjectile = projectile_scene.instantiate()
 
 	projectile.global_position = character_body.global_position
 	projectile.direction.x = motion.looking_direction.x
+	projectile.damage = combat.attack_damage
 
 	get_tree().get_root().add_child(projectile)
 

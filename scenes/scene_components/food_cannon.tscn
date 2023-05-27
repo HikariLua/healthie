@@ -45,7 +45,7 @@ _data = {
 "blink": SubResource("Animation_01hrl")
 }
 
-[node name="FoodCannon" type="StaticBody2D" node_paths=PackedStringArray("timer", "animation_player", "shoot_sfx")]
+[node name="FoodCannon" type="StaticBody2D" node_paths=PackedStringArray("timer", "animation_player", "shoot_sfx") groups=["cannon"]]
 script = ExtResource("1_w1ee6")
 timer = NodePath("Timer")
 animation_player = NodePath("AnimationPlayer")
@@ -62,7 +62,6 @@ max_distance = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_upwm5")
-one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_1ayhc")

@@ -358,15 +358,12 @@ one_shot = true
 
 [node name="StandardFood" parent="." instance=ExtResource("13_yxu3u")]
 position = Vector2(-0.351, -19)
-collision_mask = 0
 
 [node name="StandardFood2" parent="." instance=ExtResource("13_yxu3u")]
 position = Vector2(10, -6)
-collision_mask = 0
 
 [node name="StandardFood3" parent="." instance=ExtResource("13_yxu3u")]
 position = Vector2(-12, -6)
-collision_mask = 0
 
 [node name="Speeder" type="Area2D" parent="." node_paths=PackedStringArray("motion", "animation_player")]
 collision_layer = 0

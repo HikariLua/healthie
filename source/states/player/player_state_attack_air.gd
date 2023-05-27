@@ -5,8 +5,9 @@ extends State
 @export var attack_sfx: AudioStreamPlayer2D
 
 @export var motion: MotionComponent
+@export var combat: CombatComponent
 
-var projectile: PackedScene = preload(
+var projectile_scene: PackedScene = preload(
 	"res://scenes/projectiles/player_projectile.tscn"
 )
 
@@ -17,12 +18,13 @@ func _ready() -> void:
 
 
 func on_enter(_message := {}) -> void:
-	var proj_instance: PlayerProjectile = projectile.instantiate()
+	var projectile: PlayerProjectile = projectile_scene.instantiate()
 
-	proj_instance.global_position = character_body.global_position
-	proj_instance.direction.x = motion.looking_direction.x
+	projectile.global_position = character_body.global_position
+	projectile.direction.x = motion.looking_direction.x
+	projectile.damage = combat.attack_damage
 
-	get_tree().get_root().add_child(proj_instance)
+	get_tree().get_root().add_child(projectile)
 
 	motion.two_direction_animation(animation_player, "attack")
 	attack_sfx.play()
@@ -46,8 +48,6 @@ func physics_update(delta: float) -> void:
 	character_body.velocity.y = motion.apply_gravity(
 		character_body, delta / divisor
 	)
-
-	motion.was_on_floor = character_body.is_on_floor()
 
 	character_body.move_and_slide()
 

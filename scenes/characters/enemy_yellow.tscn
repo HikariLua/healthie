@@ -232,6 +232,7 @@ size = Vector2(9, 12)
 
 [node name="EnemyYellow" type="CharacterBody2D"]
 collision_layer = 16
+collision_mask = 17
 metadata/_edit_group_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -355,7 +356,6 @@ animation_player = NodePath("../../AnimationPlayer")
 
 [node name="StandardFood" parent="." instance=ExtResource("13_fptwq")]
 position = Vector2(0, -19)
-collision_mask = 0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/EnemyStateRoam01" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/EnemyStateDie01" method="_on_animation_player_animation_finished"]

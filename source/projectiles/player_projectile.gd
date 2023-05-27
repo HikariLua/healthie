@@ -1,5 +1,5 @@
 class_name PlayerProjectile
-extends CharacterBody2D
+extends Area2D
 
 @export var speed: int = 200
 @export var hitbox: AttackHitbox
@@ -10,7 +10,6 @@ var damage: int = 1
 
 func _ready() -> void:
 	global_position.y -= 7.5
-	velocity = direction * speed
 	
 	hitbox.damage = self.damage
 
@@ -25,11 +24,11 @@ func _enter_tree() -> void:
 	modulate = color
 
 
-func _physics_process(_delta: float) -> void:
-	if is_on_wall() or is_on_floor() or is_on_ceiling():
-		self_destroy()
+func _physics_process(delta: float) -> void:
+	position += (direction * speed) * delta
 	
-	move_and_slide()
+	if has_overlapping_bodies():
+		self_destroy()
 
 
 func self_destroy() -> void:

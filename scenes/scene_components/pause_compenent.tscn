@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://db3r2b8mt887h"]
+
+[ext_resource type="Script" path="res://source/scenario_components/pause_compenent.gd" id="1_bx0am"]
+
+[node name="PauseComponent" type="Node"]
+process_mode = 3
+script = ExtResource("1_bx0am")

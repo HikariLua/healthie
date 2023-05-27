@@ -1,6 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://kk2jle7s538x"]
+[gd_scene load_steps=17 format=3 uid="uid://kk2jle7s538x"]
 
 [ext_resource type="Script" path="res://source/levels/level_0.gd" id="1_5n7eb"]
+[ext_resource type="PackedScene" uid="uid://dimfi5n0yonvs" path="res://scenes/collectibles/junk_food.tscn" id="2_7n5um"]
+[ext_resource type="PackedScene" uid="uid://db3r2b8mt887h" path="res://scenes/scene_components/pause_compenent.tscn" id="2_saube"]
 [ext_resource type="TileSet" uid="uid://d4mrgu2uam4sy" path="res://resources/tiles/peace_mountain_tileset.tres" id="2_txmr5"]
 [ext_resource type="Texture2D" uid="uid://d04pabjrt7od4" path="res://images/scenario/forest_cyan/forest_cyan_tileset.png" id="3_wwaln"]
 [ext_resource type="Texture2D" uid="uid://bny56sxjj3je8" path="res://images/scenario/forest_pink/forest_pink_tileset.png" id="4_wfwjq"]
@@ -9,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://6uo15x52gvv0" path="res://scenes/characters/player.tscn" id="7_8uc2f"]
 [ext_resource type="PackedScene" uid="uid://xfsn0roj30rn" path="res://scenes/triggers/end_stage_trigger.tscn" id="8_82pc3"]
 [ext_resource type="PackedScene" uid="uid://nl67k57xsf82" path="res://scenes/scene_components/sign.tscn" id="9_6hdfw"]
-[ext_resource type="PackedScene" uid="uid://db3r2b8mt887h" path="res://scenes/globals/global_commands.tscn" id="11_qgp4g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s21ds"]
 texture = ExtResource("3_wwaln")
@@ -926,6 +927,20 @@ sources/1 = SubResource("TileSetAtlasSource_psm1s")
 script = ExtResource("1_5n7eb")
 metadata/_edit_lock_ = true
 
+[node name="Foods" type="Node2D" parent="."]
+
+[node name="JunkFood" parent="Foods" instance=ExtResource("2_7n5um")]
+position = Vector2(224, 9)
+
+[node name="JunkFood2" parent="Foods" instance=ExtResource("2_7n5um")]
+position = Vector2(224, 31)
+
+[node name="JunkFood3" parent="Foods" instance=ExtResource("2_7n5um")]
+position = Vector2(236, 20)
+
+[node name="JunkFood4" parent="Foods" instance=ExtResource("2_7n5um")]
+position = Vector2(212, 20)
+
 [node name="Tile" type="TileMap" parent="."]
 position = Vector2(-1, 0)
 tile_set = ExtResource("2_txmr5")
@@ -946,6 +961,7 @@ offset_top = -1937.0
 offset_right = 3276.0
 offset_bottom = 1977.0
 color = Color(0.439216, 0.74902, 1, 1)
+metadata/_edit_lock_ = true
 
 [node name="EndStageTrigger" parent="." instance=ExtResource("8_82pc3")]
 position = Vector2(579, 100)
@@ -1006,7 +1022,7 @@ limit_right = 638
 limit_bottom = 125
 editor_draw_limits = true
 
-[node name="GlobalCommands" parent="." instance=ExtResource("11_qgp4g")]
+[node name="PauseComponent" parent="." instance=ExtResource("2_saube")]
 
 [editable path="Signs/Sign6"]
 [editable path="Signs/Sign5"]
