@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bnu58xso2vucc"]
+[gd_scene load_steps=33 format=3 uid="uid://bnu58xso2vucc"]
 
 [ext_resource type="PackedScene" uid="uid://6uo15x52gvv0" path="res://scenes/characters/player.tscn" id="1_n5c5m"]
 [ext_resource type="Texture2D" uid="uid://dv1hwm55kavqp" path="res://images/scenario/water_cave/caves.png" id="1_s4pto"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://v3halvyh28q5" path="res://scenes/triggers/death_hole.tscn" id="14_vvurq"]
 [ext_resource type="PackedScene" uid="uid://dimfi5n0yonvs" path="res://scenes/collectibles/junk_food.tscn" id="15_xd6c2"]
 [ext_resource type="PackedScene" uid="uid://elnbs2kb3bgo" path="res://scenes/scene_components/moving_platform.tscn" id="16_hvcem"]
-[ext_resource type="PackedScene" uid="uid://dt346spxrvjq" path="res://scenes/scene_components/food_cannon.tscn" id="17_hg1du"]
 [ext_resource type="PackedScene" uid="uid://xfsn0roj30rn" path="res://scenes/triggers/end_stage_trigger.tscn" id="18_flf16"]
 [ext_resource type="PackedScene" uid="uid://nl67k57xsf82" path="res://scenes/scene_components/sign.tscn" id="18_h383h"]
 [ext_resource type="PackedScene" uid="uid://b6iey78ja7r6n" path="res://scenes/characters/enemy_yellow.tscn" id="20_64s82"]
@@ -1142,28 +1141,10 @@ position = Vector2(814, 265)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform2/AnimatableBody2D" index="2"]
 autoplay = "move"
+speed_scale = 5.0
 libraries = {
 "": SubResource("AnimationLibrary_cnv2g")
 }
-
-[node name="FoodCannon" parent="." instance=ExtResource("17_hg1du")]
-position = Vector2(967, 198)
-timer_duration = 1.0
-
-[node name="FoodCannon2" parent="." instance=ExtResource("17_hg1du")]
-position = Vector2(967, 179)
-timer_duration = 1.0
-delay = 0.2
-
-[node name="FoodCannon3" parent="." instance=ExtResource("17_hg1du")]
-position = Vector2(967, 160)
-timer_duration = 1.0
-delay = 0.4
-
-[node name="FoodCannon4" parent="." instance=ExtResource("17_hg1du")]
-position = Vector2(967, 140)
-timer_duration = 1.0
-delay = 0.6
 
 [node name="EndStageTrigger" parent="." instance=ExtResource("18_flf16")]
 position = Vector2(722, 292)
@@ -1172,7 +1153,7 @@ position = Vector2(722, 292)
 position = Vector2(175, 288)
 
 [node name="Player" parent="." instance=ExtResource("1_n5c5m")]
-position = Vector2(231, 237)
+position = Vector2(773, 158)
 
 [node name="Camera2D" parent="Player" index="10"]
 position = Vector2(-1, 17)
@@ -1185,6 +1166,10 @@ position = Vector2(197, 253)
 
 [node name="Enemy3" parent="." instance=ExtResource("21_wt14x")]
 position = Vector2(685, 282)
+collision_layer = 17
+
+[node name="BodyCollision" parent="Enemy3" index="5"]
+scale = Vector2(20, 1)
 
 [editable path="DeathHole"]
 [editable path="MovingPlatform"]
@@ -1192,3 +1177,4 @@ position = Vector2(685, 282)
 [editable path="Sign"]
 [editable path="Player"]
 [editable path="Player/MainHUD"]
+[editable path="Enemy3"]

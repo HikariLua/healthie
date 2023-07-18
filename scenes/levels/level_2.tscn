@@ -1037,7 +1037,7 @@ position = Vector2(4054, 223)
 [node name="EnemyStateIdle01" parent="Enemy7/StateMachine" index="0"]
 idle_duration = 0.8
 
-[node name="GlobalCommands" parent="." instance=ExtResource("14_rrmc6")]
+[node name="PauseComponent" parent="." instance=ExtResource("14_rrmc6")]
 
 [editable path="Player"]
 [editable path="Triggers/DeathHole"]

@@ -251,6 +251,19 @@ by FoxCheeze (2023)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Label3" type="Label" parent="Control"]
+modulate = Color(0.458824, 0.729412, 1, 1)
+layout_mode = 2
+offset_left = 90.0
+offset_top = 108.0
+offset_right = 250.0
+offset_bottom = 146.0
+scale = Vector2(0.399, 0.399)
+theme_override_fonts/font = ExtResource("6_pq5p2")
+text = "GDScript Ver."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Scenario" type="ParallaxBackground" parent="."]
 
 [node name="Layer3" type="ParallaxLayer" parent="Scenario"]

@@ -5,7 +5,6 @@ extends Button
 
 
 func _on_pressed() -> void:
-	print("aa")
 	get_tree().paused = false
 
 	owner.queue_free()

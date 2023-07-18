@@ -41,7 +41,7 @@ enum Style {
 }
 
 ## The style to use when drawing the debug menu.
-var style := Style.VISIBLE_COMPACT:
+var style := Style.VISIBLE_DETAILED:
 	set(value):
 		style = value
 		match style:

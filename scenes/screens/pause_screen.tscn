@@ -108,7 +108,7 @@ volume_db = -5.0
 stream = ExtResource("4_jbapn")
 volume_db = -5.0
 
-[node name="MainMenuButton" type="Button" parent="Control/VBoxContainer" node_paths=PackedStringArray("animation_player", "blocker", "select_sfx", "click_sfx")]
+[node name="MainMenuButton" type="Button" parent="Control/VBoxContainer" node_paths=PackedStringArray("animation_player", "select_sfx", "click_sfx")]
 modulate = Color(0.952941, 1, 0.388235, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_2f88b")
@@ -116,7 +116,6 @@ theme_override_font_sizes/font_size = 8
 text = "Main Menu"
 script = ExtResource("3_i5hyi")
 animation_player = NodePath("../../../AnimationPlayer")
-blocker = NodePath("")
 select_sfx = NodePath("Sfx/Select")
 click_sfx = NodePath("Sfx/Click")
 

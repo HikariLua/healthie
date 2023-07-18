@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @export var collectible: CollectibleComponent
+@export var health: HealthComponent
 @export var food_label: Label
 @export var food_bar: ProgressBar
 @export var time_bar: ProgressBar
@@ -13,7 +14,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	food_label.text = "= " + str(collectible.collected_food)
-	lifes.text = "= " + str(PlayerInfo.lifes)
+	lifes.text = "= " + str(health.lifes)
 	
 	food_bar.value = collectible.collect_sequence
 	time_bar.value = collectible.sequence_timer.time_left

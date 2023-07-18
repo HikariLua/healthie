@@ -1766,15 +1766,8 @@ position = Vector2(2216, 239)
 [node name="AnimationPlayer" parent="Enemys/Enemy11" index="0"]
 root_node = NodePath("../../Enemy11")
 
-[node name="EnemyStateIdle01" parent="Enemys/Enemy11/StateMachine" index="0" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy11")
+[node name="EnemyStateIdle01" parent="Enemys/Enemy11/StateMachine" index="0"]
 idle_duration = 0.8
-
-[node name="EnemyStateRoam01" parent="Enemys/Enemy11/StateMachine" index="1" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy11")
-
-[node name="EnemyStateDie01" parent="Enemys/Enemy11/StateMachine" index="2" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy11")
 
 [node name="Enemy7" parent="Enemys" instance=ExtResource("16_8bgbf")]
 position = Vector2(1498, 287)
@@ -1788,15 +1781,8 @@ root_node = NodePath("../../Enemy12")
 [node name="MotionComponent" parent="Enemys/Enemy12/Components" index="0"]
 looking_direction = Vector2(-1, 0)
 
-[node name="EnemyStateIdle01" parent="Enemys/Enemy12/StateMachine" index="0" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy12")
+[node name="EnemyStateIdle01" parent="Enemys/Enemy12/StateMachine" index="0"]
 idle_duration = 1.5
-
-[node name="EnemyStateRoam01" parent="Enemys/Enemy12/StateMachine" index="1" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy12")
-
-[node name="EnemyStateDie01" parent="Enemys/Enemy12/StateMachine" index="2" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy12")
 
 [node name="Enemy8" parent="Enemys" instance=ExtResource("16_8bgbf")]
 position = Vector2(1895, 290)
@@ -1816,15 +1802,8 @@ position = Vector2(3094, 256)
 [node name="AnimationPlayer" parent="Enemys/Enemy16" index="0"]
 root_node = NodePath("../../Enemy16")
 
-[node name="EnemyStateIdle01" parent="Enemys/Enemy16/StateMachine" index="0" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy16")
+[node name="EnemyStateIdle01" parent="Enemys/Enemy16/StateMachine" index="0"]
 idle_duration = 0.6
-
-[node name="EnemyStateRoam01" parent="Enemys/Enemy16/StateMachine" index="1" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy16")
-
-[node name="EnemyStateDie01" parent="Enemys/Enemy16/StateMachine" index="2" node_paths=PackedStringArray("character_body")]
-character_body = NodePath("../../../Enemy16")
 
 [node name="Enemy13" parent="Enemys" instance=ExtResource("16_8bgbf")]
 position = Vector2(2576, 287)

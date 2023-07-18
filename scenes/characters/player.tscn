@@ -1,7 +1,8 @@
-[gd_scene load_steps=45 format=3 uid="uid://6uo15x52gvv0"]
+[gd_scene load_steps=46 format=3 uid="uid://6uo15x52gvv0"]
 
 [ext_resource type="PackedScene" uid="uid://df3ksxfcx8i6y" path="res://scenes/screens/main_hud.tscn" id="1_mf63t"]
 [ext_resource type="AudioStream" uid="uid://cu0jfti2ef27i" path="res://audio/sfx/jump.wav" id="2_c3aux"]
+[ext_resource type="PackedScene" uid="uid://cggqb75a8w8r" path="res://addons/debug_menu/debug_menu.tscn" id="2_uwlpo"]
 [ext_resource type="AudioStream" uid="uid://bgnqq1cuhn0p1" path="res://audio/sfx/player_shoot.wav" id="3_mhfsw"]
 [ext_resource type="AudioStream" uid="uid://cnjjpqra0s4sf" path="res://audio/sfx/death.wav" id="4_iqkos"]
 [ext_resource type="Script" path="res://source/states/state_machine.gd" id="4_o0l3m"]
@@ -377,10 +378,14 @@ size = Vector2(2, 8)
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 collision_layer = 2
+wall_min_slide_angle = 0.0
 metadata/_edit_group_ = true
 
-[node name="MainHUD" parent="." node_paths=PackedStringArray("collectible") instance=ExtResource("1_mf63t")]
+[node name="MainHUD" parent="." node_paths=PackedStringArray("collectible", "health") instance=ExtResource("1_mf63t")]
 collectible = NodePath("../Components/CollectibleComponent")
+health = NodePath("../Components/HealthComponent")
+
+[node name="DebugMenu" parent="MainHUD" instance=ExtResource("2_uwlpo")]
 
 [node name="Sfx" type="Node2D" parent="."]
 
@@ -455,10 +460,9 @@ script = ExtResource("8_s2mg2")
 [node name="HealthComponent" type="Node" parent="Components"]
 script = ExtResource("9_1ku18")
 
-[node name="CombatComponent" type="Node" parent="Components" node_paths=PackedStringArray("motion", "health")]
+[node name="CombatComponent" type="Node" parent="Components" node_paths=PackedStringArray("motion")]
 script = ExtResource("10_n04hy")
 motion = NodePath("../MotionComponent")
-health = NodePath("")
 
 [node name="CollectibleComponent" type="Node" parent="Components" node_paths=PackedStringArray("sequence_timer", "pickup_sfx", "effect", "state_machine")]
 script = ExtResource("11_vn30s")
@@ -542,10 +546,11 @@ one_shot = true
 [node name="InvencibilityTimer" type="Timer" parent="StateMachine/PlayerStateStun"]
 one_shot = true
 
-[node name="PlayerStateDie" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "die_sfx", "hurtbox_collision", "collectible_collision", "collectible", "animation_player")]
+[node name="PlayerStateDie" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "health", "die_sfx", "hurtbox_collision", "collectible_collision", "collectible", "animation_player")]
 script = ExtResource("19_e5t7l")
 character_body = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
+health = NodePath("../../Components/HealthComponent")
 die_sfx = NodePath("../../Sfx/Die")
 hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
 collectible_collision = NodePath("../../Interactbox/CollisionShape2D")

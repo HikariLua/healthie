@@ -3,6 +3,7 @@ extends State
 
 @export var character_body: CharacterBody2D
 @export var motion: MotionComponent
+@export var health: HealthComponent
 @export var die_sfx: AudioStreamPlayer2D
 
 @export var hurtbox_collision: CollisionShape2D
@@ -22,8 +23,8 @@ func on_enter(_message := {}) -> void:
 	die_sfx.play()
 	
 	
-	if PlayerInfo.lifes > 0:
-		PlayerInfo.lifes -= 1
+	if health.lifes > 0:
+		health.lifes -= 1
 		get_tree().get_root().add_child(death_screen)
 		TransitionScreen.reload_scene(self.get_tree())
 		

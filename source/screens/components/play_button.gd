@@ -12,8 +12,6 @@ func _ready() -> void:
 
 
 func _on_pressed() -> void:
-	PlayerInfo.lifes = 3
-	PlayerInfo.current_level = 0
 	TransitionScreen.transition_to_packed(main_scene, get_tree())
 
 

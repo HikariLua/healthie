@@ -19,6 +19,8 @@ var end_stage_screen: PackedScene = preload(
 
 func _on_body_entered(body: Node2D) -> void:
 	player = body as CharacterBody2D
+	var health_component = player.get_node("Components/HealthComponent")
+
 	var state_machine: StateMachine = (
 		player.get_node("StateMachine") as StateMachine
 	)
@@ -43,21 +45,19 @@ func _on_body_entered(body: Node2D) -> void:
 	elif final_health >= requierd_health + 8:
 		result = "Extra Success"
 		plus = "+2 Lifes"
-		PlayerInfo.lifes += 2
+		health_component.lifes += 2
 		extra_clear_sfx.play()
 
 		show_sceen()
-		PlayerInfo.current_level += 1
 		await get_tree().create_timer(6).timeout
 		next_level()
 
 	else:
 		result = "Success"
 		plus = "+1 Life"
-		PlayerInfo.lifes += 1
+		health_component.lifes += 1
 		show_sceen()
 		clear_sfx.play()
-		PlayerInfo.current_level += 1
 		await get_tree().create_timer(6).timeout
 		next_level()
 

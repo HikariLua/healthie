@@ -970,7 +970,7 @@ position = Vector2(55, 274)
 text = "You are almost there! Just keep going.
 YOU CAN DO IT!!! "
 
-[node name="GlobalCommands" parent="." instance=ExtResource("17_1uok5")]
+[node name="PauseComponent" parent="." instance=ExtResource("17_1uok5")]
 
 [editable path="Triggers/DeathHole"]
 [editable path="Triggers/DeathHole2"]
