@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://df3ksxfcx8i6y"]
 
-[ext_resource type="Script" path="res://source/screens/main_hud.gd" id="1_yj6dt"]
+[ext_resource type="Script" path="res://source/screens/MainHud.cs" id="1_2h544"]
 [ext_resource type="Theme" uid="uid://wbb5lh8bsy3s" path="res://resources/themes/main_hud.tres" id="2_c6ues"]
 [ext_resource type="Texture2D" uid="uid://b52l00xvrm6fm" path="res://images/items/foods.png" id="3_18hhn"]
 [ext_resource type="Texture2D" uid="uid://dwiy5tkluhm06" path="res://images/characters/player/little_fox.png" id="3_f1c6j"]
@@ -13,12 +13,12 @@ colors = PackedColorArray(0, 0, 0, 0.72549, 0, 0, 0, 0)
 gradient = SubResource("Gradient_pkrto")
 width = 100
 
-[node name="MainHUD" type="CanvasLayer" node_paths=PackedStringArray("food_label", "food_bar", "time_bar", "lifes")]
-script = ExtResource("1_yj6dt")
-food_label = NodePath("Control/VBoxContainer/Food")
-food_bar = NodePath("Control/VBoxContainer2/FoodBar")
-time_bar = NodePath("Control/VBoxContainer2/TimeBar")
-lifes = NodePath("Control/Lifes")
+[node name="MainHUD" type="CanvasLayer" node_paths=PackedStringArray("foodLabel", "lives", "foodBar", "timeBar")]
+script = ExtResource("1_2h544")
+foodLabel = NodePath("Control/VBoxContainer/Food")
+lives = NodePath("Control/Lifes")
+foodBar = NodePath("Control/VBoxContainer2/FoodBar")
+timeBar = NodePath("Control/VBoxContainer2/TimeBar")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

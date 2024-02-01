@@ -27,6 +27,9 @@ func on_enter(_message := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	motion.input_direction = motion.update_input_direction()
+	print("real_vel= %s" % character_body.get_real_velocity())
+	print("platform_vel= %s" % character_body.get_platform_velocity())
+	print("vel= %s\n" % character_body.velocity)
 
 	motion.looking_direction = motion.set_looking_direction(
 		motion.input_direction

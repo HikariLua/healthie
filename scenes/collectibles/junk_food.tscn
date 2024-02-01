@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dimfi5n0yonvs"]
 
-[ext_resource type="Script" path="res://source/items/junk_food.gd" id="1_opdoe"]
+[ext_resource type="Script" path="res://source/items/JunkFood.cs" id="1_waibp"]
 [ext_resource type="Texture2D" uid="uid://b52l00xvrm6fm" path="res://images/items/foods.png" id="2_apj17"]
 
 [sub_resource type="Gradient" id="Gradient_3w81u"]
@@ -53,13 +53,14 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6cjg"]
 radius = 5.0
 
-[node name="JunkFood" type="Area2D" node_paths=PackedStringArray("sprite") groups=["food", "projectile"]]
+[node name="JunkFood" type="Area2D" node_paths=PackedStringArray("sprite", "visibleScreen") groups=["food", "projectile"]]
 position = Vector2(4, -1)
 scale = Vector2(1.2, 1.2)
 collision_layer = 128
 collision_mask = 257
-script = ExtResource("1_opdoe")
+script = ExtResource("1_waibp")
 sprite = NodePath("Sprite2D")
+visibleScreen = NodePath("VisibleOnScreenNotifier2D")
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -87,6 +88,3 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_e6cjg")
 debug_color = Color(1, 0.952941, 0.45098, 0.419608)
-
-[connection signal="area_entered" from="." to="." method="_on_area_2d_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

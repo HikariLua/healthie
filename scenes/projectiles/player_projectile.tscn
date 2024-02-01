@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://7vtkxafog8wi"]
 
-[ext_resource type="Script" path="res://source/projectiles/player_projectile.gd" id="1_fefbb"]
+[ext_resource type="Script" path="res://source/projectiles/PlayerProjectile.cs" id="1_qdx20"]
 [ext_resource type="Texture2D" uid="uid://bdhp5ba6lki3b" path="res://images/items/flower_attack.png" id="2_y2gkl"]
-[ext_resource type="Script" path="res://source/triggers/attack_hitbox.gd" id="3_84u6v"]
+[ext_resource type="Script" path="res://source/triggers/Hitbox.cs" id="3_vpul6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j1ars"]
 radius = 1.73913
@@ -10,12 +10,13 @@ radius = 1.73913
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yn54k"]
 size = Vector2(8, 10)
 
-[node name="PlayerProjectile" type="Area2D" node_paths=PackedStringArray("hitbox") groups=["projectile"]]
+[node name="PlayerProjectile" type="Area2D" node_paths=PackedStringArray("hitbox", "visibleNotifier") groups=["projectile"]]
 scale = Vector2(1.15, 1.15)
 collision_layer = 0
 collision_mask = 513
-script = ExtResource("1_fefbb")
+script = ExtResource("1_qdx20")
 hitbox = NodePath("Hitbox")
+visibleNotifier = NodePath("VisibleOnScreenNotifier2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
@@ -30,11 +31,8 @@ scale = Vector2(0.776293, 0.776293)
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 32
-script = ExtResource("3_84u6v")
+script = ExtResource("3_vpul6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_yn54k")
 debug_color = Color(0.701961, 0, 0.0196078, 0.419608)
-
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

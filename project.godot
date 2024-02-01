@@ -13,16 +13,16 @@ config_version=5
 config/name="Healthie"
 config/description="Go Godot Jam 4 game by FoxCheeze"
 run/main_scene="res://scenes/screens/splash_screen.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
-TransitionScreen="*res://scenes/screens/transition_screen.tscn"
 Music="*res://scenes/globals/global_music.tscn"
 SaveLoad="*res://scenes/globals/save_load.tscn"
+TransitionScreen="*res://scenes/screens/transition_screen.tscn"
 
 [display]
 

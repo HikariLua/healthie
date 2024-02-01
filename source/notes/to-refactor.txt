@@ -1,0 +1,3 @@
+MainHud.cs - use signal to update the ui instead of process
+TransitionScreen.cs - make projectiles be shot inside the current scne tree
+	instead of the root, making deleteProjectiles function unecessary.
