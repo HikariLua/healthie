@@ -3,82 +3,83 @@ using Godot.Collections;
 
 public partial class JunkFood : Area2D
 {
-    [Export] private Sprite2D sprite;
-    [Export] private bool isRandom = true;
+	[Export] public double Speed = 0;
+	[Export] public Vector2 Direction = Vector2.Zero;
 
-    [Export] private double speed = 0;
-    [Export] private Vector2 direction = Vector2.Zero;
-    [Export] private VisibleOnScreenNotifier2D visibleScreen;
+	[Export] private Sprite2D sprite;
+	[Export] private bool isRandom = true;
 
-    private Timer timer = new Timer();
-    private int maxFrames;
+	[Export] private VisibleOnScreenNotifier2D visibleScreen;
 
-    public override void _Ready()
-    {
-        maxFrames = sprite.Hframes * sprite.Vframes;
+	private Timer timer = new Timer();
+	private int maxFrames;
 
-        this.AddChild(timer);
-        timer.OneShot = true;
-        timer.Timeout += selfDestroy;
+	public override void _Ready()
+	{
+		maxFrames = sprite.Hframes * sprite.Vframes;
 
-        visibleScreen.ScreenExited += onVisibleOnScreenExited;
-        this.AreaEntered += onArea2DEntered;
+		this.AddChild(timer);
+		timer.OneShot = true;
+		timer.Timeout += selfDestroy;
 
-        if (isRandom)
-        {
-            sprite.Frame = GD.RandRange(0, maxFrames - 1);
-        }
+		visibleScreen.ScreenExited += onVisibleOnScreenExited;
+		this.AreaEntered += onArea2DEntered;
 
-        if (speed == 0)
-        {
-            this.SetPhysicsProcess(false);
-        }
-        else
-        {
-            timer.Start(10);
-        }
-    }
+		if (isRandom)
+		{
+			sprite.Frame = GD.RandRange(0, maxFrames - 1);
+		}
 
-    public override void _PhysicsProcess(double delta)
-    {
-        this.Position += (direction * (float)speed) * (float)delta;
+		if (Speed == 0)
+		{
+			this.SetPhysicsProcess(false);
+		}
+		else
+		{
+			timer.Start(10);
+		}
+	}
 
-        if (HasOverlappingBodies())
-        {
-            Array<Node2D> bodies = GetOverlappingBodies();
+	public override void _PhysicsProcess(double delta)
+	{
+		this.Position += (Direction * (float)Speed) * (float)delta;
 
-            checkCannon(bodies);
-        }
-    }
+		if (HasOverlappingBodies())
+		{
+			Array<Node2D> bodies = GetOverlappingBodies();
 
-    private void checkCannon(Array<Node2D> bodies)
-    {
-        foreach (Node2D body in bodies)
-        {
-            if (!body.IsInGroup("cannon"))
-            {
-                selfDestroy();
-                return;
-            }
-        }
-    }
+			checkCannon(bodies);
+		}
+	}
 
-    private void selfDestroy()
-    {
-        timer.Stop();
-        QueueFree();
-    }
+	private void checkCannon(Array<Node2D> bodies)
+	{
+		foreach (Node2D body in bodies)
+		{
+			if (!body.IsInGroup("cannon"))
+			{
+				selfDestroy();
+				return;
+			}
+		}
+	}
 
-    private void onArea2DEntered(Area2D _area)
-    {
-        selfDestroy();
-    }
+	private void selfDestroy()
+	{
+		timer.Stop();
+		QueueFree();
+	}
 
-    private void onVisibleOnScreenExited()
-    {
-        if (speed != 0)
-        {
-            selfDestroy();
-        }
-    }
+	private void onArea2DEntered(Area2D _area)
+	{
+		selfDestroy();
+	}
+
+	private void onVisibleOnScreenExited()
+	{
+		if (Speed != 0)
+		{
+			selfDestroy();
+		}
+	}
 }

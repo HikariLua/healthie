@@ -766,26 +766,14 @@ position = Vector2(318, 222)
 [node name="Enemy3" parent="Enemies" instance=ExtResource("8_ofmbq")]
 position = Vector2(243, 223)
 
-[node name="MotionComponent" parent="Enemies/Enemy3/Components" index="0"]
-looking_direction = Vector2(-1, 0)
-
 [node name="Enemy4" parent="Enemies" instance=ExtResource("8_ofmbq")]
 position = Vector2(276, 222)
 
 [node name="Enemy5" parent="Enemies" instance=ExtResource("8_ofmbq")]
 position = Vector2(352, 223)
 
-[node name="MotionComponent" parent="Enemies/Enemy5/Components" index="0"]
-looking_direction = Vector2(-1, 0)
-
 [node name="Enemy2" parent="Enemies" instance=ExtResource("9_1m2pb")]
 position = Vector2(626, 240)
-
-[node name="MotionComponent" parent="Enemies/Enemy2/Components" index="0"]
-looking_direction = Vector2(-1, 0)
-
-[node name="EnemyStateIdle01" parent="Enemies/Enemy2/StateMachine" index="0"]
-idle_duration = 1.0
 
 [node name="Enemy6" parent="Enemies" instance=ExtResource("13_7coo1")]
 position = Vector2(806, 223)
@@ -823,17 +811,8 @@ direction = Vector2(0, 1)
 [node name="Enemy13" parent="Enemies" instance=ExtResource("8_ofmbq")]
 position = Vector2(2785, 255)
 
-[node name="EnemyStateRoam01" parent="Enemies/Enemy13/StateMachine" index="2"]
-roam_duration = 1.0
-
 [node name="Enemy10" parent="Enemies" instance=ExtResource("9_1m2pb")]
 position = Vector2(1511, 271)
-
-[node name="MotionComponent" parent="Enemies/Enemy10/Components" index="0"]
-looking_direction = Vector2(-1, 0)
-
-[node name="EnemyStateIdle01" parent="Enemies/Enemy10/StateMachine" index="0"]
-idle_duration = 1.0
 
 [node name="FoodCannon8" parent="Enemies" instance=ExtResource("11_cmpgo")]
 position = Vector2(984, 148)
@@ -1001,41 +980,17 @@ position = Vector2(1400, 224)
 [node name="Enemy3" parent="." instance=ExtResource("9_1m2pb")]
 position = Vector2(2200, 192)
 
-[node name="MotionComponent" parent="Enemy3/Components" index="0"]
-looking_direction = Vector2(-1, 0)
-
 [node name="Enemy4" parent="." instance=ExtResource("9_1m2pb")]
 position = Vector2(3465, 208)
-
-[node name="MotionComponent" parent="Enemy4/Components" index="0"]
-looking_direction = Vector2(-1, 0)
-
-[node name="EnemyStateIdle01" parent="Enemy4/StateMachine" index="0"]
-idle_duration = 1.5
 
 [node name="Enemy5" parent="." instance=ExtResource("9_1m2pb")]
 position = Vector2(3738, 191)
 
-[node name="MotionComponent" parent="Enemy5/Components" index="0"]
-looking_direction = Vector2(-1, 0)
-
-[node name="EnemyStateIdle01" parent="Enemy5/StateMachine" index="0"]
-idle_duration = 0.8
-
 [node name="Enemy6" parent="." instance=ExtResource("9_1m2pb")]
 position = Vector2(4163, 225)
 
-[node name="MotionComponent" parent="Enemy6/Components" index="0"]
-looking_direction = Vector2(-1, 0)
-
-[node name="EnemyStateIdle01" parent="Enemy6/StateMachine" index="0"]
-idle_duration = 0.8
-
 [node name="Enemy7" parent="." instance=ExtResource("9_1m2pb")]
 position = Vector2(4054, 223)
-
-[node name="EnemyStateIdle01" parent="Enemy7/StateMachine" index="0"]
-idle_duration = 0.8
 
 [node name="PauseComponent" parent="." instance=ExtResource("14_rrmc6")]
 

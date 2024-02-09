@@ -140,4 +140,4 @@ libraries = {
 [connection signal="pressed" from="Control/VBoxContainer/ResumeButton" to="Control/VBoxContainer/ResumeButton" method="_on_pressed"]
 [connection signal="button_down" from="Control/VBoxContainer/MainMenuButton" to="Control/VBoxContainer/MainMenuButton" method="_on_button_down"]
 [connection signal="mouse_entered" from="Control/VBoxContainer/MainMenuButton" to="Control/VBoxContainer/MainMenuButton" method="_on_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/MainMenuButton" to="Control/VBoxContainer/MainMenuButton" method="_on_pressed" flags=18]
+[connection signal="pressed" from="Control/VBoxContainer/MainMenuButton" to="Control/VBoxContainer/MainMenuButton" method="_on_pressed"]

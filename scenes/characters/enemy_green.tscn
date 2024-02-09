@@ -1,19 +1,18 @@
-[gd_scene load_steps=29 format=3 uid="uid://dwaqa6splnpx3"]
+[gd_scene load_steps=28 format=3 uid="uid://dwaqa6splnpx3"]
 
 [ext_resource type="AudioStream" uid="uid://clk85h3yfnytp" path="res://audio/sfx/hurt.wav" id="1_ytfq3"]
 [ext_resource type="AudioStream" uid="uid://bwmkplw1cfbcb" path="res://audio/sfx/enemy_death.wav" id="2_1fcuj"]
 [ext_resource type="Texture2D" uid="uid://ccbx5f6hq7ay0" path="res://images/characters/enemies/enemy_green.png" id="3_cjfbk"]
 [ext_resource type="Texture2D" uid="uid://bgdbdx2e4yk0q" path="res://images/effects/explosion.png" id="4_rhxsu"]
-[ext_resource type="Script" path="res://source/triggers/body_hitbox.gd" id="5_ewjbm"]
-[ext_resource type="Script" path="res://source/characters/components/motion_component.gd" id="6_tt1jm"]
-[ext_resource type="Script" path="res://source/characters/components/health_component.gd" id="7_2hr4r"]
-[ext_resource type="Script" path="res://source/characters/components/combat_component.gd" id="8_62ty0"]
-[ext_resource type="Script" path="res://source/states/state_machine.gd" id="9_sb58f"]
-[ext_resource type="Script" path="res://source/states/enemy/enemy_state_idle_01.gd" id="10_m6hni"]
-[ext_resource type="Script" path="res://source/states/enemy/enemy_state_die_01.gd" id="11_pabb4"]
-[ext_resource type="Script" path="res://source/states/enemy/enemy_state_roam_01.gd" id="12_kw5gw"]
+[ext_resource type="Script" path="res://source/triggers/Hitbox.cs" id="5_5wodw"]
+[ext_resource type="Script" path="res://source/characters/components/MotionComponent.cs" id="6_0hxbl"]
+[ext_resource type="Script" path="res://source/characters/components/HealthComponent.cs" id="7_cxgmg"]
+[ext_resource type="Script" path="res://source/states/StateMachine.cs" id="8_bnmbj"]
+[ext_resource type="Script" path="res://source/states/enemy/EnemyStateIdle01.cs" id="9_5xxc1"]
+[ext_resource type="Script" path="res://source/states/enemy/EnemyStateDie01.cs" id="10_u6kny"]
+[ext_resource type="Script" path="res://source/states/enemy/EnemyStateRoam01.cs" id="11_ae6ot"]
+[ext_resource type="Script" path="res://source/triggers/SpeedTrigger.cs" id="13_loug7"]
 [ext_resource type="PackedScene" uid="uid://dimfi5n0yonvs" path="res://scenes/collectibles/junk_food.tscn" id="13_yxu3u"]
-[ext_resource type="Script" path="res://source/triggers/speed_trigger.gd" id="14_45lip"]
 
 [sub_resource type="Animation" id="Animation_0uegi"]
 length = 0.001
@@ -241,10 +240,10 @@ collision_mask = 17
 metadata/_edit_group_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle-right"
 libraries = {
 "": SubResource("AnimationLibrary_wdy5d")
 }
+autoplay = "idle-right"
 
 [node name="EffectAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -281,12 +280,12 @@ hframes = 5
 position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_knebj")
 
-[node name="BodyHitbox" type="Area2D" parent="." node_paths=PackedStringArray("combat")]
+[node name="BodyHitbox" type="Area2D" parent="."]
 position = Vector2(0, -5)
 collision_layer = 64
 collision_mask = 4
-script = ExtResource("5_ewjbm")
-combat = NodePath("../Components/CombatComponent")
+script = ExtResource("5_5wodw")
+Damage = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyHitbox"]
 position = Vector2(0, -0.5)
@@ -306,52 +305,47 @@ debug_color = Color(0, 0.0745098, 0.662745, 0.419608)
 [node name="Components" type="Node" parent="."]
 
 [node name="MotionComponent" type="Node" parent="Components"]
-script = ExtResource("6_tt1jm")
-max_speed = 46.0
-max_fall_speed = 500.0
+script = ExtResource("6_0hxbl")
+MaxSpeed = 46.0
 
-[node name="HealthComponent" type="Node" parent="Components"]
-script = ExtResource("7_2hr4r")
-max_health = 3
+[node name="HealthComponent" type="Node" parent="Components" node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("7_cxgmg")
+MaxHealth = 3
+hurtbox = NodePath("../../Hurtbox")
 
-[node name="CombatComponent" type="Node" parent="Components" node_paths=PackedStringArray("motion", "health")]
-script = ExtResource("8_62ty0")
-motion = NodePath("../MotionComponent")
-health = NodePath("../HealthComponent")
-attack_damage = 0
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("InitialState")]
+script = ExtResource("8_bnmbj")
+InitialState = NodePath("EnemyStateRoam01")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("9_sb58f")
-initial_state = NodePath("EnemyStateIdle01")
-
-[node name="EnemyStateIdle01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "idle_timer", "animation_player")]
-script = ExtResource("10_m6hni")
-character_body = NodePath("../..")
+[node name="EnemyStateIdle01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "motion", "idleTimer", "animationPlayer")]
+script = ExtResource("9_5xxc1")
+character = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
-idle_duration = 1.0
-idle_timer = NodePath("IdleTimer")
-animation_player = NodePath("../../AnimationPlayer")
+idleTimer = NodePath("IdleTimer")
+idleDuration = 1.0
+animationPlayer = NodePath("../../AnimationPlayer")
 
 [node name="IdleTimer" type="Timer" parent="StateMachine/EnemyStateIdle01"]
 one_shot = true
 
-[node name="EnemyStateDie01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "health", "hurt_sfx", "die_sfx", "hurtbox_collision", "hitbox_collision", "effect_player", "animation_player")]
-script = ExtResource("11_pabb4")
-character_body = NodePath("../..")
+[node name="EnemyStateDie01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "health", "hurtSfx", "dieSfx", "hurtboxCollision", "hitboxCollision", "effectPlayer", "animationPlayer")]
+script = ExtResource("10_u6kny")
+character = NodePath("../..")
 health = NodePath("../../Components/HealthComponent")
-hurt_sfx = NodePath("../../Sfx/Hurt")
-die_sfx = NodePath("../../Sfx/Die")
-hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
-hitbox_collision = NodePath("../../BodyHitbox/CollisionShape2D")
-effect_player = NodePath("../../EffectAnimationPlayer")
-animation_player = NodePath("../../AnimationPlayer")
+hurtSfx = NodePath("../../Sfx/Hurt")
+dieSfx = NodePath("../../Sfx/Die")
+hurtboxCollision = NodePath("../../Hurtbox/CollisionShape2D")
+hitboxCollision = NodePath("../../BodyHitbox/CollisionShape2D")
+effectPlayer = NodePath("../../EffectAnimationPlayer")
+animationPlayer = NodePath("../../AnimationPlayer")
 
-[node name="EnemyStateRoam01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "roam_timer", "animation_player")]
-script = ExtResource("12_kw5gw")
-character_body = NodePath("../..")
+[node name="EnemyStateRoam01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "motion", "roamTimer", "animationPlayer")]
+script = ExtResource("11_ae6ot")
+character = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
-roam_timer = NodePath("RoamTimer")
-animation_player = NodePath("../../AnimationPlayer")
+roamTimer = NodePath("RoamTimer")
+roamDuration = 3.0
+animationPlayer = NodePath("../../AnimationPlayer")
 
 [node name="RoamTimer" type="Timer" parent="StateMachine/EnemyStateRoam01"]
 one_shot = true
@@ -365,22 +359,21 @@ position = Vector2(10, -6)
 [node name="StandardFood3" parent="." instance=ExtResource("13_yxu3u")]
 position = Vector2(-12, -6)
 
-[node name="Speeder" type="Area2D" parent="." node_paths=PackedStringArray("motion", "animation_player")]
+[node name="Speeder" type="Area2D" parent="." node_paths=PackedStringArray("motion", "animationPlayer")]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("14_45lip")
+script = ExtResource("13_loug7")
 motion = NodePath("../Components/MotionComponent")
-animation_player = NodePath("../AnimationPlayer")
-speed_scale = 3.3
+animationPlayer = NodePath("../AnimationPlayer")
+speedScale = 3.3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Speeder"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_ndvcy")
 
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/EnemyStateDie01" method="_on_animation_player_animation_finished" flags=18]
-[connection signal="area_entered" from="Hurtbox" to="Components/HealthComponent" method="_on_hurtbox_area_entered" flags=18]
-[connection signal="damage_taken" from="Components/HealthComponent" to="StateMachine/EnemyStateDie01" method="_on_health_component_damage_taken" flags=18]
-[connection signal="timeout" from="StateMachine/EnemyStateIdle01/IdleTimer" to="StateMachine/EnemyStateIdle01" method="_on_idle_timer_timeout" flags=18]
-[connection signal="timeout" from="StateMachine/EnemyStateRoam01/RoamTimer" to="StateMachine/EnemyStateRoam01" method="_on_roam_timer_timeout" flags=18]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/EnemyStateDie01" method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="Hurtbox" to="Components/HealthComponent" method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="StateMachine/EnemyStateIdle01/IdleTimer" to="StateMachine/EnemyStateIdle01" method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="StateMachine/EnemyStateRoam01/RoamTimer" to="StateMachine/EnemyStateRoam01" method="_on_roam_timer_timeout"]
 [connection signal="body_entered" from="Speeder" to="Speeder" method="_on_body_entered"]
 [connection signal="body_exited" from="Speeder" to="Speeder" method="_on_body_exited"]

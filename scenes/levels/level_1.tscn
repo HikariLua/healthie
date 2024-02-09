@@ -1696,12 +1696,10 @@ direction = Vector2(0, 1)
 
 [node name="FoodCannon8" parent="Enemys" instance=ExtResource("14_dlasg")]
 position = Vector2(2711, 296)
-timer_duration = 1.5
 direction = Vector2(0, -1)
 
 [node name="FoodCannon9" parent="Enemys" instance=ExtResource("14_dlasg")]
 position = Vector2(2823, 280)
-timer_duration = 1.5
 delay = 1.0
 
 [node name="FoodCannon3" parent="Enemys" instance=ExtResource("14_dlasg")]
@@ -1736,12 +1734,6 @@ direction = Vector2(-1, -1)
 [node name="Enemy2" parent="Enemys" instance=ExtResource("14_cpspq")]
 position = Vector2(3539, 224)
 
-[node name="MotionComponent" parent="Enemys/Enemy2/Components" index="0"]
-looking_direction = Vector2(-1, 0)
-
-[node name="EnemyStateIdle01" parent="Enemys/Enemy2/StateMachine" index="0"]
-idle_duration = 0.8
-
 [node name="Enemy1" parent="Enemys" instance=ExtResource("14_kkl7x")]
 position = Vector2(671, 287)
 
@@ -1754,9 +1746,6 @@ position = Vector2(1323, 239)
 [node name="Enemy4" parent="Enemys" instance=ExtResource("14_kkl7x")]
 position = Vector2(792, 256)
 
-[node name="MotionComponent" parent="Enemys/Enemy4/Components" index="0"]
-looking_direction = Vector2(-1, 0)
-
 [node name="Enemy5" parent="Enemys" instance=ExtResource("16_8bgbf")]
 position = Vector2(1178, 285)
 
@@ -1766,9 +1755,6 @@ position = Vector2(2216, 239)
 [node name="AnimationPlayer" parent="Enemys/Enemy11" index="0"]
 root_node = NodePath("../../Enemy11")
 
-[node name="EnemyStateIdle01" parent="Enemys/Enemy11/StateMachine" index="0"]
-idle_duration = 0.8
-
 [node name="Enemy7" parent="Enemys" instance=ExtResource("16_8bgbf")]
 position = Vector2(1498, 287)
 
@@ -1777,12 +1763,6 @@ position = Vector2(2326, 254)
 
 [node name="AnimationPlayer" parent="Enemys/Enemy12" index="0"]
 root_node = NodePath("../../Enemy12")
-
-[node name="MotionComponent" parent="Enemys/Enemy12/Components" index="0"]
-looking_direction = Vector2(-1, 0)
-
-[node name="EnemyStateIdle01" parent="Enemys/Enemy12/StateMachine" index="0"]
-idle_duration = 1.5
 
 [node name="Enemy8" parent="Enemys" instance=ExtResource("16_8bgbf")]
 position = Vector2(1895, 290)
@@ -1802,16 +1782,11 @@ position = Vector2(3094, 256)
 [node name="AnimationPlayer" parent="Enemys/Enemy16" index="0"]
 root_node = NodePath("../../Enemy16")
 
-[node name="EnemyStateIdle01" parent="Enemys/Enemy16/StateMachine" index="0"]
-idle_duration = 0.6
-
 [node name="Enemy13" parent="Enemys" instance=ExtResource("16_8bgbf")]
 position = Vector2(2576, 287)
 
 [node name="EndStageTrigger" parent="." instance=ExtResource("13_uvihv")]
 position = Vector2(3608, 228)
-requierd_health = 75
-next_level_index = 2
 
 [node name="PauseComponent" parent="." instance=ExtResource("18_nvq1g")]
 

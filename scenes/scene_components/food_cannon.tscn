@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dt346spxrvjq"]
 
-[ext_resource type="Script" path="res://source/scenario_components/food_cannon.gd" id="1_w1ee6"]
+[ext_resource type="Script" path="res://source/scenario_components/FoodCannon.cs" id="1_kmb6l"]
 [ext_resource type="Texture2D" uid="uid://cjw6ir7mskmx4" path="res://images/scenario/components/cannon.png" id="2_1ayhc"]
 [ext_resource type="AudioStream" uid="uid://d23b55gb8m6p" path="res://audio/sfx/cannon.wav" id="2_sfgyh"]
 
@@ -45,11 +45,13 @@ _data = {
 "blink": SubResource("Animation_01hrl")
 }
 
-[node name="FoodCannon" type="StaticBody2D" node_paths=PackedStringArray("timer", "animation_player", "shoot_sfx") groups=["cannon"]]
-script = ExtResource("1_w1ee6")
+[node name="FoodCannon" type="StaticBody2D" node_paths=PackedStringArray("timer", "animationPlayer", "shootSfx") groups=["cannon"]]
+script = ExtResource("1_kmb6l")
 timer = NodePath("Timer")
-animation_player = NodePath("AnimationPlayer")
-shoot_sfx = NodePath("Sfx/Shoot")
+timerDuration = 2.0
+animationPlayer = NodePath("AnimationPlayer")
+shootSfx = NodePath("Sfx/Shoot")
+shootSpeed = 50.0
 metadata/_edit_group_ = true
 
 [node name="Sfx" type="Node2D" parent="."]

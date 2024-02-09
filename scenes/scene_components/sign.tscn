@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://nl67k57xsf82"]
 
-[ext_resource type="Script" path="res://source/scenario_components/sign.gd" id="1_5kjya"]
+[ext_resource type="Script" path="res://source/scenario_components/Sign.cs" id="1_k71ul"]
 [ext_resource type="Texture2D" uid="uid://dlsovikwltbjn" path="res://images/scenario/components/sign.png" id="2_ybswt"]
 [ext_resource type="AudioStream" uid="uid://bfxfeugjo4565" path="res://audio/sfx/sign_open.wav" id="3_ar5ll"]
 [ext_resource type="AudioStream" uid="uid://dkwpu1q7858l5" path="res://audio/sfx/sign_close.wav" id="4_dcwbk"]
@@ -62,16 +62,16 @@ _data = {
 "out": SubResource("Animation_kxudk")
 }
 
-[node name="Sign" type="Area2D" node_paths=PackedStringArray("text_label", "color_rect", "message_node", "animation_player", "open_sfx", "close_sfx")]
+[node name="Sign" type="Area2D" node_paths=PackedStringArray("textLabel", "colorRect", "messageNode", "animationPlayer", "openSfx", "closeSfx")]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("1_5kjya")
-text_label = NodePath("Message/Label")
-color_rect = NodePath("Message/ColorRect")
-message_node = NodePath("Message")
-animation_player = NodePath("AnimationPlayer")
-open_sfx = NodePath("Sfx/Open")
-close_sfx = NodePath("Sfx/Close")
+script = ExtResource("1_k71ul")
+textLabel = NodePath("Message/Label")
+colorRect = NodePath("Message/ColorRect")
+messageNode = NodePath("Message")
+animationPlayer = NodePath("AnimationPlayer")
+openSfx = NodePath("Sfx/Open")
+closeSfx = NodePath("Sfx/Close")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -103,10 +103,10 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "out"
 libraries = {
 "": SubResource("AnimationLibrary_5jp7k")
 }
+autoplay = "out"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8.5)

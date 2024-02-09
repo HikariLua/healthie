@@ -226,20 +226,20 @@ position = Vector2(238, 249)
 position = Vector2(811, 146)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform/AnimatableBody2D" index="2"]
-autoplay = "move"
 libraries = {
 "": SubResource("AnimationLibrary_sobot")
 }
+autoplay = "move"
 
 [node name="MovingPlatform2" parent="." instance=ExtResource("16_hvcem")]
 position = Vector2(814, 265)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform2/AnimatableBody2D" index="2"]
-autoplay = "move"
-speed_scale = 5.0
 libraries = {
 "": SubResource("AnimationLibrary_cnv2g")
 }
+autoplay = "move"
+speed_scale = 5.0
 
 [node name="EndStageTrigger" parent="." instance=ExtResource("18_flf16")]
 position = Vector2(722, 292)

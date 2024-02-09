@@ -80,10 +80,10 @@ texture = ExtResource("2_apj17")
 hframes = 13
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "float"
 libraries = {
 "": SubResource("AnimationLibrary_or2nw")
 }
+autoplay = "float"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_e6cjg")

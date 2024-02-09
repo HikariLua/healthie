@@ -407,10 +407,10 @@ volume_db = -5.0
 max_distance = 400.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle-right"
 libraries = {
 "": SubResource("AnimationLibrary_k6xty")
 }
+autoplay = "idle-right"
 
 [node name="EffectAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -530,6 +530,7 @@ script = ExtResource("20_0di30")
 character = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
 stunTimer = NodePath("StunTimer")
+stunDuration = 0.4
 hurtbox = NodePath("../../Hurtbox")
 animationPlayer = NodePath("../../AnimationPlayer")
 
