@@ -34,11 +34,6 @@ macos_debug/
 # Godot project settings backup files
 *godot_backup_*
 
-# GDExtension specific
-# GDExtension config files (can be generated or manually created)
-# Comment out if you want to version control these
-*.gdextension
-
 # Rust/godot-rust specific
 # Rust build artifacts
 target/
