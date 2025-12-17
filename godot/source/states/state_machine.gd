@@ -1,4 +1,3 @@
-class_name StateMachine
 extends Node
 
 ## A simple finite state machine to manage the behavior of complex objects

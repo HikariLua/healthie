@@ -1,4 +1,3 @@
-class_name State
 extends Node
 
 ## Base state class to control character's behavior
@@ -32,4 +31,3 @@ func on_enter(_message := {}) -> void:
 ## Executed when exited from the state
 func on_exit() -> void:
 	pass
-

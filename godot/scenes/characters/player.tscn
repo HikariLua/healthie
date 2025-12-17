@@ -1,17 +1,13 @@
-[gd_scene load_steps=46 format=3 uid="uid://6uo15x52gvv0"]
+[gd_scene load_steps=42 format=3 uid="uid://6uo15x52gvv0"]
 
 [ext_resource type="PackedScene" uid="uid://df3ksxfcx8i6y" path="res://scenes/screens/main_hud.tscn" id="1_mf63t"]
 [ext_resource type="AudioStream" uid="uid://d4fg7nnqss2uv" path="res://audio/sfx/jump.wav" id="2_c3aux"]
 [ext_resource type="PackedScene" uid="uid://cggqb75a8w8r" path="res://addons/debug_menu/debug_menu.tscn" id="2_uwlpo"]
 [ext_resource type="AudioStream" uid="uid://ypdhminedmjt" path="res://audio/sfx/player_shoot.wav" id="3_mhfsw"]
 [ext_resource type="AudioStream" uid="uid://c87nh20kvu2t5" path="res://audio/sfx/death.wav" id="4_iqkos"]
-[ext_resource type="Script" uid="uid://dxkka2rnnxla2" path="res://source/states/state_machine.gd" id="4_o0l3m"]
 [ext_resource type="AudioStream" uid="uid://dfxg5rshi8rj3" path="res://audio/sfx/pickup.wav" id="5_ru0ta"]
 [ext_resource type="Shader" uid="uid://dc8hobl1uykrw" path="res://resources/shaders/blink.gdshader" id="6_bp27n"]
 [ext_resource type="Texture2D" uid="uid://sldf11gtrdbv" path="res://images/characters/player/little_fox.png" id="7_t686d"]
-[ext_resource type="Script" uid="uid://gurfc36w5s1n" path="res://source/characters/components/motion_component.gd" id="8_s2mg2"]
-[ext_resource type="Script" uid="uid://8qucdc4r43jw" path="res://source/characters/components/health_component.gd" id="9_1ku18"]
-[ext_resource type="Script" uid="uid://0kum0jfxvq63" path="res://source/characters/components/combat_component.gd" id="10_n04hy"]
 [ext_resource type="Script" uid="uid://crmr0w8lu76dx" path="res://source/characters/components/collectible_component.gd" id="11_vn30s"]
 [ext_resource type="Script" uid="uid://bvysvii7myjxb" path="res://source/states/player/player_state_idle.gd" id="13_o13sq"]
 [ext_resource type="Script" uid="uid://cd5ms87ij6tov" path="res://source/states/player/player_state_attack.gd" id="14_lkmt6"]
@@ -454,74 +450,71 @@ debug_color = Color(0, 0.0745098, 0.662745, 0.419608)
 
 [node name="Components" type="Node" parent="."]
 
-[node name="MotionComponent" type="Node" parent="Components"]
-script = ExtResource("8_s2mg2")
+[node name="MotionComponent" type="MotionComponent" parent="Components"]
 
 [node name="HealthComponent" type="Node" parent="Components"]
-script = ExtResource("9_1ku18")
 
-[node name="CombatComponent" type="Node" parent="Components" node_paths=PackedStringArray("motion")]
-script = ExtResource("10_n04hy")
-motion = NodePath("../MotionComponent")
+[node name="CombatComponent" type="Node" parent="Components"]
 
 [node name="CollectibleComponent" type="Node" parent="Components" node_paths=PackedStringArray("sequence_timer", "pickup_sfx", "effect", "state_machine")]
 script = ExtResource("11_vn30s")
 sequence_timer = NodePath("SequenceTimer")
 pickup_sfx = NodePath("../../Sfx/Pickup")
 effect = NodePath("../../EffectAnimationPlayer")
-state_machine = NodePath("../../StateMachine")
+state_machine = NodePath("")
 
 [node name="SequenceTimer" type="Timer" parent="Components/CollectibleComponent"]
 one_shot = true
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_o0l3m")
-initial_state = NodePath("PlayerStateIdle")
+[node name="StateMachine" type="StateMachine" parent="." node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("")
 
-[node name="PlayerStateIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion")]
+[node name="PlayerStateIdle" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "animation_player", "motion", "state_machine")]
 script = ExtResource("13_o13sq")
 character_body = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
 motion = NodePath("../../Components/MotionComponent")
+state_machine = NodePath("..")
 
-[node name="PlayerStateAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "attack_sfx", "motion", "combat")]
+[node name="PlayerStateAttack" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "attack_sfx", "motion", "combat")]
 script = ExtResource("14_lkmt6")
 character_body = NodePath("../..")
 attack_sfx = NodePath("../../Sfx/Attack")
 motion = NodePath("../../Components/MotionComponent")
 combat = NodePath("../../Components/CombatComponent")
 
-[node name="PlayerStateAttackAir" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "attack_sfx", "motion", "combat")]
+[node name="PlayerStateAttackAir" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "attack_sfx", "motion", "combat")]
 script = ExtResource("20_in0xa")
 character_body = NodePath("../..")
 attack_sfx = NodePath("../../Sfx/Attack")
-motion = NodePath("../../Components/MotionComponent")
+motion = NodePath("")
 combat = NodePath("../../Components/CombatComponent")
 
-[node name="PlayerStateRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion")]
+[node name="PlayerStateRun" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion")]
 script = ExtResource("15_ln5kd")
 character_body = NodePath("../..")
-motion = NodePath("../../Components/MotionComponent")
+motion = NodePath("")
 
-[node name="PlayerStateFall" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "ray_casts_group", "motion", "coyote_timer")]
+[node name="PlayerStateFall" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "ray_casts_group", "motion", "coyote_timer")]
 script = ExtResource("16_g3jao")
 character_body = NodePath("../..")
 ray_casts_group = NodePath("../../RayCasts")
-motion = NodePath("../../Components/MotionComponent")
+motion = NodePath("")
 coyote_timer = NodePath("CoyoteTimer")
 
 [node name="CoyoteTimer" type="Timer" parent="StateMachine/PlayerStateFall"]
 one_shot = true
 
-[node name="PlayerStateJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "jump_sfx", "motion")]
+[node name="PlayerStateJump" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "jump_sfx", "motion")]
 script = ExtResource("17_3wf12")
 character_body = NodePath("../..")
 jump_sfx = NodePath("../../Sfx/Jump")
-motion = NodePath("../../Components/MotionComponent")
+motion = NodePath("")
 
 [node name="JumpTimer" type="Timer" parent="StateMachine/PlayerStateJump"]
 one_shot = true
 
-[node name="PlayerStateStun" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "effect_animation_player", "stun_timer", "hurtbox", "invincibility_timer")]
+[node name="PlayerStateStun" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "effect_animation_player", "stun_timer", "hurtbox", "invincibility_timer")]
 script = ExtResource("18_bbui5")
 character_body = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
@@ -539,7 +532,7 @@ one_shot = true
 [node name="InvencibilityTimer" type="Timer" parent="StateMachine/PlayerStateStun"]
 one_shot = true
 
-[node name="PlayerStateDie" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "health", "die_sfx", "hurtbox_collision", "collectible_collision", "collectible")]
+[node name="PlayerStateDie" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "health", "die_sfx", "hurtbox_collision", "collectible_collision", "collectible")]
 script = ExtResource("19_e5t7l")
 character_body = NodePath("../..")
 motion = NodePath("../../Components/MotionComponent")
@@ -570,11 +563,5 @@ target_position = Vector2(0, 10)
 position = Vector2(-4, 0)
 target_position = Vector2(0, 10)
 
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/PlayerStateAttack" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/PlayerStateAttackAir" method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Interactbox" to="Components/CollectibleComponent" method="_on_interactbox_area_entered"]
-[connection signal="area_entered" from="Hurtbox" to="StateMachine/PlayerStateStun" method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="Components/CollectibleComponent/SequenceTimer" to="Components/CollectibleComponent" method="_on_sequence_timer_timeout"]
-[connection signal="timeout" from="StateMachine/PlayerStateJump/JumpTimer" to="StateMachine/PlayerStateJump" method="_on_jump_timer_timeout"]
-[connection signal="timeout" from="StateMachine/PlayerStateStun/StunTimer" to="StateMachine/PlayerStateStun" method="_on_stun_timer_timeout"]
-[connection signal="timeout" from="StateMachine/PlayerStateStun/InvencibilityTimer" to="StateMachine/PlayerStateStun" method="_on_invencibility_timer_timeout"]
