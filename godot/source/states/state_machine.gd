@@ -34,4 +34,3 @@ func transition_state_to(target_state: String, message := {}) -> bool:
 	active_state.on_enter(message)
 
 	return true
-

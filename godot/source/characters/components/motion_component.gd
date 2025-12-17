@@ -64,4 +64,3 @@ func two_direction_animation(
 	assert(animation_player.has_animation(new_animation))
 
 	animation_player.play(new_animation)
-
