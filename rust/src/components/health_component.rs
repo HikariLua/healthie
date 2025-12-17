@@ -38,7 +38,7 @@ impl HealthComponent {
 
     #[func]
     fn take_damage(&mut self, attacker_hitbox: Gd<Area2D>) {
-        let mut previous_health = self.health_points;
+        let previous_health = self.health_points;
         //self.health_points = self.health_points - attacker_hitbox.damage;
 
         self.base_mut().emit_signal(

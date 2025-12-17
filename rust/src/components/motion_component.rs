@@ -1,4 +1,4 @@
-use godot::classes::{AnimationPlayer, CharacterBody2D, Input, Node, ProjectSettings};
+use godot::classes::{AnimationPlayer, CharacterBody2D, Input, ProjectSettings};
 use godot::global::move_toward;
 use godot::prelude::*;
 
@@ -31,7 +31,6 @@ pub struct MotionComponent {
 
     #[var]
     gravity: f64,
-
 }
 
 #[godot_api]
@@ -58,7 +57,7 @@ impl MotionComponent {
             new_input_direction.y = if new_input_direction.y > 0.0 { 1.0 } else { -1.0 };
         }
 
-        new_input_direction
+        return new_input_direction
     }
 
     // DESSA FORMA NÃO MUDA O CAMPO, APENAS RETORNA O VALOR
@@ -89,7 +88,13 @@ impl MotionComponent {
         let mut suffix = if self.looking_direction.x < 0.0 { "-left" } else { "-right" };
         let mut new_animation = animation_prefix.to_string() + suffix;
         
-        
-        
+
+        if new_animation == String::from(animation_player.get_current_animation()) {
+            return;
+        }
+
+        let mut new_animation = &new_animation;
+
+        animation_player.play_ex().name(new_animation).done();
     }
 }

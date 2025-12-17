@@ -31,21 +31,21 @@ impl INode2D for StateMachine {
 #[godot_api]
 impl StateMachine {
     #[func]
-    fn transition_state(&mut self, target_state: Gd<State>) {
+    pub fn transition_state(&mut self, target_state: Gd<State>) {
         self.active_state.bind_mut().on_exit();
         self.active_state = target_state;
         self.active_state.bind_mut().on_enter();
     }
 
     #[func]
-    fn transition_state_with_message(&mut self, target_state: Gd<State>, message: VarDictionary) {
+    pub fn transition_state_with_message(&mut self, target_state: Gd<State>, message: VarDictionary) {
         self.active_state.bind_mut().on_exit();
         self.active_state = target_state;
         self.active_state.bind_mut().on_enter_with_message(message);
     }
 
     #[func]
-    fn check_transitions(&mut self) {
+    pub fn check_transitions(&mut self) {
         let transitions = self.active_state.bind().transitions.clone();
 
         for (state_key, condition_value) in transitions.iter_shared() {
