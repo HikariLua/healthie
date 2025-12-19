@@ -24,6 +24,10 @@ TransitionScreen="*res://scenes/screens/transition_screen.tscn"
 Music="*res://scenes/globals/global_music.tscn"
 SaveLoad="*res://scenes/globals/save_load.tscn"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+
 [display]
 
 window/size/viewport_width=256

@@ -1,13 +1,13 @@
 [gd_scene load_steps=42 format=3 uid="uid://6uo15x52gvv0"]
 
 [ext_resource type="PackedScene" uid="uid://df3ksxfcx8i6y" path="res://scenes/screens/main_hud.tscn" id="1_mf63t"]
-[ext_resource type="AudioStream" uid="uid://d4fg7nnqss2uv" path="res://audio/sfx/jump.wav" id="2_c3aux"]
+[ext_resource type="AudioStream" uid="uid://cu0jfti2ef27i" path="res://audio/sfx/jump.wav" id="2_c3aux"]
 [ext_resource type="PackedScene" uid="uid://cggqb75a8w8r" path="res://addons/debug_menu/debug_menu.tscn" id="2_uwlpo"]
-[ext_resource type="AudioStream" uid="uid://ypdhminedmjt" path="res://audio/sfx/player_shoot.wav" id="3_mhfsw"]
-[ext_resource type="AudioStream" uid="uid://c87nh20kvu2t5" path="res://audio/sfx/death.wav" id="4_iqkos"]
-[ext_resource type="AudioStream" uid="uid://dfxg5rshi8rj3" path="res://audio/sfx/pickup.wav" id="5_ru0ta"]
+[ext_resource type="AudioStream" uid="uid://bgnqq1cuhn0p1" path="res://audio/sfx/player_shoot.wav" id="3_mhfsw"]
+[ext_resource type="AudioStream" uid="uid://cnjjpqra0s4sf" path="res://audio/sfx/death.wav" id="4_iqkos"]
+[ext_resource type="AudioStream" uid="uid://c1lrvcmdoxiac" path="res://audio/sfx/pickup.wav" id="5_ru0ta"]
 [ext_resource type="Shader" uid="uid://dc8hobl1uykrw" path="res://resources/shaders/blink.gdshader" id="6_bp27n"]
-[ext_resource type="Texture2D" uid="uid://sldf11gtrdbv" path="res://images/characters/player/little_fox.png" id="7_t686d"]
+[ext_resource type="Texture2D" uid="uid://dwiy5tkluhm06" path="res://images/characters/player/little_fox.png" id="7_t686d"]
 [ext_resource type="Script" uid="uid://crmr0w8lu76dx" path="res://source/characters/components/collectible_component.gd" id="11_vn30s"]
 [ext_resource type="Script" uid="uid://bvysvii7myjxb" path="res://source/states/player/player_state_idle.gd" id="13_o13sq"]
 [ext_resource type="Script" uid="uid://cd5ms87ij6tov" path="res://source/states/player/player_state_attack.gd" id="14_lkmt6"]
@@ -461,69 +461,101 @@ script = ExtResource("11_vn30s")
 sequence_timer = NodePath("SequenceTimer")
 pickup_sfx = NodePath("../../Sfx/Pickup")
 effect = NodePath("../../EffectAnimationPlayer")
-state_machine = NodePath("")
+state_machine = NodePath("../../StateMachine")
 
 [node name="SequenceTimer" type="Timer" parent="Components/CollectibleComponent"]
 one_shot = true
 
 [node name="StateMachine" type="StateMachine" parent="." node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("")
+initial_state = NodePath("PlayerStateIdle")
 
-[node name="PlayerStateIdle" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "animation_player", "motion", "state_machine")]
+[node name="PlayerStateIdle" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "animation_player", "state_machine", "motion", "jump_state", "fall_state", "run_state", "attack_state")]
 script = ExtResource("13_o13sq")
 character_body = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
-motion = NodePath("../../Components/MotionComponent")
 state_machine = NodePath("..")
+motion = NodePath("../../Components/MotionComponent")
+jump_state = NodePath("../PlayerStateJump")
+fall_state = NodePath("../PlayerStateFall")
+run_state = NodePath("../PlayerStateRun")
+attack_state = NodePath("../PlayerStateAttack")
 
-[node name="PlayerStateAttack" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "attack_sfx", "motion", "combat")]
+[node name="PlayerStateAttack" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "animation_player", "state_machine", "attack_sfx", "motion", "combat", "idle_state")]
 script = ExtResource("14_lkmt6")
 character_body = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
+state_machine = NodePath("..")
 attack_sfx = NodePath("../../Sfx/Attack")
 motion = NodePath("../../Components/MotionComponent")
 combat = NodePath("../../Components/CombatComponent")
+idle_state = NodePath("../PlayerStateIdle")
 
-[node name="PlayerStateAttackAir" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "attack_sfx", "motion", "combat")]
+[node name="PlayerStateAttackAir" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "animation_player", "state_machine", "attack_sfx", "motion", "combat", "idle_state", "fall_state")]
 script = ExtResource("20_in0xa")
 character_body = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
+state_machine = NodePath("..")
 attack_sfx = NodePath("../../Sfx/Attack")
-motion = NodePath("")
+motion = NodePath("../../Components/MotionComponent")
 combat = NodePath("../../Components/CombatComponent")
+idle_state = NodePath("../PlayerStateIdle")
+fall_state = NodePath("../PlayerStateFall")
 
-[node name="PlayerStateRun" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion")]
+[node name="PlayerStateRun" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "animation_player", "state_machine", "motion", "jump_state", "fall_state", "idle_state", "attack_state")]
 script = ExtResource("15_ln5kd")
 character_body = NodePath("../..")
-motion = NodePath("")
+animation_player = NodePath("../../AnimationPlayer")
+state_machine = NodePath("..")
+motion = NodePath("../../Components/MotionComponent")
+jump_state = NodePath("../PlayerStateJump")
+fall_state = NodePath("../PlayerStateFall")
+idle_state = NodePath("../PlayerStateIdle")
+attack_state = NodePath("../PlayerStateAttack")
 
-[node name="PlayerStateFall" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "ray_casts_group", "motion", "coyote_timer")]
+[node name="PlayerStateFall" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "animation_player", "state_machine", "ray_casts_group", "coyote_timer", "motion", "jump_state", "attack_air_state", "run_state", "idle_state")]
 script = ExtResource("16_g3jao")
 character_body = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
+state_machine = NodePath("..")
 ray_casts_group = NodePath("../../RayCasts")
-motion = NodePath("")
 coyote_timer = NodePath("CoyoteTimer")
+motion = NodePath("../../Components/MotionComponent")
+jump_state = NodePath("../PlayerStateJump")
+attack_air_state = NodePath("../PlayerStateAttackAir")
+run_state = NodePath("../PlayerStateRun")
+idle_state = NodePath("../PlayerStateIdle")
 
 [node name="CoyoteTimer" type="Timer" parent="StateMachine/PlayerStateFall"]
 one_shot = true
 
-[node name="PlayerStateJump" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "jump_sfx", "motion")]
+[node name="PlayerStateJump" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "animation_player", "state_machine", "jump_sfx", "motion", "fall_state", "attack_air_state", "run_state", "idle_state")]
 script = ExtResource("17_3wf12")
 character_body = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
+state_machine = NodePath("..")
 jump_sfx = NodePath("../../Sfx/Jump")
-motion = NodePath("")
+motion = NodePath("../../Components/MotionComponent")
+fall_state = NodePath("../PlayerStateFall")
+attack_air_state = NodePath("../PlayerStateAttackAir")
+run_state = NodePath("../PlayerStateRun")
+idle_state = NodePath("../PlayerStateIdle")
 
 [node name="JumpTimer" type="Timer" parent="StateMachine/PlayerStateJump"]
 one_shot = true
 
-[node name="PlayerStateStun" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "effect_animation_player", "stun_timer", "hurtbox", "invincibility_timer")]
+[node name="PlayerStateStun" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "animation_player", "effect_animation_player", "state_machine", "stun_timer", "hurtbox", "invincibility_timer", "motion", "idle_state")]
 script = ExtResource("18_bbui5")
+invincibility_duration = 1.0
+knockback_distance = Vector2(12, -20)
 character_body = NodePath("../..")
-motion = NodePath("../../Components/MotionComponent")
+animation_player = NodePath("../../AnimationPlayer")
 effect_animation_player = NodePath("../../EffectAnimationPlayer")
+state_machine = NodePath("..")
 stun_timer = NodePath("StunTimer")
 hurtbox = NodePath("../../Hurtbox")
 invincibility_timer = NodePath("InvencibilityTimer")
-invincibility_duration = 1.0
-knockback_distance = Vector2(12, -20)
+motion = NodePath("../../Components/MotionComponent")
+idle_state = NodePath("../PlayerStateIdle")
 
 [node name="StunTimer" type="Timer" parent="StateMachine/PlayerStateStun"]
 wait_time = 0.5

@@ -1,4 +1,3 @@
-class_name CollectibleComponent
 extends Node
 
 @export var sequence_timer: Timer

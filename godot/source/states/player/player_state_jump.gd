@@ -2,41 +2,77 @@ class_name PlayerStateJump
 extends State
 
 ## Jump state executed when the player is on floor
+@export_group("Nodes")
 @export var character_body: CharacterBody2D
+@export var animation_player: AnimationPlayer
+@export var state_machine: StateMachine
 @export var jump_sfx: AudioStreamPlayer2D
 
-
+@export_group("Components")
 @export var motion: MotionComponent
+
+@export_group("States")
+@export var fall_state: PlayerStateFall
+@export var attack_air_state: PlayerStateAttackAir
+@export var run_state: PlayerStateRun
+@export var idle_state: PlayerStateIdle
 
 @onready var min_jump_velocity: float = motion.jump_velocity / 2
 
 
 func _ready() -> void:
 	assert(character_body != null)
+	assert(animation_player != null)
+	assert(state_machine != null)
+	assert(jump_sfx != null)
 	assert(motion != null)
+	assert(fall_state != null)
+	assert(run_state != null)
+	assert(idle_state != null)
+	assert(attack_air_state != null)
+
+	transitions = {
+		attack_air_state: attack_air_transition,
+		run_state: run_transition,
+		idle_state: idle_transition,
+		fall_state: fall_transition
+	}
 
 
-func on_enter(_message := {}) -> void:
-	motion.two_direction_animation(animation_player, "jump")
+func _on_enter() -> void:
+	MotionComponent.two_direction_animation(
+		animation_player,
+		motion.looking_direction.x,
+		"jump"
+	)
+
 	character_body.velocity.y = motion.jump_velocity
 
 	jump_sfx.play()
 
 
-func physics_update(delta: float) -> void:
-	motion.input_direction = motion.update_input_direction()
+func _physics_update(delta: float) -> void:
+	motion.input_direction = MotionComponent.update_input_direction()
 
-	motion.looking_direction = motion.set_looking_direction(
-		motion.input_direction
+	motion.looking_direction = motion.input_direction
+
+	MotionComponent.two_direction_animation(
+		animation_player,
+		motion.looking_direction.x,
+		"jump"
 	)
 
-	motion.two_direction_animation(animation_player, "jump")
-
-	character_body.velocity.x = motion.move_x(
-		motion.max_speed, motion.input_direction.x
+	character_body.velocity.x = MotionComponent.move_x(
+		motion.max_speed,
+		motion.input_direction.x
 	)
 
-	character_body.velocity.y = motion.apply_gravity(character_body, delta)
+	character_body.velocity.y = MotionComponent.apply_gravity(
+		character_body,
+		motion.max_fall_speed,
+		motion.gravity,
+		delta
+	)
 
 	if Input.is_action_just_released("jump"):
 		regulate_jump()
@@ -44,7 +80,6 @@ func physics_update(delta: float) -> void:
 	motion.was_on_floor = character_body.is_on_floor()
 
 	character_body.move_and_slide()
-	check_transitions()
 
 
 func regulate_jump() -> void:
@@ -52,15 +87,22 @@ func regulate_jump() -> void:
 		character_body.velocity.y = min_jump_velocity
 
 
-func check_transitions() -> void:
-	if Input.is_action_just_pressed("attack"):
-		state_machine.transition_state_to("PlayerStateAttackAir")
+func attack_air_transition() -> Array[Variant]:
+	var condition := Input.is_action_just_pressed("attack")
+	return [condition, null]
 
-	elif character_body.is_on_floor() and not motion.input_direction.x == 0:
-		state_machine.transition_state_to("PlayerStateRun")
 
-	elif character_body.is_on_floor():
-		state_machine.transition_state_to("PlayerStateIdle")
+func run_transition() -> Array[Variant]:
+	var condition := character_body.is_on_floor() and motion.input_direction.x != 0
+	return [condition, null]
 
-	elif character_body.velocity.y >= 0:
-		state_machine.transition_state_to("PlayerStateFall")
+
+func idle_transition() -> Array[Variant]:
+	var condition := character_body.is_on_floor()
+	return [condition, null]
+
+
+func fall_transition() -> Array[Variant]:
+	var condition := character_body.velocity.y >= 0
+
+	return [condition, null]

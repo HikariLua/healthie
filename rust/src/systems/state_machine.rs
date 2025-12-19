@@ -38,28 +38,64 @@ impl StateMachine {
     }
 
     #[func]
-    pub fn transition_state_with_message(&mut self, target_state: Gd<State>, message: VarDictionary) {
+    pub fn transition_state_with_message(
+        &mut self,
+        target_state: Gd<State>,
+        message: VarDictionary,
+    ) {
         self.active_state.bind_mut().on_exit();
         self.active_state = target_state;
         self.active_state.bind_mut().on_enter_with_message(message);
     }
 
+    // TODO: refatorar para aceitar dict{state: dict{callable: variant}} para suporte on_enter_with_message
     #[func]
     pub fn check_transitions(&mut self) {
         let transitions = self.active_state.bind().transitions.clone();
 
         for (state_key, condition_value) in transitions.iter_shared() {
             let target_state = state_key.try_to::<Gd<State>>().unwrap();
+            let transition_func = condition_value.try_to::<Callable>().unwrap();
 
-            let condition = condition_value.try_to::<Callable>().unwrap();
+            let result_array = transition_func
+                .callv(&varray![])
+                .try_to::<VarArray>()
+                .unwrap();
 
-            let result = condition.callv(&varray![]);
+            if result_array.len() < 2 {
+                panic!("Condition array must have 2 elements");
+            }
 
-            if let Ok(is_true) = result.try_to::<bool>() {
-                if is_true {
-                    self.transition_state(target_state);
-                    break;
+            let should_transition = match result_array.get(0).unwrap().try_to::<bool>() {
+                Ok(val) => val,
+                Err(_) => {
+                    panic!("First array element must be a boolean");
                 }
+            };
+
+            let message_variant = match result_array.get(1) {
+                Some(val) => val,
+                None => {
+                    panic!("Array must have length 2");
+                }
+            };
+
+            if should_transition {
+                if message_variant.is_nil() {
+                    self.transition_state(target_state);
+                    return;
+                }
+
+                match message_variant.try_to::<VarDictionary>() {
+                    Ok(message_dict) => {
+                        self.transition_state_with_message(target_state, message_dict);
+                    }
+                    Err(_) => {
+                        panic!("Second array element must be null or a Dictionary");
+                    }
+                }
+
+                break;
             }
         }
     }

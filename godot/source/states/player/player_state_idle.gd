@@ -3,48 +3,85 @@ extends State
 
 ## Idle sate executed when player is standing still on ground
 
+@export_group("Nodes")
 @export var character_body: CharacterBody2D
 @export var animation_player: AnimationPlayer
-@export var motion: MotionComponent
 @export var state_machine: StateMachine
 
+@export_group("Components")
+@export var motion: MotionComponent
+
+@export_group("States")
+@export var jump_state: PlayerStateJump
+@export var fall_state: PlayerStateFall
+@export var run_state: PlayerStateRun
+@export var attack_state: PlayerStateAttack
 
 
 func _ready() -> void:
 	assert(character_body != null)
+	assert(animation_player != null)
+	assert(state_machine != null)
 	assert(motion != null)
+	assert(jump_state != null)
+	assert(fall_state != null)
+	assert(run_state != null)
+	assert(attack_state != null)
+
+	transitions = {
+		jump_state: jump_transition,
+		fall_state: fall_transition,
+		run_state: run_transition,
+		attack_state: attack_transition
+	}
 
 
-func on_enter(_message := {}) -> void:
-	motion.two_direction_animation(animation_player, "idle")
-
-
-func physics_update(delta: float) -> void:
-	motion.input_direction = motion.update_input_direction()
-
-	motion.looking_direction = motion.set_new_looking_direction(
-		motion.input_direction
+func _on_enter() -> void:
+	MotionComponent.two_direction_animation(
+		animation_player,
+		motion.looking_direction.x,
+		"idle"
 	)
+
+
+func _physics_update(delta: float) -> void:
+	motion.input_direction = MotionComponent.update_input_direction()
+
+	motion.looking_direction = motion.input_direction
 
 	character_body.velocity.x = 0
 
-	character_body.velocity.y = motion.apply_gravity(character_body, delta)
+	character_body.velocity.y = MotionComponent.apply_gravity(
+		character_body,
+		motion.max_fall_speed,
+		motion.gravity,
+		delta
+	)
 
 	motion.was_on_floor = character_body.is_on_floor()
 
 	character_body.move_and_slide()
-	check_transitions()
+
+# TODO: fazer lógica de transição padrão
+func jump_transition() -> Array[Variant]:
+	var condition := (
+		Input.is_action_just_pressed("jump")
+		and character_body.is_on_floor()
+	)
+
+	return [condition, null]
 
 
-func check_transitions() -> void:
-	if Input.is_action_just_pressed("jump") and character_body.is_on_floor():
-		state_machine.transition_state("PlayerStateJump")
+func fall_transition() -> Array[Variant]:
+	var condition := character_body.velocity.y > 0
+	return [condition, null]
 
-	elif character_body.velocity.y > 0:
-		state_machine.transition_state("PlayerStateFall")
 
-	elif motion.input_direction.x:
-		state_machine.transition_state("PlayerStateRun")
+func run_transition() -> Array[Variant]:
+	var condition := motion.input_direction.x != 0
+	return [condition, null]
 
-	elif Input.is_action_just_pressed("attack"):
-		state_machine.transition_state("PlayerStateAttack")
+
+func attack_transition() -> Array[Variant]:
+	var condition := Input.is_action_just_pressed("attack")
+	return [condition, null]

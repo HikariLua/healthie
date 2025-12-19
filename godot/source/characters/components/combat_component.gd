@@ -1,4 +1,3 @@
-class_name CombatComponent
 extends Node
 
 @export var motion: MotionComponent
