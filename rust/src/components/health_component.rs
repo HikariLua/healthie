@@ -1,39 +1,58 @@
 use godot::classes::{Area2D, Node};
 use godot::prelude::*;
+use godot::tools::try_get_autoload_by_name;
+use crate::systems::SaveLoad;
 
 #[derive(GodotClass)]
 #[class(init, base=Node)]
 pub struct HealthComponent {
     #[export]
     #[init(val = 6)]
-    max_health: i64,
+    max_health: i32,
 
-    lifes: i64,
+    #[export]
+    hurtbox: OnEditor<Gd<Area2D>>,
 
-    health_points: i64,
+    #[export]    
+    #[var(get, set = set_lifes)]
+    lifes: i32,
 
+    #[var]
+    health_points: i32,
+        
     base: Base<Node>
 }
 
-/*#[godot_api]
-impl INode2D for HealthComponent {
-    >>>>>>- SAVELOAD -<<<<<<<<<
-}*/
+#[godot_api]
+impl INode for HealthComponent {
+    fn ready(&mut self) {
+        self.hurtbox.signals().area_entered().connect_other(self, Self::on_hurtbox_area_entered);
+        
+        /*let health_node = self.base().clone();
+        self.hurtbox.connect(
+            "area_entered", 
+            &Callable::from_object_method(&health_node, "on_hurtbox_area_entered")
+        );*/
+    }
+}
 
 #[godot_api]
 impl HealthComponent {
     #[signal]
-    fn damage_taken(previous_hp: i64, attacker_hitbox: Gd<Area2D>);
+    fn damage_taken(previous_hp: i32, attacker_hitbox: Gd<Area2D>);
     #[signal]
-    fn life_changed(previous_life: i64);
+    fn life_changed(previous_life: i32);
 
     #[func]
-    fn set_lifes(&mut self, new_lifes: i64) {
+    fn set_lifes(&mut self, new_lifes: i32) {
         self.base_mut().emit_signal("life_changed", &[Variant::from(new_lifes)]);
         
-        self.lifes = new_lifes
+        self.lifes = new_lifes;
 
-        // <<<<<<<- Lógica do SAVELOAD ->>>>>>>>
+        let mut saveload = try_get_autoload_by_name::<SaveLoad>("SaveLoadAutoload").unwrap();
+
+        saveload.bind_mut().save_to_next_scene("player".into(), vdict! {"lifes": self.lifes});
+
     }
 
     #[func]
@@ -47,7 +66,7 @@ impl HealthComponent {
     }
 
     #[func]
-    fn _on_hurtbox_area_entered(&mut self, area: Gd<Area2D>) {
+    fn on_hurtbox_area_entered(&mut self, area: Gd<Area2D>) {
         self.take_damage(area);
     }
 }
