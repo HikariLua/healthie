@@ -20,9 +20,9 @@ config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
-TransitionScreen="*res://scenes/screens/transition_screen.tscn"
-Music="*res://scenes/globals/global_music.tscn"
-SaveLoad="*res://scenes/globals/save_load.tscn"
+TransitionScreenAutoload="*res://scenes/screens/transition_screen.tscn"
+MusicAutoload="*res://scenes/globals/global_music.tscn"
+SaveLoadAutoload="*res://scenes/globals/save_load.tscn"
 
 [debug]
 

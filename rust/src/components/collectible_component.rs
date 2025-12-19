@@ -1,16 +1,16 @@
+use crate::systems::{State, StateMachine};
 use godot::classes::{AnimationPlayer, Area2D, AudioStreamPlayer2D, Timer};
 use godot::prelude::*;
-use crate::systems::{StateMachine, State};
 
 #[derive(GodotClass)]
 #[class(init, base=Node)]
 pub struct CollectibleComponent {
     #[export]
-    sequence_timer: OnEditor<Gd<Timer>>,
-
-    #[export]
     #[init(val = 5.0)]
     sequence_duration: f64,
+
+    #[export]
+    sequence_timer: OnEditor<Gd<Timer>>,
 
     #[export]
     pickup_sfx: OnEditor<Gd<AudioStreamPlayer2D>>,
@@ -27,9 +27,6 @@ pub struct CollectibleComponent {
     #[export]
     interactbox: OnEditor<Gd<Area2D>>,
 
-    #[export]
-    timer: OnEditor<Gd<Timer>>,
-
     #[var]
     #[init(val = 0)]
     collected_food: i32,
@@ -38,50 +35,59 @@ pub struct CollectibleComponent {
     #[init(val = 0)]
     collect_sequence: i32,
 
-    base: Base<Node>
+    base: Base<Node>,
 }
 
 #[godot_api]
 impl INode for CollectibleComponent {
-    fn ready (&mut self) {
+    fn ready(&mut self) {
         /*
         let collectible_node = self.base().clone();
-        
+
         self.interactbox.connect(
-            "area_entered", 
+            "area_entered",
             &Callable::from_object_method(&collectible_node, "on_interactbox_area_entered")
         );
 
         self.timer.connect(
-            "timeout", 
+            "timeout",
             &Callable::from_object_method(&collectible_node, "on_sequence_timer_timeout")
         );*/
 
-        self.interactbox.signals().area_entered().connect_other(self, Self::on_interactbox_area_entered);
+        self.interactbox
+            .signals()
+            .area_entered()
+            .connect_other(self, Self::on_interactbox_area_entered);
 
-        self.timer.signals().timeout().connect_other(self, Self::on_sequence_timer_timeout);
+        self.sequence_timer
+            .signals()
+            .timeout()
+            .connect_other(self, Self::on_sequence_timer_timeout);
     }
 }
 
 #[godot_api]
 impl CollectibleComponent {
     #[func]
-    fn on_interactbox_area_entered (&mut self, _area: Gd<Area2D>) {
+    fn on_interactbox_area_entered(&mut self, _area: Gd<Area2D>) {
         self.collected_food += 1;
         self.collect_sequence += 1;
         self.pickup_sfx.play();
         self.effect.play_ex().name("hit").done();
 
         if self.collect_sequence >= 7 {
-            self.state_machine.bind_mut().transition_state(self.player_state_die.clone());
-            return
+            self.state_machine
+                .bind_mut()
+                .transition_state(self.player_state_die.clone());
+            return;
         }
 
         self.sequence_timer.start();
     }
 
     #[func]
-    fn on_sequence_timer_timeout (&mut self) {
+    fn on_sequence_timer_timeout(&mut self) {
         self.collect_sequence = 0;
     }
 }
+

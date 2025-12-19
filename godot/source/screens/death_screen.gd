@@ -3,7 +3,7 @@ extends CanvasLayer
 
 
 func _ready() -> void:
-	TransitionScreen.connect("transition_complete", self_destroy)
+	TransitionScreenAutoload.connect("transition_complete", self_destroy)
 
 
 func show_lifes() -> void:

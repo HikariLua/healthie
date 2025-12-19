@@ -1,7 +1,7 @@
+use crate::systems::SaveLoad;
 use godot::classes::{Area2D, Node};
 use godot::prelude::*;
 use godot::tools::try_get_autoload_by_name;
-use crate::systems::SaveLoad;
 
 #[derive(GodotClass)]
 #[class(init, base=Node)]
@@ -13,24 +13,27 @@ pub struct HealthComponent {
     #[export]
     hurtbox: OnEditor<Gd<Area2D>>,
 
-    #[export]    
+    #[export]
     #[var(get, set = set_lifes)]
     lifes: i32,
 
     #[var]
     health_points: i32,
-        
-    base: Base<Node>
+
+    base: Base<Node>,
 }
 
 #[godot_api]
 impl INode for HealthComponent {
     fn ready(&mut self) {
-        self.hurtbox.signals().area_entered().connect_other(self, Self::on_hurtbox_area_entered);
-        
+        self.hurtbox
+            .signals()
+            .area_entered()
+            .connect_other(self, Self::on_hurtbox_area_entered);
+
         /*let health_node = self.base().clone();
         self.hurtbox.connect(
-            "area_entered", 
+            "area_entered",
             &Callable::from_object_method(&health_node, "on_hurtbox_area_entered")
         );*/
     }
@@ -45,14 +48,16 @@ impl HealthComponent {
 
     #[func]
     fn set_lifes(&mut self, new_lifes: i32) {
-        self.base_mut().emit_signal("life_changed", &[Variant::from(new_lifes)]);
-        
+        self.base_mut()
+            .emit_signal("life_changed", &[Variant::from(new_lifes)]);
+
         self.lifes = new_lifes;
 
         let mut saveload = try_get_autoload_by_name::<SaveLoad>("SaveLoadAutoload").unwrap();
 
-        saveload.bind_mut().save_to_next_scene("player".into(), vdict! {"lifes": self.lifes});
-
+        saveload
+            .bind_mut()
+            .save_to_next_scene("player".into(), vdict! {"lifes": self.lifes});
     }
 
     #[func]
@@ -61,8 +66,12 @@ impl HealthComponent {
         //self.health_points = self.health_points - attacker_hitbox.damage;
 
         self.base_mut().emit_signal(
-            "damage_taken", 
-            &[Variant::from(previous_health), Variant::from(attacker_hitbox)]);
+            "damage_taken",
+            &[
+                Variant::from(previous_health),
+                Variant::from(attacker_hitbox),
+            ],
+        );
     }
 
     #[func]
@@ -70,3 +79,4 @@ impl HealthComponent {
         self.take_damage(area);
     }
 }
+

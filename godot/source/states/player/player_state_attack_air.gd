@@ -50,9 +50,7 @@ func _on_enter() -> void:
 func _physics_update(delta: float) -> void:
 	motion.input_direction = MotionComponent.update_input_direction()
 
-	motion.looking_direction = motion.set_new_looking_direction(
-		motion.input_direction
-	)
+	motion.looking_direction = motion.input_direction
 
 	character_body.velocity.x = 0
 

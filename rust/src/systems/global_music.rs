@@ -1,4 +1,4 @@
-use godot::{classes::AudioStreamPlayer};
+use godot::classes::AudioStreamPlayer;
 use godot::prelude::*;
 
 #[derive(GodotClass)]
@@ -6,7 +6,6 @@ use godot::prelude::*;
 pub struct GlobalMusic {
     #[export]
     music_list: Array<Gd<AudioStreamPlayer>>,
-
 }
 
 #[godot_api]
@@ -19,10 +18,11 @@ impl GlobalMusic {
 
         for mut item in self.music_list.iter_shared() {
             if item == music {
-                continue
+                continue;
             }
 
             item.stop()
         }
     }
 }
+

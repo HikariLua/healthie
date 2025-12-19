@@ -8,7 +8,7 @@ signal fade_outed
 var player: CharacterBody2D
 
 
-func transition_to(path: String, tree) -> void:
+func transition_to(path: String, tree: SceneTree) -> void:
 	animation_player.play("fade_out")
 	
 	await animation_player.animation_finished
@@ -17,7 +17,7 @@ func transition_to(path: String, tree) -> void:
 	delete_projectiles()
 
 
-func transition_to_packed(path: PackedScene, tree) -> void:
+func transition_to_packed(path: PackedScene, tree: SceneTree) -> void:
 	animation_player.play("fade_out")
 	
 	await animation_player.animation_finished
@@ -35,7 +35,7 @@ func reload_scene(tree: SceneTree) -> void:
 
 
 func delete_projectiles() -> void:
-	var nodes = get_tree().get_nodes_in_group("projectile")
+	var nodes: Array[Node] = get_tree().get_nodes_in_group("projectile")
 	for node in nodes:
 		node.queue_free()
 

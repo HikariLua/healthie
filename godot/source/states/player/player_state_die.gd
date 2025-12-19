@@ -35,10 +35,10 @@ func _on_enter() -> void:
 	if health.lifes > 0:
 		health.lifes -= 1
 		get_tree().get_root().add_child(death_screen)
-		TransitionScreen.reload_scene(self.get_tree())
+		TransitionScreenAutoload.reload_scene(self.get_tree())
 		
 	else:
-		TransitionScreen.transition_to(
+		TransitionScreenAutoload.transition_to(
 			"res://scenes/screens/game_over_screen.tscn",
 			get_tree()
 		)

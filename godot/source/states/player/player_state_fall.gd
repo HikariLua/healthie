@@ -52,7 +52,7 @@ func _on_enter() -> void:
 
 
 func _on_enter_with_message(message: Dictionary) -> void:
-	assert(message.has(coyote), "message must include coyote key")
+	assert(message.has("coyote"), "message must include coyote key")
 	coyote = message["coyote"]
 	enter_fall()
 
@@ -66,7 +66,7 @@ func enter_fall() -> void:
 	)
 
 
-func physics_update(delta: float) -> void:
+func _physics_update(delta: float) -> void:
 	motion.input_direction = MotionComponent.update_input_direction()
 
 	motion.looking_direction = motion.input_direction

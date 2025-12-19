@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://6uo15x52gvv0"]
+[gd_scene load_steps=41 format=3 uid="uid://6uo15x52gvv0"]
 
 [ext_resource type="PackedScene" uid="uid://df3ksxfcx8i6y" path="res://scenes/screens/main_hud.tscn" id="1_mf63t"]
 [ext_resource type="AudioStream" uid="uid://cu0jfti2ef27i" path="res://audio/sfx/jump.wav" id="2_c3aux"]
@@ -8,7 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://c1lrvcmdoxiac" path="res://audio/sfx/pickup.wav" id="5_ru0ta"]
 [ext_resource type="Shader" uid="uid://dc8hobl1uykrw" path="res://resources/shaders/blink.gdshader" id="6_bp27n"]
 [ext_resource type="Texture2D" uid="uid://dwiy5tkluhm06" path="res://images/characters/player/little_fox.png" id="7_t686d"]
-[ext_resource type="Script" uid="uid://crmr0w8lu76dx" path="res://source/characters/components/collectible_component.gd" id="11_vn30s"]
 [ext_resource type="Script" uid="uid://bvysvii7myjxb" path="res://source/states/player/player_state_idle.gd" id="13_o13sq"]
 [ext_resource type="Script" uid="uid://cd5ms87ij6tov" path="res://source/states/player/player_state_attack.gd" id="14_lkmt6"]
 [ext_resource type="Script" uid="uid://dp5haq56q3enj" path="res://source/states/player/player_state_run.gd" id="15_ln5kd"]
@@ -452,16 +451,20 @@ debug_color = Color(0, 0.0745098, 0.662745, 0.419608)
 
 [node name="MotionComponent" type="MotionComponent" parent="Components"]
 
-[node name="HealthComponent" type="Node" parent="Components"]
+[node name="HealthComponent" type="HealthComponent" parent="Components" node_paths=PackedStringArray("hurtbox")]
+hurtbox = NodePath("../../Hurtbox")
 
-[node name="CombatComponent" type="Node" parent="Components"]
+[node name="CombatComponent" type="CombatComponent" parent="Components" node_paths=PackedStringArray("motion", "health")]
+motion = NodePath("../MotionComponent")
+health = NodePath("../HealthComponent")
 
-[node name="CollectibleComponent" type="Node" parent="Components" node_paths=PackedStringArray("sequence_timer", "pickup_sfx", "effect", "state_machine")]
-script = ExtResource("11_vn30s")
+[node name="CollectibleComponent" type="CollectibleComponent" parent="Components" node_paths=PackedStringArray("sequence_timer", "pickup_sfx", "effect", "state_machine", "player_state_die", "interactbox")]
 sequence_timer = NodePath("SequenceTimer")
 pickup_sfx = NodePath("../../Sfx/Pickup")
 effect = NodePath("../../EffectAnimationPlayer")
 state_machine = NodePath("../../StateMachine")
+player_state_die = NodePath("../../StateMachine/PlayerStateDie")
+interactbox = NodePath("../../Interactbox")
 
 [node name="SequenceTimer" type="Timer" parent="Components/CollectibleComponent"]
 one_shot = true
@@ -564,14 +567,16 @@ one_shot = true
 [node name="InvencibilityTimer" type="Timer" parent="StateMachine/PlayerStateStun"]
 one_shot = true
 
-[node name="PlayerStateDie" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "health", "die_sfx", "hurtbox_collision", "collectible_collision", "collectible")]
+[node name="PlayerStateDie" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "animation_player", "state_machine", "die_sfx", "hurtbox_collision", "collectible_collision", "health", "motion", "collectible")]
 script = ExtResource("19_e5t7l")
 character_body = NodePath("../..")
-motion = NodePath("../../Components/MotionComponent")
-health = NodePath("../../Components/HealthComponent")
+animation_player = NodePath("../../AnimationPlayer")
+state_machine = NodePath("..")
 die_sfx = NodePath("../../Sfx/Die")
 hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
 collectible_collision = NodePath("../../Interactbox/CollisionShape2D")
+health = NodePath("../../Components/HealthComponent")
+motion = NodePath("../../Components/MotionComponent")
 collectible = NodePath("../../Components/CollectibleComponent")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -594,6 +599,3 @@ target_position = Vector2(0, 10)
 [node name="JumpRayCastLeft" type="RayCast2D" parent="RayCasts"]
 position = Vector2(-4, 0)
 target_position = Vector2(0, 10)
-
-[connection signal="area_entered" from="Interactbox" to="Components/CollectibleComponent" method="_on_interactbox_area_entered"]
-[connection signal="timeout" from="Components/CollectibleComponent/SequenceTimer" to="Components/CollectibleComponent" method="_on_sequence_timer_timeout"]
