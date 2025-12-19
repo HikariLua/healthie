@@ -20,6 +20,7 @@ pub struct StateMachine {
 impl INode2D for StateMachine {
     fn ready(&mut self) {
         self.active_state = self.initial_state.clone();
+        self.active_state.bind_mut().on_enter();
     }
 
     fn physics_process(&mut self, delta: f64) {

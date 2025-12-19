@@ -1,7 +1,7 @@
 class_name PlayerStateIdle
 extends State
 
-## Idle sate executed when player is standing still on ground
+## Idle state executed when player is standing still on ground
 
 @export_group("Nodes")
 @export var character_body: CharacterBody2D

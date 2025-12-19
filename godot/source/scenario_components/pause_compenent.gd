@@ -24,4 +24,3 @@ func toggle_pause() -> void:
 
 		pause_screen = pause_screen_packed.instantiate()
 		get_tree().get_root().add_child(pause_screen)
-

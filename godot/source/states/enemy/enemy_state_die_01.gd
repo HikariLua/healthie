@@ -17,25 +17,25 @@ func _ready() -> void:
 	assert(health != null)
 
 
-func _on_health_component_damage_taken(_previous_hp, _attacker_hitbox) -> void:
-	effect_player.play("hurt")
-	hurt_sfx.play()
-	
-	if health.health_points <= 0:
-		state_machine.transition_state_to("EnemyStateDie01")
+#func _on_health_component_damage_taken(_previous_hp, _attacker_hitbox) -> void:
+	#effect_player.play("hurt")
+	#hurt_sfx.play()
+	#
+	#if health.health_points <= 0:
+		#state_machine.transition_state_to("EnemyStateDie01")
 
 
 func on_enter(_message := {}) -> void:
 	hurtbox_collision.set_deferred("disabled", true)
 	hitbox_collision.set_deferred("disabled", true)
 	die_sfx.play()
-	animation_player.play("die")
+	#animation_player.play("die")
 
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if not state_machine.active_state == self:
-		return
-	if not anim_name == "die":
-		return
-	
-	character_body.queue_free()
+#func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	#if not state_machine.active_state == self:
+		#return
+	#if not anim_name == "die":
+		#return
+	#
+	#character_body.queue_free()

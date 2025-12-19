@@ -7,12 +7,12 @@ extends Area2D
 
 var normal_speed: float
 
-func _on_body_entered(_body: Node2D) -> void:
-	animation_player.speed_scale = speed_scale
-	normal_speed = motion.max_speed
-	motion.max_speed *= speed_scale
-
-
-func _on_body_exited(_body: Node2D) -> void:
-	animation_player.speed_scale = 1
-	motion.max_speed = normal_speed
+#func _on_body_entered(_body: Node2D) -> void:
+	#animation_player.speed_scale = speed_scale
+	#normal_speed = motion.max_speed
+	#motion.max_speed *= speed_scale
+#
+#
+#func _on_body_exited(_body: Node2D) -> void:
+	#animation_player.speed_scale = 1
+	#motion.max_speed = normal_speed

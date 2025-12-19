@@ -101,7 +101,7 @@ func ray_casts_colliding() -> bool:
 	return false
 
 
-func on_exit() -> void:
+func _on_exit() -> void:
 	coyote_timer.stop()
 
 

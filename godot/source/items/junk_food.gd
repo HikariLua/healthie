@@ -32,14 +32,14 @@ func _physics_process(delta: float) -> void:
 
 	if has_overlapping_bodies():
 		var bodies: Array[Node2D] = get_overlapping_bodies()
-		check_cannon(bodies)
+		#check_cannon(bodies)
 
 
-func check_cannon(bodies: Array[Node2D]):
-	for body in bodies:
-		if not body.is_in_group("cannon"):
-			self_destroy()
-			return
+#func check_cannon(bodies: Array[Node2D]):
+	#for body in bodies:
+		#if not body.is_in_group("cannon"):
+			#self_destroy()
+			#return
 
 
 func _on_area_2d_entered(_area: Area2D) -> void:

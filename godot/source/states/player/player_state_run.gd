@@ -86,7 +86,6 @@ func jump_transition() -> Array[Variant]:
 		Input.is_action_just_pressed("jump")
 		and character_body.is_on_floor()
 	)
-
 	return [condition, null]
 
 

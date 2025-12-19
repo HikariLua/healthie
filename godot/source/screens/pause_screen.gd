@@ -7,4 +7,3 @@ extends CanvasLayer
 func _ready() -> void:
 	assert(focus_on_show_button != null)
 	focus_on_show_button.grab_focus()
-

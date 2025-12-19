@@ -11,7 +11,7 @@ signal life_changed(previous_life: int)
 
 		lifes = new_lifes
 
-		SaveLoad.save_to_next_scene("player", {"lifes": lifes})
+#		SaveLoad.save_to_next_scene("player", {"lifes": lifes})
 
 
 @onready var health_points: int = max_health
