@@ -37,6 +37,7 @@ func _ready() -> void:
 	assert(idle_state != null)
 
 	hurtbox.area_entered.connect(_on_hurtbox_area_entered)
+	stun_timer.timeout.connect(_on_stun_timer_timeout)
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
