@@ -11,10 +11,9 @@ extends State
 @export var motion: MotionComponent
 
 @export_group("States")
-@export var roam_state: EnemyStateRoam01
+@export var roam_state: State
 
-
-@export var idle_duration: float = 202
+@export var idle_duration: float = 2
 @export var flips: bool = true
 
 
@@ -23,10 +22,6 @@ func _ready() -> void:
 	assert(motion != null)
 	assert(roam_state != null)
 	assert(idle_timer != null)
-	
-	transitions = {
-		roam_state: roam_transition
-	}
 
 
 func _on_enter() -> void:
@@ -54,22 +49,11 @@ func _physics_update(delta: float) -> void:
 	character_body.move_and_slide()
 
 
-#func _on_idle_timer_timeout() -> void:
-	#state_machine.transition_state_to("EnemyStateRoam01")
+func _on_idle_timer_timeout() -> void:
+	state_machine.transition_state(roam_state)
 
-func roam_transition() -> Array[Variant]:
-	print(idle_timer.time_left)
-	var condition := (
-		Input.is_action_just_pressed("jump")
-		and character_body.is_on_floor()
-	)
 
-	return [condition, null]
-
-func on_exit() -> void:
+func _on_exit() -> void:
 	idle_timer.stop()
 
-	#if flips:
-		#motion.looking_direction = motion.set_looking_direction(
-			#motion.looking_direction * -1
-		#)
+	motion.looking_direction = motion.looking_direction * -1
