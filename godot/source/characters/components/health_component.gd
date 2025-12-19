@@ -1,4 +1,3 @@
-class_name HealthComponent
 extends Node
 
 signal damage_taken(previous_hp: int, attacker_hitbox: Area2D)

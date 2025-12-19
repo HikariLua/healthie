@@ -11,8 +11,8 @@ pub struct CombatComponent {
     health : OnEditor<Gd<HealthComponent>>,
 
     #[export]
-    attack_damage: i64,
+    attack_damage: i32,
 
     #[export]
-    contact_damage: i64
+    contact_damage: i32
 }

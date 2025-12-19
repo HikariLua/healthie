@@ -4,7 +4,7 @@ use crate::systems::{StateMachine, State};
 
 #[derive(GodotClass)]
 #[class(init, base=Node)]
-pub struct ColectibleComponent {
+pub struct CollectibleComponent {
     #[export]
     sequence_timer: OnEditor<Gd<Timer>>,
 
@@ -24,19 +24,49 @@ pub struct ColectibleComponent {
     #[export]
     player_state_die: OnEditor<Gd<State>>,
 
-    #[var]
-    #[init(val = 0)]
-    collected_food: i64,
+    #[export]
+    interactbox: OnEditor<Gd<Area2D>>,
+
+    #[export]
+    timer: OnEditor<Gd<Timer>>,
 
     #[var]
     #[init(val = 0)]
-    collect_sequence: i64
+    collected_food: i32,
+
+    #[var]
+    #[init(val = 0)]
+    collect_sequence: i32,
+
+    base: Base<Node>
 }
 
 #[godot_api]
-impl ColectibleComponent {
+impl INode for CollectibleComponent {
+    fn ready (&mut self) {
+        /*
+        let collectible_node = self.base().clone();
+        
+        self.interactbox.connect(
+            "area_entered", 
+            &Callable::from_object_method(&collectible_node, "on_interactbox_area_entered")
+        );
+
+        self.timer.connect(
+            "timeout", 
+            &Callable::from_object_method(&collectible_node, "on_sequence_timer_timeout")
+        );*/
+
+        self.interactbox.signals().area_entered().connect_other(self, Self::on_interactbox_area_entered);
+
+        self.timer.signals().timeout().connect_other(self, Self::on_sequence_timer_timeout);
+    }
+}
+
+#[godot_api]
+impl CollectibleComponent {
     #[func]
-    fn _on_interactbox_area_entered (&mut self, _area: Gd<Area2D>) {
+    fn on_interactbox_area_entered (&mut self, _area: Gd<Area2D>) {
         self.collected_food += 1;
         self.collect_sequence += 1;
         self.pickup_sfx.play();
@@ -51,7 +81,7 @@ impl ColectibleComponent {
     }
 
     #[func]
-    fn _on_sequence_timer_timeout (&mut self) {
+    fn on_sequence_timer_timeout (&mut self) {
         self.collect_sequence = 0;
     }
 }

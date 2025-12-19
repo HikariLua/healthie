@@ -1,4 +1,3 @@
-class_name MotionComponent
 extends Node
 
 ## A group of reusable data used for moving a character

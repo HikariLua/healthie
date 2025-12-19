@@ -85,15 +85,15 @@ impl MotionComponent {
     
     #[func]
     fn two_direction_animation(&mut self, mut animation_player: Gd<AnimationPlayer>, animation_prefix: GString) {
-        let mut suffix = if self.looking_direction.x < 0.0 { "-left" } else { "-right" };
-        let mut new_animation = animation_prefix.to_string() + suffix;
+        let suffix = if self.looking_direction.x < 0.0 { "-left" } else { "-right" };
+        let new_animation = animation_prefix.to_string() + suffix;
         
 
         if new_animation == String::from(animation_player.get_current_animation()) {
             return;
         }
 
-        let mut new_animation = &new_animation;
+        let new_animation = &new_animation;
 
         animation_player.play_ex().name(new_animation).done();
     }
