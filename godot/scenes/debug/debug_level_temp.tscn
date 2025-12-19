@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c3g2pbguvbwwu"]
+[gd_scene load_steps=31 format=3 uid="uid://c3g2pbguvbwwu"]
 
 [ext_resource type="Texture2D" uid="uid://bucrkqampbpmw" path="res://images/scenario/water_cave/caves.png" id="1_uy4j3"]
 [ext_resource type="Texture2D" uid="uid://bor7d020hdtek" path="res://images/scenario/forest_pink/forest_pink_layer_3.png" id="2_ktkb6"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://nl67k57xsf82" path="res://scenes/scene_components/sign.tscn" id="14_wxfs3"]
 [ext_resource type="PackedScene" uid="uid://6uo15x52gvv0" path="res://scenes/characters/player.tscn" id="15_sbniw"]
 [ext_resource type="PackedScene" uid="uid://dwaqa6splnpx3" path="res://scenes/characters/enemy_green.tscn" id="16_ktkb6"]
+[ext_resource type="PackedScene" uid="uid://bgw07jqxk7uwd" path="res://scenes/characters/enemy_red.tscn" id="17_nqn5a"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f3e5c"]
 animations = [{
@@ -828,7 +829,11 @@ limit_bottom = 320
 editor_draw_limits = true
 
 [node name="EnemyGreen" parent="." instance=ExtResource("16_ktkb6")]
+visible = false
 position = Vector2(501, 160)
+
+[node name="EnemyRed" parent="." instance=ExtResource("17_nqn5a")]
+position = Vector2(648, 196)
 
 [editable path="DeathHole"]
 [editable path="MovingPlatform"]

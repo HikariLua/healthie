@@ -1,9 +1,16 @@
 extends State
 
-@export var motion: MotionComponent
+@export_group("Nodes")
+@export var animation_player: AnimationPlayer
 @export var shoot_sfx: AudioStreamPlayer2D
 @export var character_body: CharacterBody2D
+@export var state_machine: StateMachine
 
+@export_group("Components")
+@export var motion: MotionComponent
+
+@export_group("States")
+@export var idle_state: EnemyStateIdle01
 @export var shoot_speed: float = 70
 
 var junk_food: PackedScene = preload(
@@ -19,12 +26,19 @@ func on_enter(_message := {}) -> void:
 	food.direction = motion.looking_direction.normalized()
 	
 	get_tree().get_root().add_child(food)
-	motion.two_direction_animation(animation_player, "shoot")
+	MotionComponent.two_direction_animation(
+		animation_player,
+		motion.looking_direction.x,
+		"shoot"
+	)
+	
 	shoot_sfx.play()
 
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-	if state_machine.active_state != self:
+#	if not state_machine.active_state == self:
+#		return
+	if not _anim_name == "shoot":
 		return
 	
-	state_machine.transition_state_to("EnemyStateIdle01")
+	state_machine.transition_state(idle_state)

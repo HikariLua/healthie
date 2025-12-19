@@ -1,18 +1,14 @@
-[gd_scene load_steps=28 format=3 uid="uid://b6iey78ja7r6n"]
+[gd_scene load_steps=24 format=3 uid="uid://b6iey78ja7r6n"]
 
-[ext_resource type="AudioStream" uid="uid://clk85h3yfnytp" path="res://audio/sfx/hurt.wav" id="1_t2kmj"]
-[ext_resource type="AudioStream" uid="uid://bwmkplw1cfbcb" path="res://audio/sfx/enemy_death.wav" id="2_cxexn"]
-[ext_resource type="AudioStream" uid="uid://d23b55gb8m6p" path="res://audio/sfx/cannon.wav" id="3_tr7wa"]
-[ext_resource type="Texture2D" uid="uid://df6x5yjteqp65" path="res://images/characters/enemies/enemy_yellow.png" id="4_5qhcj"]
-[ext_resource type="Texture2D" uid="uid://bgdbdx2e4yk0q" path="res://images/effects/explosion.png" id="5_33nh5"]
-[ext_resource type="Script" path="res://source/triggers/body_hitbox.gd" id="5_wtdgc"]
-[ext_resource type="Script" path="res://source/characters/components/motion_component.gd" id="6_ei7y4"]
-[ext_resource type="Script" path="res://source/characters/components/health_component.gd" id="7_8a71r"]
-[ext_resource type="Script" path="res://source/characters/components/combat_component.gd" id="8_0wri5"]
-[ext_resource type="Script" path="res://source/states/state_machine.gd" id="9_kbqgx"]
-[ext_resource type="Script" path="res://source/states/enemy/enemy_state_idle_01.gd" id="10_7o1us"]
-[ext_resource type="Script" path="res://source/states/enemy/enemy_state_shoot.gd" id="11_ttvfb"]
-[ext_resource type="Script" path="res://source/states/enemy/enemy_state_die_01.gd" id="12_wbx7q"]
+[ext_resource type="AudioStream" uid="uid://dnby5vqq2p05h" path="res://audio/sfx/hurt.wav" id="1_t2kmj"]
+[ext_resource type="AudioStream" uid="uid://ktjxa777vw67" path="res://audio/sfx/enemy_death.wav" id="2_cxexn"]
+[ext_resource type="AudioStream" uid="uid://djhayjh7pwihp" path="res://audio/sfx/cannon.wav" id="3_tr7wa"]
+[ext_resource type="Texture2D" uid="uid://byk1uswbq0vc4" path="res://images/characters/enemies/enemy_yellow.png" id="4_5qhcj"]
+[ext_resource type="Texture2D" uid="uid://6y2ree4ufpwd" path="res://images/effects/explosion.png" id="5_33nh5"]
+[ext_resource type="Script" uid="uid://ce0ulhrm3jlur" path="res://source/triggers/body_hitbox.gd" id="5_wtdgc"]
+[ext_resource type="Script" uid="uid://bbc8dyu2lwykh" path="res://source/states/enemy/enemy_state_idle_01.gd" id="10_7o1us"]
+[ext_resource type="Script" uid="uid://dskdgll3ww57c" path="res://source/states/enemy/enemy_state_shoot.gd" id="11_ttvfb"]
+[ext_resource type="Script" uid="uid://bhu1pn1guhp6t" path="res://source/states/enemy/enemy_state_die_01.gd" id="12_wbx7q"]
 [ext_resource type="PackedScene" uid="uid://dimfi5n0yonvs" path="res://scenes/collectibles/junk_food.tscn" id="13_fptwq"]
 
 [sub_resource type="Animation" id="Animation_n0ihl"]
@@ -175,12 +171,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c30y7"]
 _data = {
-"RESET": SubResource("Animation_n0ihl"),
-"die": SubResource("Animation_fb7s6"),
-"idle-left": SubResource("Animation_kby21"),
-"idle-right": SubResource("Animation_slchm"),
-"shoot-left": SubResource("Animation_mn165"),
-"shoot-right": SubResource("Animation_3na3b")
+&"RESET": SubResource("Animation_n0ihl"),
+&"die": SubResource("Animation_fb7s6"),
+&"idle-left": SubResource("Animation_kby21"),
+&"idle-right": SubResource("Animation_slchm"),
+&"shoot-left": SubResource("Animation_mn165"),
+&"shoot-right": SubResource("Animation_3na3b")
 }
 
 [sub_resource type="Animation" id="Animation_jbein"]
@@ -217,8 +213,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6g5p7"]
 _data = {
-"RESET": SubResource("Animation_jbein"),
-"hurt": SubResource("Animation_x1io1")
+&"RESET": SubResource("Animation_jbein"),
+&"hurt": SubResource("Animation_x1io1")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqtdl"]
@@ -236,14 +232,14 @@ collision_mask = 17
 metadata/_edit_group_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle-right"
 libraries = {
-"": SubResource("AnimationLibrary_c30y7")
+&"": SubResource("AnimationLibrary_c30y7")
 }
+autoplay = "idle-right"
 
 [node name="EffectAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_6g5p7")
+&"": SubResource("AnimationLibrary_6g5p7")
 }
 
 [node name="Sfx" type="Node2D" parent="."]
@@ -306,59 +302,55 @@ debug_color = Color(0, 0.0745098, 0.662745, 0.419608)
 
 [node name="Components" type="Node" parent="."]
 
-[node name="MotionComponent" type="Node" parent="Components"]
-script = ExtResource("6_ei7y4")
-max_speed = 46.0
-max_fall_speed = 500.0
+[node name="MotionComponent" type="MotionComponent" parent="Components"]
 
-[node name="HealthComponent" type="Node" parent="Components"]
-script = ExtResource("7_8a71r")
-max_health = 2
+[node name="HealthComponent" type="HealthComponent" parent="Components" node_paths=PackedStringArray("hurtbox")]
+hurtbox = NodePath("../../Hurtbox")
 
-[node name="CombatComponent" type="Node" parent="Components" node_paths=PackedStringArray("motion", "health")]
-script = ExtResource("8_0wri5")
+[node name="CombatComponent" type="CombatComponent" parent="Components" node_paths=PackedStringArray("motion", "health")]
 motion = NodePath("../MotionComponent")
 health = NodePath("../HealthComponent")
-attack_damage = 0
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("9_kbqgx")
+[node name="StateMachine" type="StateMachine" parent="." node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("EnemyStateIdle01")
 
-[node name="EnemyStateIdle01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "motion", "idle_timer", "animation_player")]
+[node name="EnemyStateIdle01" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "idle_timer", "animation_player", "state_machine", "motion", "roam_state")]
 script = ExtResource("10_7o1us")
 character_body = NodePath("../..")
-motion = NodePath("../../Components/MotionComponent")
 idle_timer = NodePath("IdleTimer")
-flips = false
 animation_player = NodePath("../../AnimationPlayer")
+state_machine = NodePath("..")
+motion = NodePath("../../Components/MotionComponent")
+roam_state = NodePath("../EnemyStateRoam01")
+flips = false
 
 [node name="IdleTimer" type="Timer" parent="StateMachine/EnemyStateIdle01"]
 one_shot = true
 
-[node name="EnemyStateRoam01" type="Node" parent="StateMachine" node_paths=PackedStringArray("motion", "shoot_sfx", "character_body", "animation_player")]
+[node name="EnemyStateRoam01" type="State" parent="StateMachine" node_paths=PackedStringArray("animation_player", "shoot_sfx", "character_body", "state_machine", "motion", "idle_state")]
 script = ExtResource("11_ttvfb")
-motion = NodePath("../../Components/MotionComponent")
+animation_player = NodePath("../../AnimationPlayer")
 shoot_sfx = NodePath("../../Sfx/Shoot")
 character_body = NodePath("../..")
-animation_player = NodePath("../../AnimationPlayer")
+state_machine = NodePath("..")
+motion = NodePath("../../Components/MotionComponent")
+idle_state = NodePath("../EnemyStateIdle01")
 
-[node name="EnemyStateDie01" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body", "health", "hurt_sfx", "die_sfx", "hurtbox_collision", "hitbox_collision", "effect_player", "animation_player")]
+[node name="EnemyStateDie01" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "hurt_sfx", "die_sfx", "hurtbox_collision", "hitbox_collision", "effect_player", "animation_player", "state_machine", "health")]
 script = ExtResource("12_wbx7q")
 character_body = NodePath("../..")
-health = NodePath("../../Components/HealthComponent")
 hurt_sfx = NodePath("../../Sfx/Hurt")
 die_sfx = NodePath("../../Sfx/Die")
 hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
 hitbox_collision = NodePath("../../BodyHitbox/CollisionShape2D")
 effect_player = NodePath("../../EffectAnimationPlayer")
 animation_player = NodePath("../../AnimationPlayer")
+state_machine = NodePath("..")
+health = NodePath("../../Components/HealthComponent")
 
 [node name="StandardFood" parent="." instance=ExtResource("13_fptwq")]
 position = Vector2(0, -19)
 
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/EnemyStateRoam01" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/EnemyStateDie01" method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="Components/HealthComponent" method="_on_hurtbox_area_entered"]
-[connection signal="damage_taken" from="Components/HealthComponent" to="StateMachine/EnemyStateDie01" method="_on_health_component_damage_taken"]
 [connection signal="timeout" from="StateMachine/EnemyStateIdle01/IdleTimer" to="StateMachine/EnemyStateIdle01" method="_on_idle_timer_timeout"]

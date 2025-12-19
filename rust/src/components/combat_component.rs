@@ -2,7 +2,7 @@ use super::{HealthComponent, MotionComponent};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
-#[class(init, base=Node2D)]
+#[class(init, base=Node)]
 pub struct CombatComponent {
     #[export]
     motion: OnEditor<Gd<MotionComponent>>,
@@ -17,4 +17,6 @@ pub struct CombatComponent {
     #[export]
     #[init(val = 1)]
     contact_damage: i64,
+
+    base: Base<Node>,
 }
