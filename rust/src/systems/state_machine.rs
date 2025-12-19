@@ -11,7 +11,7 @@ pub struct StateMachine {
 
     #[var]
     #[init(val = Gd::from_init_fn(State::init))]
-    active_state: Gd<State>,
+    pub active_state: Gd<State>,
 
     base: Base<Node2D>,
 }

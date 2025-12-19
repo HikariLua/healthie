@@ -18,6 +18,8 @@ extends Area2D
 func _ready() -> void:
 	timer.timeout.connect(self_destroy)
 	visible_notifier.screen_exited.connect(_on_visible_on_screen_notifier_2d_screen_exited)
+	self.area_entered.connect(_on_area_2d_entered)
+
 
 	if is_random:
 		sprite.frame = randi_range(0, max_frames - 1)

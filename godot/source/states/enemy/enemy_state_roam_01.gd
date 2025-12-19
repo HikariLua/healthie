@@ -19,6 +19,8 @@ func _ready() -> void:
 	assert(character_body != null)
 	assert(motion != null)
 	assert(roam_timer != null)
+	
+	roam_timer.timeout.connect(_on_roam_timer_timeout)
 
 
 func _on_enter() -> void:

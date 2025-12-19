@@ -22,6 +22,8 @@ func _ready() -> void:
 	assert(motion != null)
 	assert(roam_state != null)
 	assert(idle_timer != null)
+	
+	idle_timer.timeout.connect(_on_idle_timer_timeout)
 
 
 func _on_enter() -> void:
