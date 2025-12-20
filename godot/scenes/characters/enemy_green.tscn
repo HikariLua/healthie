@@ -1,9 +1,9 @@
 [gd_scene load_steps=25 format=3 uid="uid://dwaqa6splnpx3"]
 
-[ext_resource type="AudioStream" uid="uid://clk85h3yfnytp" path="res://audio/sfx/hurt.wav" id="1_ytfq3"]
-[ext_resource type="AudioStream" uid="uid://bwmkplw1cfbcb" path="res://audio/sfx/enemy_death.wav" id="2_1fcuj"]
-[ext_resource type="Texture2D" uid="uid://ccbx5f6hq7ay0" path="res://images/characters/enemies/enemy_green.png" id="3_cjfbk"]
-[ext_resource type="Texture2D" uid="uid://bgdbdx2e4yk0q" path="res://images/effects/explosion.png" id="4_rhxsu"]
+[ext_resource type="AudioStream" uid="uid://dnby5vqq2p05h" path="res://audio/sfx/hurt.wav" id="1_ytfq3"]
+[ext_resource type="AudioStream" uid="uid://ktjxa777vw67" path="res://audio/sfx/enemy_death.wav" id="2_1fcuj"]
+[ext_resource type="Texture2D" uid="uid://dxfy04fw7l24f" path="res://images/characters/enemies/enemy_green.png" id="3_cjfbk"]
+[ext_resource type="Texture2D" uid="uid://6y2ree4ufpwd" path="res://images/effects/explosion.png" id="4_rhxsu"]
 [ext_resource type="Script" uid="uid://ce0ulhrm3jlur" path="res://source/triggers/body_hitbox.gd" id="5_ewjbm"]
 [ext_resource type="Script" uid="uid://bbc8dyu2lwykh" path="res://source/states/enemy/enemy_state_idle_01.gd" id="10_m6hni"]
 [ext_resource type="Script" uid="uid://bhu1pn1guhp6t" path="res://source/states/enemy/enemy_state_die_01.gd" id="11_pabb4"]
@@ -307,7 +307,9 @@ max_speed = 30.0
 [node name="HealthComponent" type="HealthComponent" parent="Components" node_paths=PackedStringArray("hurtbox")]
 hurtbox = NodePath("../../Hurtbox")
 
-[node name="CombatComponent" type="Node2D" parent="Components"]
+[node name="CombatComponent" type="CombatComponent" parent="Components" node_paths=PackedStringArray("motion", "health")]
+motion = NodePath("../MotionComponent")
+health = NodePath("../HealthComponent")
 
 [node name="StateMachine" type="StateMachine" parent="." node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("EnemyStateIdle01")

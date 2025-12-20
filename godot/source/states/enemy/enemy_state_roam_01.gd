@@ -26,11 +26,6 @@ func _ready() -> void:
 func _on_enter() -> void:
 	roam_timer.start(roam_duration)
 	
-	MotionComponent.two_direction_animation(
-		animation_player,
-		motion.looking_direction.x,
-		"run"
-	)
 
 
 func _physics_update(delta: float) -> void:
@@ -47,7 +42,13 @@ func _physics_update(delta: float) -> void:
 	)
 	
 	character_body.move_and_slide()
-
+	
+	MotionComponent.two_direction_animation(
+		animation_player,
+		motion.looking_direction.x,
+		"run"
+	)
+	
 	check_walls()
 
 
