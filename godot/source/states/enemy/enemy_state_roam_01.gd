@@ -43,10 +43,11 @@ func _physics_update(delta: float) -> void:
 	
 	character_body.move_and_slide()
 	
-	MotionComponent.two_direction_animation(
-		animation_player,
+	animation_player.play(
+		MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"run"
+		)
 	)
 	
 	check_walls()

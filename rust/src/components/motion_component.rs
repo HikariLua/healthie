@@ -1,4 +1,4 @@
-use godot::classes::{AnimationPlayer, CharacterBody2D, Input, ProjectSettings};
+use godot::classes::{CharacterBody2D, Input, ProjectSettings};
 use godot::global::move_toward;
 use godot::prelude::*;
 
@@ -104,24 +104,16 @@ impl MotionComponent {
         speed * direction
     }
 
-    // TODO: colocar função em classe de animação apropriada
-    // TODO: tornar a função sem side effect e fazer mudança direcional por sinal
+    
     #[func]
     fn two_direction_animation(
-        mut animation_player: Gd<AnimationPlayer>,
         direction: f64,
         animation_prefix: GString,
-    ) {
+    ) -> String {
         let suffix = if direction < 0.0 { "-left" } else { "-right" };
         let new_animation = animation_prefix.to_string() + suffix;
 
-        if new_animation == String::from(animation_player.get_current_animation()) {
-            return;
-        }
-
-        let new_animation = &new_animation;
-
-        animation_player.play_ex().name(new_animation).done();
+        return new_animation;
     }
 
     #[func]
@@ -138,6 +130,7 @@ impl MotionComponent {
         self.signals()
             .looking_direction_changed()
             .emit(old_value, new_value);
+        
     }
 
     #[func]

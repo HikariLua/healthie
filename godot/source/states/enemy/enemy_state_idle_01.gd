@@ -29,10 +29,10 @@ func _ready() -> void:
 func _on_enter() -> void:
 	idle_timer.start(idle_duration)
 	
-	MotionComponent.two_direction_animation(
-		animation_player,
+	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"idle"
+		)
 	)
 
 

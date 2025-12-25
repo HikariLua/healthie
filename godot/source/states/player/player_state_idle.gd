@@ -37,10 +37,10 @@ func _ready() -> void:
 
 
 func _on_enter() -> void:
-	MotionComponent.two_direction_animation(
-		animation_player,
+	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"idle"
+		)
 	)
 
 
@@ -59,7 +59,7 @@ func _physics_update(delta: float) -> void:
 	)
 
 	motion.was_on_floor = character_body.is_on_floor()
-
+	
 	character_body.move_and_slide()
 
 # TODO: fazer lógica de transição padrão

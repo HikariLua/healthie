@@ -40,10 +40,10 @@ func _ready() -> void:
 
 
 func _on_enter() -> void:
-	MotionComponent.two_direction_animation(
-		animation_player,
+	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"jump"
+		)
 	)
 
 	character_body.velocity.y = motion.jump_velocity
@@ -56,10 +56,10 @@ func _physics_update(delta: float) -> void:
 
 	motion.looking_direction = motion.input_direction
 
-	MotionComponent.two_direction_animation(
-		animation_player,
+	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"jump"
+		)
 	)
 
 	character_body.velocity.x = MotionComponent.move_x(

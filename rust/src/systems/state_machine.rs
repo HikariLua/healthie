@@ -49,7 +49,6 @@ impl StateMachine {
         self.active_state.bind_mut().on_enter_with_message(message);
     }
 
-    // TODO: refatorar para aceitar dict{state: dict{callable: variant}} para suporte on_enter_with_message
     #[func]
     pub fn check_transitions(&mut self) {
         let transitions = self.active_state.bind().transitions.clone();

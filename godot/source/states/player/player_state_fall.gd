@@ -59,10 +59,10 @@ func _on_enter_with_message(message: Dictionary) -> void:
 
 func enter_fall() -> void:
 	coyote_timer.start(0.2)
-	MotionComponent.two_direction_animation(
-		animation_player,
+	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"fall"
+		)
 	)
 
 
@@ -71,10 +71,10 @@ func _physics_update(delta: float) -> void:
 
 	motion.looking_direction = motion.input_direction
 
-	MotionComponent.two_direction_animation(
-		animation_player,
+	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"fall"
+		)
 	)
 
 	var divisor: float = 1 if character_body.velocity.y <= 0 else 2

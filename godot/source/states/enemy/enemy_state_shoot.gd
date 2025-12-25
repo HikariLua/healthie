@@ -26,10 +26,11 @@ func on_enter(_message := {}) -> void:
 	food.direction = motion.looking_direction.normalized()
 	
 	get_tree().get_root().add_child(food)
-	MotionComponent.two_direction_animation(
-		animation_player,
+	
+	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"shoot"
+		)
 	)
 	
 	shoot_sfx.play()

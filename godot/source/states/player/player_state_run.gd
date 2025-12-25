@@ -17,7 +17,6 @@ extends State
 @export var idle_state: PlayerStateIdle
 @export var attack_state: PlayerStateAttack
 
-
 var speed_divisor: float
 
 
@@ -37,13 +36,15 @@ func _ready() -> void:
 		idle_state: idle_transition,
 		attack_state: attack_transition
 	}
+	
+	motion.looking_direction_changed.connect(_on_motion_component_looking_direction_changed)
 
 
 func _on_enter() -> void:
-	MotionComponent.two_direction_animation(
-		animation_player,
+	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"run"
+		)
 	)
 
 	# TODO: rever efetividade e nescessidade dessa lógica
@@ -58,13 +59,6 @@ func _physics_update(delta: float) -> void:
 	motion.input_direction = MotionComponent.update_input_direction()
 
 	motion.looking_direction = motion.input_direction
-
-	# TODO: refatorar para funcionar com sinais e não todo frame
-	MotionComponent.two_direction_animation(
-		animation_player,
-		motion.looking_direction.x,
-		"run"
-	)
 
 	character_body.velocity.x = MotionComponent.move_x(
 		motion.max_speed / speed_divisor,
@@ -102,3 +96,14 @@ func idle_transition() -> Array[Variant]:
 func attack_transition() -> Array[Variant]:
 	var condition := Input.is_action_just_pressed("attack")
 	return [condition, null]
+
+
+func _on_motion_component_looking_direction_changed(_old_value: Vector2, new_value: Vector2) -> void:
+	var logic: Callable = func() -> void:
+		if state_machine.active_state == self:
+			animation_player.play(MotionComponent.two_direction_animation(
+			new_value.x,
+			"run"
+			)
+		)
+	logic.call_deferred()

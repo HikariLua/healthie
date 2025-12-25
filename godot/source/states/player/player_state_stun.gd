@@ -50,10 +50,10 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 
 
 func _on_enter_with_message(message: Dictionary) -> void:
-	MotionComponent.two_direction_animation(
-		animation_player,
+	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"stun"
+		)
 	)
 	
 	stun_timer.start(stun_duration)

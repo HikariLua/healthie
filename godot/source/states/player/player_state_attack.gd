@@ -39,12 +39,12 @@ func _on_enter() -> void:
 	# TODO: refatorar lógica de projeteis para ter um system de gerenciamento
 	get_tree().get_root().add_child(projectile)
 
-	MotionComponent.two_direction_animation(
-		animation_player,
+	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"attack"
+		)
 	)
-
+	
 	attack_sfx.play()
 
 	character_body.velocity.x = 0

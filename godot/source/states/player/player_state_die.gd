@@ -46,10 +46,10 @@ func _on_enter() -> void:
 	collectible.collect_sequence = -100
 	hurtbox_collision.set_deferred("disabled", true)
 	collectible_collision.set_deferred("disabled", true)
-	MotionComponent.two_direction_animation(
-		animation_player,
+	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,
 		"die"
+		)
 	)
 
 	character_body.velocity.x = 0
