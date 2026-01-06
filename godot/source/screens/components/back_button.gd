@@ -10,7 +10,7 @@ func _ready() -> void:
 
 
 func _on_pressed() -> void:
-	TransitionScreen.transition_to(to_scene, get_tree())
+	TransitionScreenAutoload.transition_to(to_scene, get_tree())
 
 
 func _on_mouse_entered() -> void:

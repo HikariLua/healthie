@@ -6,6 +6,7 @@ extends Area2D
 @export var next_level_index: int
 
 var health: int = 100
+var health_component: HealthComponent
 var player: CharacterBody2D
 
 var final_health: int
@@ -13,13 +14,13 @@ var result: String
 var plus: String
 
 var end_stage_screen: PackedScene = preload(
-	"res://scenes/screens/end_stage_screen.tscn"
+	"uid://dxapkphi12wn0"
 )
 
 
 func _on_body_entered(body: Node2D) -> void:
 	player = body as CharacterBody2D
-	var health_component = player.get_node("Components/HealthComponent")
+	health_component = player.get_node("Components/HealthComponent")
 
 	var state_machine: StateMachine = (
 		player.get_node("StateMachine") as StateMachine
@@ -30,8 +31,13 @@ func _on_body_entered(body: Node2D) -> void:
 	)
 
 	state_machine.set_physics_process(false)
+	
+	verify_result()
+
+
+func verify_result() -> void:
 	var player_food: int = (
-		player.get_node("Components/CollectibleComponent").collected_food
+	player.get_node("Components/CollectibleComponent").collected_food
 	)
 	final_health = health - player_food
 
@@ -63,8 +69,11 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func next_level() -> void:
-	TransitionScreen.transition_to(
-		"res://scenes/levels/level_%s.tscn" % next_level_index, get_tree()
+	#TransitionScreenAutoload.transition_to(
+		#"res://scenes/levels/level_%s.tscn" % next_level_index, get_tree()
+	#)
+	TransitionScreenAutoload.transition_to(
+		"res://scenes/levels/level_0.tscn", get_tree()
 	)
 
 

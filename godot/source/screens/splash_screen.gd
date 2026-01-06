@@ -17,4 +17,4 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_animation_player_fade_animation_finished(_anim_name: StringName) -> void:
-	TransitionScreen.transition_to("res://scenes/screens/main_menu.tscn", get_tree())
+	TransitionScreenAutoload.transition_to("uid://cx13u703swmfu", get_tree())

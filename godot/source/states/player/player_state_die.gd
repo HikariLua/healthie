@@ -43,7 +43,10 @@ func _on_enter() -> void:
 			get_tree()
 		)
 	
-	collectible.collect_sequence = -100
+	var logic: Callable = func() -> void:
+		collectible.collect_sequence = -100
+	logic.call_deferred()
+	
 	hurtbox_collision.set_deferred("disabled", true)
 	collectible_collision.set_deferred("disabled", true)
 	animation_player.play(MotionComponent.two_direction_animation(
@@ -56,6 +59,7 @@ func _on_enter() -> void:
 
 
 func _physics_update(delta: float) -> void:
+	
 	character_body.velocity.y = MotionComponent.apply_gravity(
 		character_body,
 		motion.max_fall_speed,

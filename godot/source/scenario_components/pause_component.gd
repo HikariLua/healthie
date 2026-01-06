@@ -2,7 +2,7 @@ class_name PauseComponent
 extends Node
 
 var pause_screen_packed: PackedScene = preload(
-	"res://scenes/screens/pause_screen.tscn"
+	"uid://cnhoovseu1oe7"
 )
 
 var pause_screen: PauseScreen

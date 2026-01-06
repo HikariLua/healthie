@@ -1,15 +1,16 @@
 [gd_scene load_steps=8 format=3 uid="uid://vkpm8f1u0fyi"]
 
-[ext_resource type="Script" path="res://source/levels/level_4.gd" id="1_07m1h"]
+[ext_resource type="Script" uid="uid://b1krs0oiqtptb" path="res://source/levels/level.gd" id="1_5vn0v"]
 [ext_resource type="TileSet" uid="uid://d4mrgu2uam4sy" path="res://resources/tiles/peace_mountain_tileset.tres" id="2_npcc4"]
 [ext_resource type="PackedScene" uid="uid://6uo15x52gvv0" path="res://scenes/characters/player.tscn" id="3_epm01"]
-[ext_resource type="Script" path="res://source/screens/components/credit_button.gd" id="4_xsv3b"]
-[ext_resource type="AudioStream" uid="uid://cfuukjesyayae" path="res://audio/sfx/select.wav" id="5_wgsoj"]
-[ext_resource type="AudioStream" uid="uid://453bk4bf7snq" path="res://audio/sfx/click.wav" id="6_dsama"]
+[ext_resource type="Script" uid="uid://envuljcyltwy" path="res://source/screens/components/credit_button.gd" id="4_xsv3b"]
+[ext_resource type="AudioStream" uid="uid://jkvp6bu8gpey" path="res://audio/sfx/select.wav" id="5_wgsoj"]
+[ext_resource type="AudioStream" uid="uid://bekjtjw2epm44" path="res://audio/sfx/click.wav" id="6_dsama"]
 [ext_resource type="PackedScene" uid="uid://nl67k57xsf82" path="res://scenes/scene_components/sign.tscn" id="7_54pag"]
 
 [node name="Level4" type="Node2D"]
-script = ExtResource("1_07m1h")
+script = ExtResource("1_5vn0v")
+music_index = 4
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -6

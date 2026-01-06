@@ -2,4 +2,4 @@ extends CanvasLayer
 
 
 func _ready() -> void:
-	Music.play(Music.menu)
+	MusicAutoload.play(MusicAutoload.music_list[0])

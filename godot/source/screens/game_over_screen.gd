@@ -1,7 +1,6 @@
 extends CanvasLayer
 
-
 func _ready() -> void:
-	Music.play(Music.game_over)
+	MusicAutoload.play(MusicAutoload.music_list[3])
 
-	SaveLoad.saved_dict.clear()
+	SaveLoadAutoload.saved_dict.clear()

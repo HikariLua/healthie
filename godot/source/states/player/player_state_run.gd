@@ -56,6 +56,7 @@ func _on_enter() -> void:
 
 
 func _physics_update(delta: float) -> void:
+	#print(SaveLoadAutoload.saved_dict)
 	motion.input_direction = MotionComponent.update_input_direction()
 
 	motion.looking_direction = motion.input_direction

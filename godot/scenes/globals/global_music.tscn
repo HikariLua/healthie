@@ -1,21 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://ci0g6r02hn3je"]
+[gd_scene load_steps=7 format=3 uid="uid://ci0g6r02hn3je"]
 
-[ext_resource type="Script" path="res://source/globals/global_music.gd" id="1_1q0pd"]
-[ext_resource type="AudioStream" uid="uid://bk24t5baeux7g" path="res://audio/music/chopin_op9_no2_hana.mp3" id="1_coijs"]
-[ext_resource type="AudioStream" uid="uid://bk83jgocn4djv" path="res://audio/music/mozart_piano_16_chip_plus_orch_hana.mp3" id="3_oyv00"]
-[ext_resource type="AudioStream" uid="uid://c1jxx1ol82miu" path="res://audio/music/satie-remix-8bit_alt_hana.mp3" id="4_524an"]
-[ext_resource type="AudioStream" uid="uid://bgvi267mdf1jg" path="res://audio/music/nocturne_20_hana.mp3" id="5_x8kc6"]
-[ext_resource type="AudioStream" uid="uid://bxr0d0lwadvga" path="res://audio/music/chopin_uplift_op9_no2_hana.mp3" id="6_6ic1k"]
-[ext_resource type="AudioStream" uid="uid://0k8jfgn8ubf5" path="res://audio/music/hr_lizt_hana.mp3" id="7_rljw2"]
+[ext_resource type="AudioStream" uid="uid://chun3wui5iwwc" path="res://audio/music/chopin_op9_no2_hana.mp3" id="1_coijs"]
+[ext_resource type="AudioStream" uid="uid://dls73iq4rmo81" path="res://audio/music/mozart_piano_16_chip_plus_orch_hana.mp3" id="3_oyv00"]
+[ext_resource type="AudioStream" uid="uid://bxhkq8vwataam" path="res://audio/music/satie-remix-8bit_alt_hana.mp3" id="4_524an"]
+[ext_resource type="AudioStream" uid="uid://b886k5itk6dxt" path="res://audio/music/nocturne_20_hana.mp3" id="5_x8kc6"]
+[ext_resource type="AudioStream" uid="uid://cjuuyff8bx8f" path="res://audio/music/chopin_uplift_op9_no2_hana.mp3" id="6_6ic1k"]
+[ext_resource type="AudioStream" uid="uid://gus4x3yv63du" path="res://audio/music/hr_lizt_hana.mp3" id="7_rljw2"]
 
-[node name="GlobalMusic" type="Node" node_paths=PackedStringArray("menu", "level_1", "level_2", "level_3", "game_over", "win")]
-script = ExtResource("1_1q0pd")
-menu = NodePath("Nocturne92")
-level_1 = NodePath("Mozart16")
-level_2 = NodePath("Gymnopie1")
-level_3 = NodePath("LiztHR2p2")
-game_over = NodePath("Nocturne20")
-win = NodePath("UpNocturne92")
+[node name="GlobalMusic" type="GlobalMusic" node_paths=PackedStringArray("music_list")]
+music_list = [NodePath("Nocturne92"), NodePath("Mozart16"), NodePath("Gymnopie1"), NodePath("Nocturne20"), NodePath("UpNocturne92"), NodePath("LiztHR2p2")]
 
 [node name="Nocturne92" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_coijs")

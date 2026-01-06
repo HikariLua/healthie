@@ -4,7 +4,7 @@ extends Button
 @export var click_sfx: AudioStreamPlayer
 @export var start_focus: bool = false
 
-var main_scene: PackedScene = preload("res://scenes/levels/level_0.tscn")
+var main_scene: PackedScene = preload("uid://kk2jle7s538x")
 
 
 func _ready() -> void:
@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func _on_pressed() -> void:
-	TransitionScreen.transition_to_packed(main_scene, get_tree())
+	TransitionScreenAutoload.transition_to_packed(main_scene, get_tree())
 
 
 func _on_mouse_entered() -> void:

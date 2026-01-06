@@ -4,12 +4,12 @@ extends Button
 @export var click_sfx: AudioStreamPlayer
 
 var credits_scene: PackedScene = preload(
-	"res://scenes/screens/credit_screen.tscn"
+	"uid://7xafqjp8h31s"
 )
 
 
 func _on_pressed() -> void:
-	TransitionScreen.transition_to_packed(credits_scene, get_tree())
+	TransitionScreenAutoload.transition_to_packed(credits_scene, get_tree())
 
 
 func _on_mouse_entered() -> void:

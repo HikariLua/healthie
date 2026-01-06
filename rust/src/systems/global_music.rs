@@ -11,7 +11,7 @@ pub struct GlobalMusic {
 #[godot_api]
 impl GlobalMusic {
     #[func]
-    pub fn play(&mut self, music: Gd<AudioStreamPlayer>) {
+    pub fn play(&mut self, mut music: Gd<AudioStreamPlayer>) {
         if music.is_playing() {
             return;
         }
@@ -23,6 +23,6 @@ impl GlobalMusic {
 
             item.stop()
         }
+        music.play();
     }
 }
-

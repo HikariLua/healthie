@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://cvskl433rnerq"]
 
-[ext_resource type="Script" path="res://source/screens/game_over_screen.gd" id="1_ctngi"]
-[ext_resource type="FontFile" uid="uid://b4nnj0vck6ek2" path="res://fonts/pixel_operator/PixelOperator8-Bold.ttf" id="1_sngif"]
-[ext_resource type="FontFile" uid="uid://bq55taxbtsta5" path="res://fonts/pixel_operator/PixelOperator8.ttf" id="2_pwsng"]
-[ext_resource type="Texture2D" uid="uid://dv1hwm55kavqp" path="res://images/scenario/water_cave/caves.png" id="2_ys4xh"]
-[ext_resource type="Script" path="res://source/screens/components/main_menu_button.gd" id="3_jkboh"]
-[ext_resource type="AudioStream" uid="uid://cfuukjesyayae" path="res://audio/sfx/select.wav" id="4_otfau"]
-[ext_resource type="AudioStream" uid="uid://453bk4bf7snq" path="res://audio/sfx/click.wav" id="5_kvotc"]
-[ext_resource type="Script" path="res://source/screens/components/menu_camera.gd" id="8_b5387"]
+[ext_resource type="Script" uid="uid://3q5thet2u7mw" path="res://source/screens/game_over_screen.gd" id="1_ctngi"]
+[ext_resource type="FontFile" uid="uid://bdf423ck4cwpu" path="res://fonts/pixel_operator/PixelOperator8-Bold.ttf" id="1_sngif"]
+[ext_resource type="FontFile" uid="uid://vl7okq2uq6r3" path="res://fonts/pixel_operator/PixelOperator8.ttf" id="2_pwsng"]
+[ext_resource type="Texture2D" uid="uid://uk0onsarvhlo" path="res://images/scenario/water_cave/caves.png" id="2_ys4xh"]
+[ext_resource type="Script" uid="uid://cvjlcpdblhgf" path="res://source/screens/components/main_menu_button.gd" id="3_jkboh"]
+[ext_resource type="AudioStream" uid="uid://jkvp6bu8gpey" path="res://audio/sfx/select.wav" id="4_otfau"]
+[ext_resource type="AudioStream" uid="uid://bekjtjw2epm44" path="res://audio/sfx/click.wav" id="5_kvotc"]
+[ext_resource type="Script" uid="uid://bvd026lriffu2" path="res://source/screens/components/menu_camera.gd" id="8_b5387"]
 
 [sub_resource type="Animation" id="Animation_slbq7"]
 length = 0.001
@@ -42,8 +42,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gvr85"]
 _data = {
-"RESET": SubResource("Animation_slbq7"),
-"fade": SubResource("Animation_trvkt")
+&"RESET": SubResource("Animation_slbq7"),
+&"fade": SubResource("Animation_trvkt")
 }
 
 [node name="GameOverScreen" type="CanvasLayer"]
@@ -133,7 +133,7 @@ color = Color(0, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_gvr85")
+&"": SubResource("AnimationLibrary_gvr85")
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -4,7 +4,7 @@ use godot::prelude::*;
 #[class(init, base=Node)]
 pub struct SaveLoad {
     #[var]
-    saved_dict: VarDictionary,
+    pub saved_dict: VarDictionary,
 }
 
 #[godot_api]

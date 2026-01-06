@@ -9,15 +9,15 @@ extends Button
 
 
 func _ready() -> void:
-	TransitionScreen.connect("fade_outed", reload)
+	TransitionScreenAutoload.connect("fade_outed", reload)
 	if first_button:
 		grab_focus()
 
 
 func _on_pressed() -> void:
 	blocker.visible = true
-	TransitionScreen.transition_to(
-		"res://scenes/screens/main_menu.tscn", get_tree()
+	TransitionScreenAutoload.transition_to(
+		"uid://cx13u703swmfu", get_tree()
 	)
 	animation_player.play("fade")
 
