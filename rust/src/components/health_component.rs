@@ -14,7 +14,6 @@ pub struct HealthComponent {
     hurtbox: OnEditor<Gd<Area2D>>,
 
     #[export]
-    #[var(get, set = set_lifes)]
     lifes: i32,
 
     #[var]
@@ -37,11 +36,10 @@ impl INode for HealthComponent {
 
         let save_dict = saveload.bind_mut().get_saved_dict();
 
+
         if save_dict.contains_key("player") {
             self.lifes = saveload.bind_mut().load_from_previous_scene("player".into()).get_or_nil("lifes").to();
         }
-
-        godot_print!("lifes ready: {}", self.lifes);
 
     }
 }
@@ -54,7 +52,7 @@ impl HealthComponent {
     fn life_changed(previous_life: i32);
 
     #[func]
-    fn set_lifes(&mut self, new_lifes: i32) {
+    fn change_lifes(&mut self, new_lifes: i32) {
         self.base_mut()
             .emit_signal("life_changed", &[Variant::from(new_lifes)]);
 
@@ -63,18 +61,9 @@ impl HealthComponent {
         
         let mut saveload = try_get_autoload_by_name::<SaveLoad>("SaveLoadAutoload").unwrap();
 
-        let savelifes: i32 = saveload.bind_mut().load_from_previous_scene("player".into()).get_or_nil("lifes").to();
-
-        godot_print!("antes save_lifes {}", savelifes);
-
         saveload
             .bind_mut()
             .save_to_next_scene("player".into(), vdict! {"lifes": self.lifes});
-
-
-
-        godot_print!("depois save_lifes {}", savelifes);
-        godot_print!("lifes {}", self.lifes);
     }
 
     #[func]

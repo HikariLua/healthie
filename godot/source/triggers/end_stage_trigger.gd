@@ -51,7 +51,7 @@ func verify_result() -> void:
 	elif final_health >= requierd_health + 8:
 		result = "Extra Success"
 		plus = "+2 Lifes"
-		health_component.lifes += 2
+		health_component.change_lifes(health_component.lifes + 2)
 		extra_clear_sfx.play()
 
 		show_sceen()
@@ -61,7 +61,7 @@ func verify_result() -> void:
 	else:
 		result = "Success"
 		plus = "+1 Life"
-		health_component.lifes += 1
+		health_component.change_lifes(health_component.lifes + 1)
 		show_sceen()
 		clear_sfx.play()
 		await get_tree().create_timer(6).timeout

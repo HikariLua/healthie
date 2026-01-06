@@ -12,6 +12,7 @@ func _ready() -> void:
 
 
 func _on_pressed() -> void:
+	SaveLoadAutoload.save_to_next_scene("player", {"lifes": 3})
 	TransitionScreenAutoload.transition_to_packed(main_scene, get_tree())
 
 
