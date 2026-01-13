@@ -23,6 +23,7 @@ config/windows_native_icon="res://icon.ico"
 TransitionScreenAutoload="*res://scenes/screens/transition_screen.tscn"
 MusicAutoload="*res://scenes/globals/global_music.tscn"
 SaveLoadAutoload="*res://scenes/globals/save_load.tscn"
+ProjectileManagerAutoload="*res://scenes/globals/projectile_manager.tscn"
 
 [debug]
 

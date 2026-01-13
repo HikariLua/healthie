@@ -37,5 +37,5 @@ func _on_timer_timeout() -> void:
 	food.speed = self.shoot_speed
 	food.direction = self.direction.normalized()
 	
-	get_tree().get_root().add_child(food)
+	ProjectileManagerAutoload.spawn_projectile(food)
 	shoot_sfx.play()

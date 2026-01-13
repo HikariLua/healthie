@@ -36,7 +36,7 @@ func _on_enter() -> void:
 	projectile.direction.x = motion.looking_direction.x
 	projectile.damage = combat.attack_damage
 
-	get_tree().get_root().add_child(projectile)
+	ProjectileManagerAutoload.spawn_projectile(projectile)
 
 	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,

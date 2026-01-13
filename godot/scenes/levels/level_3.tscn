@@ -1,15 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://bovy8r5x583gj"]
+[gd_scene load_steps=24 format=3 uid="uid://bovy8r5x583gj"]
 
 [ext_resource type="PackedScene" uid="uid://v3halvyh28q5" path="res://scenes/triggers/death_hole.tscn" id="1_chjhv"]
 [ext_resource type="Script" uid="uid://b1krs0oiqtptb" path="res://source/levels/level.gd" id="1_lgrx1"]
 [ext_resource type="PackedScene" uid="uid://6uo15x52gvv0" path="res://scenes/characters/player.tscn" id="2_cl16n"]
-[ext_resource type="Texture2D" uid="uid://b0omwf26rn4s3" path="res://images/scenario/forest_cyan/forest_cyan_layer_3.png" id="2_q51te"]
-[ext_resource type="Texture2D" uid="uid://cxbrlixyrl5mi" path="res://images/scenario/forest_cyan/forest_cyan_layer_2.png" id="3_0o67j"]
+[ext_resource type="Texture2D" uid="uid://5sok6jwuyn1l" path="res://images/scenario/forest_cyan/forest_cyan_layer_3.png" id="2_q51te"]
+[ext_resource type="Texture2D" uid="uid://bfgxmcvkxbu5j" path="res://images/scenario/forest_cyan/forest_cyan_layer_2.png" id="3_0o67j"]
 [ext_resource type="PackedScene" uid="uid://cxpoqvu6jrvbs" path="res://scenes/triggers/trigger_camera_limit.tscn" id="3_7d1em"]
-[ext_resource type="Texture2D" uid="uid://eyl2tu5y8hxx" path="res://images/scenario/forest_cyan/forest_cyan_layer_1.png" id="4_u3pxv"]
-[ext_resource type="Texture2D" uid="uid://c1hyt02eb2fc5" path="res://images/scenario/forest_cyan/forest_cyan_layer_4.png" id="5_be840"]
+[ext_resource type="Texture2D" uid="uid://bqehmtsk6d21l" path="res://images/scenario/forest_cyan/forest_cyan_layer_1.png" id="4_u3pxv"]
+[ext_resource type="Texture2D" uid="uid://bcmg3g2th0bhm" path="res://images/scenario/forest_cyan/forest_cyan_layer_4.png" id="5_be840"]
 [ext_resource type="PackedScene" uid="uid://dimfi5n0yonvs" path="res://scenes/collectibles/junk_food.tscn" id="7_rw8hn"]
-[ext_resource type="Texture2D" uid="uid://cvwesoy1a54k3" path="res://images/scenario/forest_cyan/forest_cyan_tileset.png" id="7_vbe4j"]
+[ext_resource type="Texture2D" uid="uid://d04pabjrt7od4" path="res://images/scenario/forest_cyan/forest_cyan_tileset.png" id="7_vbe4j"]
 [ext_resource type="PackedScene" uid="uid://dt346spxrvjq" path="res://scenes/scene_components/food_cannon.tscn" id="8_8utbc"]
 [ext_resource type="PackedScene" uid="uid://b6iey78ja7r6n" path="res://scenes/characters/enemy_yellow.tscn" id="8_apwmn"]
 [ext_resource type="PackedScene" uid="uid://dwaqa6splnpx3" path="res://scenes/characters/enemy_green.tscn" id="11_nkgi4"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://nl67k57xsf82" path="res://scenes/scene_components/sign.tscn" id="14_35ooa"]
 [ext_resource type="PackedScene" uid="uid://xfsn0roj30rn" path="res://scenes/triggers/end_stage_trigger.tscn" id="16_t6iwx"]
 [ext_resource type="PackedScene" uid="uid://db3r2b8mt887h" path="res://scenes/scene_components/pause_compenent.tscn" id="17_1uok5"]
+[ext_resource type="PackedScene" uid="uid://b4gms6q3j03g6" path="res://scenes/globals/projectile_entry_point.tscn" id="18_fhpes"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s21ds"]
 texture = ExtResource("7_vbe4j")
@@ -634,9 +635,9 @@ shape = SubResource("RectangleShape2D_hqkc7")
 [node name="TriggerLimitCamera" parent="Triggers" node_paths=PackedStringArray("character_body", "camera") instance=ExtResource("3_7d1em")]
 position = Vector2(5044, 250)
 collision_layer = 0
-limit_left = 5039
 character_body = NodePath("../../Player")
 camera = NodePath("../../Player/Camera2D")
+limit_left = 5039
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/TriggerLimitCamera"]
 position = Vector2(79.5, 0)
@@ -878,6 +879,8 @@ text = "You are almost there! Just keep going.
 YOU CAN DO IT!!! "
 
 [node name="PauseComponent" parent="." instance=ExtResource("17_1uok5")]
+
+[node name="ProjectileEntryPoint" parent="." instance=ExtResource("18_fhpes")]
 
 [editable path="Triggers/DeathHole"]
 [editable path="Triggers/DeathHole2"]

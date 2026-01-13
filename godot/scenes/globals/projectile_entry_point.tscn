@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4gms6q3j03g6"]
+
+[ext_resource type="Script" uid="uid://cgqe4t2pxn27b" path="res://source/globals/projectile_entry_point.gd" id="1_mlofw"]
+
+[node name="ProjectileEntryPoint" type="Node2D"]
+script = ExtResource("1_mlofw")

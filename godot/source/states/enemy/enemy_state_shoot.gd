@@ -25,7 +25,7 @@ func on_enter(_message := {}) -> void:
 	food.speed = self.shoot_speed
 	food.direction = motion.looking_direction.normalized()
 	
-	get_tree().get_root().add_child(food)
+	ProjectileManagerAutoload.spawn_projectile(food)
 	
 	animation_player.play(MotionComponent.two_direction_animation(
 		motion.looking_direction.x,

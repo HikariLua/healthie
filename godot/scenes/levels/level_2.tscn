@@ -1,10 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://0f2n7sfcj3l0"]
+[gd_scene load_steps=21 format=3 uid="uid://0f2n7sfcj3l0"]
 
 [ext_resource type="Script" uid="uid://b1krs0oiqtptb" path="res://source/levels/level.gd" id="1_r88tb"]
-[ext_resource type="Texture2D" uid="uid://uk0onsarvhlo" path="res://images/scenario/water_cave/caves.png" id="2_abupe"]
-[ext_resource type="Texture2D" uid="uid://3ffnc53sim6x" path="res://images/scenario/water_cave/cave_tile.png" id="4_4pcux"]
+[ext_resource type="Texture2D" uid="uid://dv1hwm55kavqp" path="res://images/scenario/water_cave/caves.png" id="2_abupe"]
+[ext_resource type="Texture2D" uid="uid://u4ubojsit8rx" path="res://images/scenario/water_cave/cave_tile.png" id="4_4pcux"]
 [ext_resource type="PackedScene" uid="uid://6uo15x52gvv0" path="res://scenes/characters/player.tscn" id="4_dvka2"]
-[ext_resource type="Texture2D" uid="uid://c06iqapbas1fd" path="res://images/unused/shadow_decoration_tile.png" id="5_1mguf"]
+[ext_resource type="Texture2D" uid="uid://bga186w1xs767" path="res://images/unused/shadow_decoration_tile.png" id="5_1mguf"]
 [ext_resource type="PackedScene" uid="uid://v3halvyh28q5" path="res://scenes/triggers/death_hole.tscn" id="7_7u8i7"]
 [ext_resource type="PackedScene" uid="uid://nl67k57xsf82" path="res://scenes/scene_components/sign.tscn" id="8_i870r"]
 [ext_resource type="PackedScene" uid="uid://bgw07jqxk7uwd" path="res://scenes/characters/enemy_red.tscn" id="8_ofmbq"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dt346spxrvjq" path="res://scenes/scene_components/food_cannon.tscn" id="11_cmpgo"]
 [ext_resource type="PackedScene" uid="uid://dwaqa6splnpx3" path="res://scenes/characters/enemy_green.tscn" id="13_7coo1"]
 [ext_resource type="PackedScene" uid="uid://db3r2b8mt887h" path="res://scenes/scene_components/pause_compenent.tscn" id="14_rrmc6"]
+[ext_resource type="PackedScene" uid="uid://b4gms6q3j03g6" path="res://scenes/globals/projectile_entry_point.tscn" id="15_1yj8c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_efp4g"]
 texture = ExtResource("4_4pcux")
@@ -919,6 +920,8 @@ position = Vector2(4054, 223)
 idle_duration = 0.8
 
 [node name="PauseComponent" parent="." instance=ExtResource("14_rrmc6")]
+
+[node name="ProjectileEntryPoint" parent="." instance=ExtResource("15_1yj8c")]
 
 [editable path="Player"]
 [editable path="Triggers/DeathHole"]
