@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" uid="uid://ct1k754hcafuw" path="res://source/screens/components/play_button.gd" id="1_eepkb"]
 [ext_resource type="Script" uid="uid://cjru6dmkfuttv" path="res://source/screens/main_menu.gd" id="1_xfc8d"]
-[ext_resource type="AudioStream" uid="uid://jkvp6bu8gpey" path="res://audio/sfx/select.wav" id="2_5abde"]
-[ext_resource type="AudioStream" uid="uid://bekjtjw2epm44" path="res://audio/sfx/click.wav" id="3_1c0kp"]
+[ext_resource type="AudioStream" uid="uid://cfuukjesyayae" path="res://audio/sfx/select.wav" id="2_5abde"]
+[ext_resource type="AudioStream" uid="uid://453bk4bf7snq" path="res://audio/sfx/click.wav" id="3_1c0kp"]
 [ext_resource type="Script" uid="uid://envuljcyltwy" path="res://source/screens/components/credit_button.gd" id="4_h1m54"]
 [ext_resource type="Script" uid="uid://dhvygth3j7dvg" path="res://source/screens/components/quit_button.gd" id="5_3ux1f"]
-[ext_resource type="FontFile" uid="uid://cp6ef6rj4eptb" path="res://fonts/pixel_operator/PixelOperator-Bold.ttf" id="6_pq5p2"]
-[ext_resource type="Texture2D" uid="uid://cm3g4vkdcqida" path="res://images/scenario/forest_pink/forest_pink_layer_3.png" id="8_pt8b5"]
-[ext_resource type="Texture2D" uid="uid://bvp6esq6b0wlu" path="res://images/scenario/forest_pink/forest_pink_layer_2.png" id="9_i0nml"]
-[ext_resource type="Texture2D" uid="uid://cq24swec6828e" path="res://images/scenario/forest_pink/forest_pink_layer_1.png" id="10_ilejl"]
-[ext_resource type="Texture2D" uid="uid://pyvnhy1qsf6" path="res://images/scenario/forest_pink/forest_pink_layer_4.png" id="11_bo8wo"]
+[ext_resource type="FontFile" uid="uid://db05cah26g47n" path="res://fonts/pixel_operator/PixelOperator-Bold.ttf" id="6_pq5p2"]
+[ext_resource type="Texture2D" uid="uid://18coak7prrsb" path="res://images/scenario/forest_pink/forest_pink_layer_3.png" id="8_pt8b5"]
+[ext_resource type="Texture2D" uid="uid://jkxwbrisjq70" path="res://images/scenario/forest_pink/forest_pink_layer_2.png" id="9_i0nml"]
+[ext_resource type="Texture2D" uid="uid://dxyfrftacig7d" path="res://images/scenario/forest_pink/forest_pink_layer_1.png" id="10_ilejl"]
+[ext_resource type="Texture2D" uid="uid://ceyschb22pnc1" path="res://images/scenario/forest_pink/forest_pink_layer_4.png" id="11_bo8wo"]
 [ext_resource type="Script" uid="uid://bvd026lriffu2" path="res://source/screens/components/menu_camera.gd" id="12_uujvb"]
 
 [sub_resource type="Animation" id="Animation_e7n63"]
@@ -252,15 +252,41 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="Control"]
-modulate = Color(0.458824, 0.729412, 1, 1)
+modulate = Color(0.9830609, 0.6344999, 0.47953898, 1)
 layout_mode = 0
-offset_left = 90.0
-offset_top = 108.0
-offset_right = 250.0
-offset_bottom = 146.0
+offset_left = 104.0
+offset_top = 102.00001
+offset_right = 264.0
+offset_bottom = 140.0
 scale = Vector2(0.399, 0.399)
 theme_override_fonts/font = ExtResource("6_pq5p2")
-text = "GDScript Ver."
+text = "Rust"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control"]
+modulate = Color(0.76444227, 0.87941515, 1, 1)
+layout_mode = 0
+offset_left = 90.0
+offset_top = 109.0
+offset_right = 250.0
+offset_bottom = 147.0
+scale = Vector2(0.399, 0.399)
+theme_override_fonts/font = ExtResource("6_pq5p2")
+text = "Version"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Control"]
+modulate = Color(0.458824, 0.729412, 1, 1)
+layout_mode = 0
+offset_left = 82.0
+offset_top = 102.00001
+offset_right = 242.0
+offset_bottom = 140.0
+scale = Vector2(0.399, 0.399)
+theme_override_fonts/font = ExtResource("6_pq5p2")
+text = "GDScript +"
 horizontal_alignment = 1
 vertical_alignment = 1
 
