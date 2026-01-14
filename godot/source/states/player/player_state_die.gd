@@ -33,7 +33,8 @@ func _on_enter() -> void:
 	
 	
 	if health.lifes > 0:
-		health.lifes -= 1
+		health.change_lifes(health.lifes - 1)
+		
 		get_tree().get_root().add_child(death_screen)
 		TransitionScreenAutoload.reload_scene(self.get_tree())
 		

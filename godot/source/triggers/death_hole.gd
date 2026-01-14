@@ -13,4 +13,3 @@ func _on_body_entered(body: Node2D) -> void:
 	for state in states:
 		if state.name.containsn("die"):
 			state_machine.transition_state(state)
-d d 

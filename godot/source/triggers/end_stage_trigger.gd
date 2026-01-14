@@ -37,7 +37,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 func verify_result() -> void:
 	var player_food: int = (
-	player.get_node("Components/CollectibleComponent").collected_food
+		player.get_node("Components/CollectibleComponent").collected_food
 	)
 	final_health = health - player_food
 
@@ -46,7 +46,13 @@ func verify_result() -> void:
 		show_sceen()
 
 		await get_tree().create_timer(6).timeout
-		player.get_node("StateMachine").transition_state_to("PlayerStateDie")
+		var state_machine: StateMachine = player.get_node("StateMachine")
+
+		var states: Array[Node] = state_machine.get_children()
+	
+		for state in states:
+			if state.name.containsn("die"):
+				state_machine.transition_state(state)
 
 	elif final_health >= requierd_health + 8:
 		result = "Extra Success"
@@ -69,11 +75,8 @@ func verify_result() -> void:
 
 
 func next_level() -> void:
-	#TransitionScreenAutoload.transition_to(
-		#"res://scenes/levels/level_%s.tscn" % next_level_index, get_tree()
-	#)
 	TransitionScreenAutoload.transition_to(
-		"res://scenes/levels/level_0.tscn", get_tree()
+		"res://scenes/levels/level_%s.tscn" % next_level_index, get_tree()
 	)
 
 
