@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dihivu0kmp7xx"]
+
+[ext_resource type="Script" uid="uid://dbyy5vvl7etly" path="res://source/projectiles/projectile_wrapper.gd" id="1_gnmwj"]
+[ext_resource type="PackedScene" uid="uid://dimfi5n0yonvs" path="res://scenes/collectibles/junk_food.tscn" id="2_n0o5s"]
+
+[node name="ProjectileFood" type="Node2D" node_paths=PackedStringArray("projectile_area", "timer", "visible_notifier")]
+script = ExtResource("1_gnmwj")
+projectile_area = NodePath("JunkFood")
+timer = NodePath("Timer")
+visible_notifier = NodePath("VisibleOnScreenNotifier2D")
+
+[node name="JunkFood" parent="." instance=ExtResource("2_n0o5s")]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

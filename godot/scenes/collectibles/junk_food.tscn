@@ -53,15 +53,12 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6cjg"]
 radius = 5.0
 
-[node name="JunkFood" type="Area2D" node_paths=PackedStringArray("timer", "sprite", "visible_notifier") groups=["food", "projectile"]]
-position = Vector2(4, -1)
+[node name="JunkFood" type="Area2D" node_paths=PackedStringArray("sprite") groups=["food", "projectile"]]
 scale = Vector2(1.2, 1.2)
 collision_layer = 128
 collision_mask = 257
 script = ExtResource("1_opdoe")
-timer = NodePath("Timer")
 sprite = NodePath("Sprite2D")
-visible_notifier = NodePath("VisibleOnScreenNotifier2D")
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -72,8 +69,6 @@ offset_top = -11.6667
 offset_right = 12.3333
 offset_bottom = 12.3333
 texture = SubResource("GradientTexture2D_v5nwx")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -89,6 +84,3 @@ autoplay = "float"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_e6cjg")
 debug_color = Color(1, 0.952941, 0.45098, 0.419608)
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
