@@ -1,8 +1,7 @@
-[gd_scene load_steps=41 format=3 uid="uid://6uo15x52gvv0"]
+[gd_scene load_steps=40 format=3 uid="uid://6uo15x52gvv0"]
 
 [ext_resource type="PackedScene" uid="uid://df3ksxfcx8i6y" path="res://scenes/screens/main_hud.tscn" id="1_mf63t"]
 [ext_resource type="AudioStream" uid="uid://cu0jfti2ef27i" path="res://audio/sfx/jump.wav" id="2_c3aux"]
-[ext_resource type="PackedScene" uid="uid://cggqb75a8w8r" path="res://addons/debug_menu/debug_menu.tscn" id="2_uwlpo"]
 [ext_resource type="AudioStream" uid="uid://bgnqq1cuhn0p1" path="res://audio/sfx/player_shoot.wav" id="3_mhfsw"]
 [ext_resource type="AudioStream" uid="uid://cnjjpqra0s4sf" path="res://audio/sfx/death.wav" id="4_iqkos"]
 [ext_resource type="AudioStream" uid="uid://c1lrvcmdoxiac" path="res://audio/sfx/pickup.wav" id="5_ru0ta"]
@@ -379,8 +378,6 @@ metadata/_edit_group_ = true
 [node name="MainHUD" parent="." node_paths=PackedStringArray("collectible", "health") instance=ExtResource("1_mf63t")]
 collectible = NodePath("../Components/CollectibleComponent")
 health = NodePath("../Components/HealthComponent")
-
-[node name="DebugMenu" parent="MainHUD" instance=ExtResource("2_uwlpo")]
 
 [node name="Sfx" type="Node2D" parent="."]
 
