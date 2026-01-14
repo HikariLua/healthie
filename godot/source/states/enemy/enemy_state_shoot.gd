@@ -18,7 +18,11 @@ var junk_food: PackedScene = preload(
 )
 
 
-func on_enter(_message := {}) -> void:
+func _ready() -> void:
+	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
+
+
+func _on_enter() -> void:
 	var food: ProjectileWrapper = junk_food.instantiate()
 
 	food.global_position = character_body.global_position + Vector2(0, -8)
@@ -28,18 +32,18 @@ func on_enter(_message := {}) -> void:
 	ProjectileManagerAutoload.spawn_projectile(food)
 	
 	animation_player.play(MotionComponent.two_direction_animation(
-		motion.looking_direction.x,
-		"shoot"
+			motion.looking_direction.x,
+			"shoot"
 		)
 	)
 	
 	shoot_sfx.play()
 
 
-func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-#	if not state_machine.active_state == self:
-#		return
-	if not _anim_name == "shoot":
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if not state_machine.active_state == self:
+		return
+	if not anim_name.begins_with("shoot"):
 		return
 	
 	state_machine.transition_state(idle_state)

@@ -1,20 +1,22 @@
-[gd_scene load_steps=29 format=3 uid="uid://c3g2pbguvbwwu"]
+[gd_scene load_steps=31 format=3 uid="uid://c3g2pbguvbwwu"]
 
-[ext_resource type="Texture2D" uid="uid://bucrkqampbpmw" path="res://images/scenario/water_cave/caves.png" id="1_uy4j3"]
-[ext_resource type="Texture2D" uid="uid://bor7d020hdtek" path="res://images/scenario/forest_pink/forest_pink_layer_3.png" id="2_ktkb6"]
-[ext_resource type="Texture2D" uid="uid://cfttox50i35ev" path="res://images/scenario/forest_pink/forest_pink_layer_2.png" id="3_nqn5a"]
-[ext_resource type="Texture2D" uid="uid://ci8wgke7dhnd5" path="res://images/scenario/forest_pink/forest_pink_layer_1.png" id="4_2bxyd"]
-[ext_resource type="Texture2D" uid="uid://eu4rswycfsba" path="res://images/unused/chuva_teste1.png" id="5_h28uw"]
-[ext_resource type="Texture2D" uid="uid://dekcwyxu5qghk" path="res://images/unused/chuva_teste2.png" id="6_pv6nr"]
-[ext_resource type="Texture2D" uid="uid://cy2p65xb4vgxb" path="res://images/unused/chuva_teste3.png" id="7_vccx6"]
-[ext_resource type="Texture2D" uid="uid://5bdr86pymegw" path="res://images/scenario/forest_cyan/forest_cyan_tileset.png" id="8_ny77q"]
-[ext_resource type="Texture2D" uid="uid://dqk7s2p61ur1d" path="res://images/scenario/forest_pink/forest_pink_tileset.png" id="9_s6joj"]
-[ext_resource type="Texture2D" uid="uid://epjgqumi5twm" path="res://images/scenario/water_cave/cave_tile.png" id="10_kwyv3"]
-[ext_resource type="Texture2D" uid="uid://chcafdoqqdifd" path="res://images/unused/shadow_decoration_tile.png" id="11_tr66w"]
+[ext_resource type="Texture2D" uid="uid://dv1hwm55kavqp" path="res://images/scenario/water_cave/caves.png" id="1_uy4j3"]
+[ext_resource type="Texture2D" uid="uid://18coak7prrsb" path="res://images/scenario/forest_pink/forest_pink_layer_3.png" id="2_ktkb6"]
+[ext_resource type="Texture2D" uid="uid://jkxwbrisjq70" path="res://images/scenario/forest_pink/forest_pink_layer_2.png" id="3_nqn5a"]
+[ext_resource type="Texture2D" uid="uid://dxyfrftacig7d" path="res://images/scenario/forest_pink/forest_pink_layer_1.png" id="4_2bxyd"]
+[ext_resource type="Texture2D" uid="uid://bv3ffruortooo" path="res://images/unused/chuva_teste1.png" id="5_h28uw"]
+[ext_resource type="Texture2D" uid="uid://8kx2af1yn13c" path="res://images/unused/chuva_teste2.png" id="6_pv6nr"]
+[ext_resource type="Texture2D" uid="uid://cfyuclay28gpk" path="res://images/unused/chuva_teste3.png" id="7_vccx6"]
+[ext_resource type="Texture2D" uid="uid://d04pabjrt7od4" path="res://images/scenario/forest_cyan/forest_cyan_tileset.png" id="8_ny77q"]
+[ext_resource type="Texture2D" uid="uid://bny56sxjj3je8" path="res://images/scenario/forest_pink/forest_pink_tileset.png" id="9_s6joj"]
+[ext_resource type="Texture2D" uid="uid://u4ubojsit8rx" path="res://images/scenario/water_cave/cave_tile.png" id="10_kwyv3"]
+[ext_resource type="Texture2D" uid="uid://bga186w1xs767" path="res://images/unused/shadow_decoration_tile.png" id="11_tr66w"]
 [ext_resource type="PackedScene" uid="uid://v3halvyh28q5" path="res://scenes/triggers/death_hole.tscn" id="12_afyoy"]
 [ext_resource type="PackedScene" uid="uid://elnbs2kb3bgo" path="res://scenes/scene_components/moving_platform.tscn" id="13_ywx0l"]
 [ext_resource type="PackedScene" uid="uid://nl67k57xsf82" path="res://scenes/scene_components/sign.tscn" id="14_wxfs3"]
 [ext_resource type="PackedScene" uid="uid://6uo15x52gvv0" path="res://scenes/characters/player.tscn" id="15_sbniw"]
+[ext_resource type="PackedScene" uid="uid://b6iey78ja7r6n" path="res://scenes/characters/enemy_yellow.tscn" id="16_ktkb6"]
+[ext_resource type="PackedScene" uid="uid://b4gms6q3j03g6" path="res://scenes/globals/projectile_entry_point.tscn" id="17_nqn5a"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f3e5c"]
 animations = [{
@@ -805,7 +807,7 @@ speed_scale = 5.0
 position = Vector2(175, 288)
 
 [node name="Player" parent="." instance=ExtResource("15_sbniw")]
-position = Vector2(755, 145)
+position = Vector2(674, 268)
 
 [node name="Lifes" parent="Player/MainHUD/Control" index="2"]
 layout_mode = 0
@@ -825,6 +827,11 @@ position = Vector2(-1, 17)
 limit_top = 0
 limit_bottom = 320
 editor_draw_limits = true
+
+[node name="EnemyYellow" parent="." instance=ExtResource("16_ktkb6")]
+position = Vector2(722, 280)
+
+[node name="ProjectileEntryPoint" parent="." instance=ExtResource("17_nqn5a")]
 
 [editable path="DeathHole"]
 [editable path="MovingPlatform"]

@@ -21,4 +21,3 @@ impl SaveLoad {
         load_value
     }
 }
-

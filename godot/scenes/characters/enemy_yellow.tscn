@@ -1,10 +1,10 @@
 [gd_scene load_steps=24 format=3 uid="uid://b6iey78ja7r6n"]
 
-[ext_resource type="AudioStream" uid="uid://dbjuaqi3bfomq" path="res://audio/sfx/hurt.wav" id="1_t2kmj"]
-[ext_resource type="AudioStream" uid="uid://c27jt26126p5g" path="res://audio/sfx/enemy_death.wav" id="2_cxexn"]
-[ext_resource type="AudioStream" uid="uid://dns7tm7l2x5bb" path="res://audio/sfx/cannon.wav" id="3_tr7wa"]
-[ext_resource type="Texture2D" uid="uid://diq3ib82f3g3x" path="res://images/characters/enemies/enemy_yellow.png" id="4_5qhcj"]
-[ext_resource type="Texture2D" uid="uid://b3ndrn4e5w46p" path="res://images/effects/explosion.png" id="5_33nh5"]
+[ext_resource type="AudioStream" uid="uid://clk85h3yfnytp" path="res://audio/sfx/hurt.wav" id="1_t2kmj"]
+[ext_resource type="AudioStream" uid="uid://bwmkplw1cfbcb" path="res://audio/sfx/enemy_death.wav" id="2_cxexn"]
+[ext_resource type="AudioStream" uid="uid://d23b55gb8m6p" path="res://audio/sfx/cannon.wav" id="3_tr7wa"]
+[ext_resource type="Texture2D" uid="uid://df6x5yjteqp65" path="res://images/characters/enemies/enemy_yellow.png" id="4_5qhcj"]
+[ext_resource type="Texture2D" uid="uid://bgdbdx2e4yk0q" path="res://images/effects/explosion.png" id="5_33nh5"]
 [ext_resource type="Script" uid="uid://ce0ulhrm3jlur" path="res://source/triggers/body_hitbox.gd" id="5_wtdgc"]
 [ext_resource type="Script" uid="uid://bbc8dyu2lwykh" path="res://source/states/enemy/enemy_state_idle_01.gd" id="10_7o1us"]
 [ext_resource type="Script" uid="uid://dskdgll3ww57c" path="res://source/states/enemy/enemy_state_shoot.gd" id="11_ttvfb"]
@@ -305,6 +305,7 @@ debug_color = Color(0, 0.0745098, 0.662745, 0.419608)
 [node name="MotionComponent" type="MotionComponent" parent="Components"]
 
 [node name="HealthComponent" type="HealthComponent" parent="Components" node_paths=PackedStringArray("hurtbox")]
+max_health = 2
 hurtbox = NodePath("../../Hurtbox")
 
 [node name="CombatComponent" type="CombatComponent" parent="Components" node_paths=PackedStringArray("motion", "health")]
@@ -335,8 +336,9 @@ character_body = NodePath("../..")
 state_machine = NodePath("..")
 motion = NodePath("../../Components/MotionComponent")
 idle_state = NodePath("../EnemyStateIdle01")
+shoot_speed = null
 
-[node name="EnemyStateDie01" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "hurt_sfx", "die_sfx", "hurtbox_collision", "hitbox_collision", "effect_player", "animation_player", "state_machine", "health")]
+[node name="EnemyStateDie01" type="State" parent="StateMachine" node_paths=PackedStringArray("character_body", "hurt_sfx", "die_sfx", "hurtbox_collision", "hitbox_collision", "effect_player", "animation_player", "state_machine", "health", "death_state")]
 script = ExtResource("12_wbx7q")
 character_body = NodePath("../..")
 hurt_sfx = NodePath("../../Sfx/Hurt")
@@ -347,9 +349,7 @@ effect_player = NodePath("../../EffectAnimationPlayer")
 animation_player = NodePath("../../AnimationPlayer")
 state_machine = NodePath("..")
 health = NodePath("../../Components/HealthComponent")
+death_state = NodePath(".")
 
 [node name="StandardFood" parent="." instance=ExtResource("13_fptwq")]
 position = Vector2(0, -19)
-
-[connection signal="area_entered" from="Hurtbox" to="Components/HealthComponent" method="_on_hurtbox_area_entered"]
-[connection signal="timeout" from="StateMachine/EnemyStateIdle01/IdleTimer" to="StateMachine/EnemyStateIdle01" method="_on_idle_timer_timeout"]

@@ -21,6 +21,9 @@ extends State
 func _ready() -> void:
 	assert(character_body != null)
 	assert(health != null)
+	
+	health.damage_taken.connect(_on_health_component_damage_taken)
+	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
 
 
 func _on_enter() -> void:
@@ -28,9 +31,6 @@ func _on_enter() -> void:
 	hitbox_collision.set_deferred("disabled", true)
 	die_sfx.play()
 	animation_player.play("die")
-	
-	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
-	health.damage_taken.connect(_on_health_component_damage_taken)
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

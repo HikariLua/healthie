@@ -82,7 +82,10 @@ impl CollectibleComponent {
             return;
         }
 
-        self.sequence_timer.start_ex().time_sec(self.sequence_duration).done();
+        self.sequence_timer
+            .start_ex()
+            .time_sec(self.sequence_duration)
+            .done();
     }
 
     #[func]
@@ -90,4 +93,3 @@ impl CollectibleComponent {
         self.collect_sequence = 0;
     }
 }
-

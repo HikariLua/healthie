@@ -104,12 +104,8 @@ impl MotionComponent {
         speed * direction
     }
 
-    
     #[func]
-    fn two_direction_animation(
-        direction: f64,
-        animation_prefix: GString,
-    ) -> String {
+    fn two_direction_animation(direction: f64, animation_prefix: GString) -> String {
         let suffix = if direction < 0.0 { "-left" } else { "-right" };
         let new_animation = animation_prefix.to_string() + suffix;
 
@@ -130,7 +126,6 @@ impl MotionComponent {
         self.signals()
             .looking_direction_changed()
             .emit(old_value, new_value);
-        
     }
 
     #[func]

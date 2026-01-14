@@ -58,4 +58,5 @@ func _on_idle_timer_timeout() -> void:
 func _on_exit() -> void:
 	idle_timer.stop()
 
-	motion.looking_direction = motion.looking_direction * -1
+	if flips:
+		motion.looking_direction *= -1

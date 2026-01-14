@@ -3,7 +3,14 @@ extends Area2D
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.get_node("StateMachine").active_state.name == "PlayerStateDie":
+	var state_machine: StateMachine = body.get_node("StateMachine")
+	
+	if state_machine.active_state.name.containsn("die"):
 		return
 	
-	body.get_node("StateMachine").transition_state_to("PlayerStateDie")
+	var states: Array[Node] = state_machine.get_children()
+	
+	for state in states:
+		if state.name.containsn("die"):
+			state_machine.transition_state(state)
+d d 
