@@ -1,0 +1,33 @@
+extends Node
+
+signal damage_taken(previous_hp: int, attacker_hitbox: Area2D)
+signal life_changed(previous_life: int)
+
+@export var max_health: int = 6
+
+@export var lifes: int = 3:
+	set(new_lifes):
+		emit_signal("life_changed", lifes)
+
+		lifes = new_lifes
+
+#		SaveLoad.save_to_next_scene("player", {"lifes": lifes})
+
+
+@onready var health_points: int = max_health
+
+
+func _ready() -> void:
+	if SaveLoad.saved_dict.has("player"):
+		lifes = SaveLoad.load_from_previous_scene("player")["lifes"]
+
+
+func take_damage(attacker_hitbox: Area2D) -> void:
+	var previous_health: int = health_points
+	health_points -= attacker_hitbox.damage
+
+	emit_signal("damage_taken", previous_health, attacker_hitbox)
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	take_damage(area)

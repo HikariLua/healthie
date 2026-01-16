@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://ci0g6r02hn3je"]
+
+[ext_resource type="AudioStream" uid="uid://bk24t5baeux7g" path="res://audio/music/chopin_op9_no2_hana.mp3" id="1_coijs"]
+[ext_resource type="AudioStream" uid="uid://bk83jgocn4djv" path="res://audio/music/mozart_piano_16_chip_plus_orch_hana.mp3" id="3_oyv00"]
+[ext_resource type="AudioStream" uid="uid://c1jxx1ol82miu" path="res://audio/music/satie-remix-8bit_alt_hana.mp3" id="4_524an"]
+[ext_resource type="AudioStream" uid="uid://bgvi267mdf1jg" path="res://audio/music/nocturne_20_hana.mp3" id="5_x8kc6"]
+[ext_resource type="AudioStream" uid="uid://bxr0d0lwadvga" path="res://audio/music/chopin_uplift_op9_no2_hana.mp3" id="6_6ic1k"]
+[ext_resource type="AudioStream" uid="uid://0k8jfgn8ubf5" path="res://audio/music/hr_lizt_hana.mp3" id="7_rljw2"]
+
+[node name="GlobalMusic" type="GlobalMusic" node_paths=PackedStringArray("music_list")]
+music_list = [NodePath("Nocturne92"), NodePath("Mozart16"), NodePath("Gymnopie1"), NodePath("LiztHR2p2"), NodePath("UpNocturne92"), NodePath("Nocturne20")]
+
+[node name="Nocturne92" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_coijs")
+volume_db = -10.0
+
+[node name="Mozart16" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_oyv00")
+volume_db = -20.0
+
+[node name="Gymnopie1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_524an")
+volume_db = -15.0
+
+[node name="LiztHR2p2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_rljw2")
+volume_db = -14.0
+
+[node name="UpNocturne92" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6ic1k")
+volume_db = -8.0
+
+[node name="Nocturne20" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_x8kc6")
+volume_db = -8.0

@@ -1,0 +1,72 @@
+class_name PlayerStateAttack
+extends State
+
+@export_group("Nodes")
+@export var character_body: CharacterBody2D
+@export var animation_player: AnimationPlayer
+@export var state_machine: StateMachine
+@export var attack_sfx: AudioStreamPlayer2D
+
+@export_group("Components")
+@export var motion: MotionComponent
+@export var combat: CombatComponent
+
+@export_group("States")
+@export var idle_state: PlayerStateIdle
+
+var projectile_scene: PackedScene = preload("uid://7vtkxafog8wi")
+
+
+func _ready() -> void:
+	assert(character_body != null)
+	assert(animation_player != null)
+	assert(state_machine != null)
+	assert(motion != null)
+	assert(combat != null)
+	assert(idle_state != null)
+
+
+	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
+
+
+func _on_enter() -> void:
+	var projectile: PlayerProjectile = projectile_scene.instantiate()
+
+	projectile.global_position = character_body.global_position
+	projectile.direction.x = motion.looking_direction.x
+	projectile.damage = combat.attack_damage
+
+	ProjectileManagerAutoload.spawn_projectile(projectile)
+
+	animation_player.play(MotionComponent.two_direction_animation(
+		motion.looking_direction.x,
+		"attack"
+		)
+	)
+	
+	attack_sfx.play()
+
+	character_body.velocity.x = 0
+	character_body.velocity.y = 0 # TODO: por que????
+
+
+func _physics_update(delta: float) -> void:
+	character_body.velocity.y = MotionComponent.apply_gravity(
+		character_body,
+		motion.max_fall_speed,
+		motion.gravity,
+		delta
+	)
+
+	motion.was_on_floor = character_body.is_on_floor()
+
+	character_body.move_and_slide()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if not state_machine.active_state == self:
+		return
+	if not anim_name.begins_with("attack"):
+		return
+
+	state_machine.transition_state(idle_state)

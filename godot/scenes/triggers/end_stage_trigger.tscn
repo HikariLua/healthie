@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://xfsn0roj30rn"]
+
+[ext_resource type="Script" uid="uid://blolbn27obt22" path="res://source/triggers/end_stage_trigger.gd" id="1_leo6r"]
+[ext_resource type="AudioStream" uid="uid://c6unpgiweso1m" path="res://audio/sfx/clear.wav" id="2_w3346"]
+[ext_resource type="Texture2D" uid="uid://b4jiycjkoww41" path="res://images/scenario/peace_mountain/peace_mountain_tileset.png" id="3_ergbj"]
+[ext_resource type="Texture2D" uid="uid://bmv50817e7d5c" path="res://images/scenario/components/sign.png" id="3_jfbcx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1er58"]
+size = Vector2(48, 21)
+
+[node name="EndStageTrigger" type="Area2D" node_paths=PackedStringArray("clear_sfx", "extra_clear_sfx")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_leo6r")
+clear_sfx = NodePath("Sfx/Clear")
+extra_clear_sfx = NodePath("Sfx/ExtraClear")
+metadata/_edit_group_ = true
+
+[node name="Sfx" type="Node2D" parent="."]
+
+[node name="Clear" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource("2_w3346")
+volume_db = -5.0
+max_distance = 400.0
+
+[node name="ExtraClear" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource("2_w3346")
+volume_db = -5.0
+max_distance = 400.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_1er58")
+debug_color = Color(0.0980392, 1, 0, 0.419608)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0.164706, 1)
+position = Vector2(16, -12)
+texture = ExtResource("3_jfbcx")
+hframes = 2
+region_rect = Rect2(80, 0, 48, 8)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0.164706, 1)
+position = Vector2(-16, -12)
+texture = ExtResource("3_jfbcx")
+hframes = 2
+region_rect = Rect2(80, 0, 48, 8)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_ergbj")
+region_enabled = true
+region_rect = Rect2(80, 0, 48, 8)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

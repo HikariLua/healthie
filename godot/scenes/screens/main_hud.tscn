@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3 uid="uid://df3ksxfcx8i6y"]
+
+[ext_resource type="Script" path="res://source/screens/main_hud.gd" id="1_yj6dt"]
+[ext_resource type="Theme" uid="uid://wbb5lh8bsy3s" path="res://resources/themes/main_hud.tres" id="2_c6ues"]
+[ext_resource type="Texture2D" uid="uid://b52l00xvrm6fm" path="res://images/items/foods.png" id="3_18hhn"]
+[ext_resource type="Texture2D" uid="uid://dwiy5tkluhm06" path="res://images/characters/player/little_fox.png" id="3_f1c6j"]
+
+[sub_resource type="Gradient" id="Gradient_pkrto"]
+offsets = PackedFloat32Array(0.133758, 1)
+colors = PackedColorArray(0, 0, 0, 0.72549, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qght8"]
+gradient = SubResource("Gradient_pkrto")
+width = 100
+
+[node name="MainHUD" type="CanvasLayer" node_paths=PackedStringArray("food_label", "food_bar", "time_bar", "lifes")]
+script = ExtResource("1_yj6dt")
+food_label = NodePath("Control/VBoxContainer/Food")
+food_bar = NodePath("Control/VBoxContainer2/FoodBar")
+time_bar = NodePath("Control/VBoxContainer2/TimeBar")
+lifes = NodePath("Control/Lifes")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_c6ues")
+
+[node name="ColorRect" type="TextureRect" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 272.0
+offset_right = 372.0
+offset_bottom = 322.0
+rotation = 1.5708
+scale = Vector2(0.3, 1)
+texture = SubResource("GradientTexture1D_qght8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 5.0
+offset_right = -76.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Food" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = " = 111"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/VBoxContainer/Food"]
+position = Vector2(22, 4)
+texture = ExtResource("3_18hhn")
+hframes = 13
+region_rect = Rect2(1, 1, 4, 6)
+
+[node name="Lifes" type="Label" parent="Control"]
+layout_mode = 2
+offset_left = 187.0
+offset_top = 5.0
+offset_right = 271.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 8
+text = "= 5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Lifes"]
+position = Vector2(22, 4)
+texture = ExtResource("3_f1c6j")
+region_enabled = true
+region_rect = Rect2(0, 4, 14, 10)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
+layout_mode = 2
+offset_left = 21.0
+offset_top = 5.0
+offset_right = 63.0
+offset_bottom = 13.0
+scale = Vector2(1.321, 1.321)
+
+[node name="FoodBar" type="ProgressBar" parent="Control/VBoxContainer2"]
+modulate = Color(1, 0.929412, 0.207843, 1)
+layout_mode = 2
+max_value = 7.0
+value = 5.0
+show_percentage = false
+
+[node name="TimeBar" type="ProgressBar" parent="Control/VBoxContainer2"]
+layout_mode = 2
+max_value = 10.0
+step = 0.001
+show_percentage = false

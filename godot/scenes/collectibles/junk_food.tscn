@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://dimfi5n0yonvs"]
+
+[ext_resource type="Script" uid="uid://xcrh6qoly17b" path="res://source/items/junk_food.gd" id="1_opdoe"]
+[ext_resource type="Texture2D" uid="uid://b52l00xvrm6fm" path="res://images/items/foods.png" id="2_apj17"]
+
+[sub_resource type="Gradient" id="Gradient_3w81u"]
+offsets = PackedFloat32Array(0.611465, 0.713376)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v5nwx"]
+gradient = SubResource("Gradient_3w81u")
+width = 24
+height = 24
+fill = 1
+fill_from = Vector2(0.495726, 0.492877)
+fill_to = Vector2(0.706553, 0.213675)
+
+[sub_resource type="Animation" id="Animation_xkqgj"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_3r4c5"]
+resource_name = "float"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -12, 0, 0.3, 0.3, 0, -0.5, -0.3, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_or2nw"]
+_data = {
+&"RESET": SubResource("Animation_xkqgj"),
+&"float": SubResource("Animation_3r4c5")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6cjg"]
+radius = 5.0
+
+[node name="JunkFood" type="Area2D" node_paths=PackedStringArray("sprite") groups=["food", "projectile"]]
+scale = Vector2(1.2, 1.2)
+collision_layer = 128
+collision_mask = 257
+script = ExtResource("1_opdoe")
+sprite = NodePath("Sprite2D")
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.929412)
+texture_filter = 1
+offset_left = -11.6667
+offset_top = -11.6667
+offset_right = 12.3333
+offset_bottom = 12.3333
+texture = SubResource("GradientTexture2D_v5nwx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_apj17")
+hframes = 13
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_or2nw")
+}
+autoplay = "float"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e6cjg")
+debug_color = Color(1, 0.952941, 0.45098, 0.419608)
