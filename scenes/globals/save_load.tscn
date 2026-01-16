@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://vjemdneg4fg4"]
-
-[ext_resource type="Script" path="res://source/globals/SaveLoad.cs" id="1_rl7kc"]
-
-[node name="SaveLoad" type="Node"]
-script = ExtResource("1_rl7kc")
